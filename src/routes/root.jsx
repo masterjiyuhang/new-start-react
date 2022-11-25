@@ -57,6 +57,11 @@ export default function Root() {
           </Form>
         </div>
         <nav>
+          <ul>
+            <li>
+              <NavLink to={`learn`}>Learn</NavLink>
+            </li>
+          </ul>
           {contacts.length ? (
             <ul>
               {contacts.map((contact) => (
@@ -71,6 +76,7 @@ export default function Root() {
                     )}{' '}
                     {contact.favorite && <span>★</span>}
                   </NavLink>
+
                   {/* <Link to={`contacts/${contact.id}`}>
                     {contact.first || contact.last ? (
                       <>
