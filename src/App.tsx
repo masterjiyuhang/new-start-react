@@ -1,14 +1,21 @@
 import { useEffect, useState } from 'react'
-import reactLogo from './assets/react.svg'
+// import reactLogo from './assets/react.svg'
 // import './App.css'
-import Home from './pages/home'
-import { HashRouter, Link, Routes, Route } from 'react-router-dom'
+import { HashRouter, Link, Routes, Route, Outlet } from 'react-router-dom'
 import { Button } from 'antd'
-import LearnHook from './pages/learnHook'
+import { useNavigate } from 'react-router-dom'
+// import Home from './pages/home'
+// import LearnHook from './pages/learnHook'
 
-function App() {
+function App(props: any) {
   const [count, setCount] = useState(0)
   const [msg, setMsg] = useState('hi')
+
+  const navigate = useNavigate()
+  const goback = () => {
+    console.log('回退', navigate)
+    navigate('/')
+  }
 
   // // 某些特定的值在两次重新渲染之间没有发生变化，可以通知react跳过对effect的调用。
   // useEffect(() => {
@@ -17,7 +24,14 @@ function App() {
 
   return (
     <div className='App'>
-      <Button type='primary'>Button</Button>
+      <Button type='primary' onClick={goback}>
+        back
+      </Button>
+
+      <Link to='home'>Go Home</Link>
+      <Link to='learn'>Go Learn</Link>
+
+      <Outlet />
       {/* <div>
         <a href='https://vitejs.dev' target='_blank'>
           <img src='/vite.svg' className='logo' alt='Vite logo' />
@@ -39,14 +53,14 @@ function App() {
       </div>
       <p className='read-the-docs'>Click on the Vite and React logos to learn more</p> */}
 
-      <HashRouter>
+      {/* <HashRouter>
         <Link to='/'>Home</Link>
         <Link to='/hook'>Hook</Link>
         <Routes>
           <Route path='/' element={<Home />}></Route>
           <Route path='/hook' element={<LearnHook />}></Route>
         </Routes>
-      </HashRouter>
+      </HashRouter> */}
     </div>
   )
 }

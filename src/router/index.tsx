@@ -1,22 +1,29 @@
 import { createHashRouter, Navigate } from 'react-router-dom'
 import type { RouteObject } from 'react-router-dom'
-import Home from '@/pages/home'
+import Home, { homeLoader } from '@/pages/home'
 import Login from '../pages/login'
+import LearnHook from '@/pages/learnHook'
+import App from '@/App'
 
 export const globalRouters = createHashRouter([
   {
     path: '/login',
     element: <Login />
   },
-
-  {
-    path: '/home',
-    element: <Home />
-  },
-
   {
     path: '/',
-    element: <Home />
+    element: <App />,
+    loader: homeLoader,
+    children: [
+      {
+        path: 'home',
+        element: <Home />
+      },
+      {
+        path: 'learn',
+        element: <LearnHook />
+      }
+    ]
   },
   // 未匹配，，跳转Login页面
   {

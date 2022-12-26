@@ -11,8 +11,8 @@ import { globalRouters } from '@/router'
 ReactDOM.createRoot(document.getElementById('root') as HTMLElement).render(
   <React.StrictMode>
     <ConfigProvider locale={zhCN}>
-      <App />
-      {/* <RouterProvider router={globalRouters} /> */}
+      {/* <App /> */}
+      <RouterProvider router={globalRouters} />
     </ConfigProvider>
   </React.StrictMode>
 )

@@ -1,13 +1,11 @@
 import React from 'react'
 
 function LogsItem(props: any) {
-  console.log(props)
   const { logsData } = props
-  console.log(logsData, props.logsData)
   return (
     <div className='item'>
       <div className='date'>
-        <div className='month'>{logsData.date.getMonth()}月</div>
+        <div className='month'>{logsData.date.toLocaleString('zh-CN', { month: 'long' })}</div>
         <div className='day'>{logsData.date.getDate()}</div>
       </div>
       <div className='content'>
