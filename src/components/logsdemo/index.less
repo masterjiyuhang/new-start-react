@@ -1,0 +1,53 @@
+.logs {
+  width: 800px;
+  background-color: #eae2b7;
+  padding: 20px;
+  border-radius: 10px;
+  box-shadow: 0 0 10px rgba(9, 101, 192, 0.2);
+  margin: 0 auto;
+
+  .item {
+    display: flex;
+    background-color: #fcbf49;
+    border-radius: 10px;
+    margin: 16px 0;
+    padding: 6px;
+  }
+
+  .date {
+    width: 90px;
+    background-color: #fff;
+    border-radius: 10px;
+    font-weight: bold;
+    text-align: center;
+    overflow: hidden;
+
+    .month {
+      height: 20px;
+      line-height: 20px;
+      background-color: #d62828;
+      font-size: 20px;
+      color: #fff;
+    }
+
+    .day {
+      height: 70px;
+      line-height: 70px;
+      font-size: 50px;
+    }
+  }
+
+  .content {
+    flex: 1;
+    text-align: center;
+    font-weight: bold;
+
+    .title {
+      font-size: 16px;
+      color: #194b49;
+    }
+    .desc {
+      column-rule: #d62828;
+    }
+  }
+}

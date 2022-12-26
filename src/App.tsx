@@ -1,21 +1,23 @@
 import { useEffect, useState } from 'react'
 import reactLogo from './assets/react.svg'
-import './App.css'
+// import './App.css'
 import Home from './pages/home'
 import { HashRouter, Link, Routes, Route } from 'react-router-dom'
-
+import { Button } from 'antd'
 import LearnHook from './pages/learnHook'
+
 function App() {
   const [count, setCount] = useState(0)
   const [msg, setMsg] = useState('hi')
 
-  // 某些特定的值在两次重新渲染之间没有发生变化，可以通知react跳过对effect的调用。
-  useEffect(() => {
-    document.title = `${count}You clicked ${count} times`
-  }, [count])
+  // // 某些特定的值在两次重新渲染之间没有发生变化，可以通知react跳过对effect的调用。
+  // useEffect(() => {
+  //   document.title = `${count}You clicked ${count} times`
+  // }, [count])
 
   return (
     <div className='App'>
+      <Button type='primary'>Button</Button>
       {/* <div>
         <a href='https://vitejs.dev' target='_blank'>
           <img src='/vite.svg' className='logo' alt='Vite logo' />
