@@ -1,9 +1,9 @@
 import { useEffect, useState } from 'react'
 // import reactLogo from './assets/react.svg'
 // import './App.css'
-import { HashRouter, Link, Routes, Route, Outlet } from 'react-router-dom'
 import { Button } from 'antd'
-import { useNavigate } from 'react-router-dom'
+import { HashRouter, Link, Routes, Route, Outlet, useNavigate } from 'react-router-dom'
+import SysLayout from './layout'
 // import Home from './pages/home'
 // import LearnHook from './pages/learnHook'
 
@@ -25,14 +25,15 @@ function App(props: any) {
 
   return (
     <div className='App'>
-      <Button type='primary' onClick={goback}>
+      <SysLayout />
+      {/* <Button type='primary' onClick={goback}>
         back
       </Button>
 
       <Link to='home'>Go Home</Link>
       <Link to='learn'>Go Learn</Link>
 
-      <Outlet />
+      <Outlet /> */}
       {/* <div>
         <a href='https://vitejs.dev' target='_blank'>
           <img src='/vite.svg' className='logo' alt='Vite logo' />

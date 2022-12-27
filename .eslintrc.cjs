@@ -3,19 +3,20 @@ module.exports = {
     browser: true,
     es2021: true
   },
-  extends: [
-    'plugin:react/recommended',
-    'standard-with-typescript'
-  ],
-  overrides: [
-  ],
+  extends: ['plugin:react/recommended', 'standard-with-typescript'],
+  overrides: [],
   parserOptions: {
     ecmaVersion: 'latest',
-    sourceType: 'module'
+    sourceType: 'module',
+    project: ['./tsconfig.json']
   },
-  plugins: [
-    'react'
-  ],
+  plugins: ['react'],
   rules: {
+    'react/react-in-jsx-scope': 0,
+    '@typescript-eslint/no-unused-vars': 0,
+    '@typescript-eslint/explicit-function-return-type': 0,
+    'space-before-function-paren': 'off',
+    '@typescript-eslint/space-before-function-paren': 'off',
+    '@typescript-eslint/no-floating-promises': 'off'
   }
 }

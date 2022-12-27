@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react'
 import axios from 'axios'
 
-type Hits = {
+interface Hits {
   objectID: number
   url: string
   title: string
@@ -13,7 +13,7 @@ export default function LearnHook() {
   useEffect(() => {
     let ignore = false
 
-    async function fetchData() {
+    async function fetchData () {
       const result = await axios('https://hn.algolia.com/api/v1/search?query=' + query)
       if (!ignore) setData(result.data)
     }
