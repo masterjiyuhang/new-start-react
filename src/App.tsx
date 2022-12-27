@@ -14,7 +14,8 @@ function App(props: any) {
   const navigate = useNavigate()
   const goback = () => {
     console.log('回退', navigate)
-    navigate('/')
+    navigate(-1)
+    // navigate('/')
   }
 
   // // 某些特定的值在两次重新渲染之间没有发生变化，可以通知react跳过对effect的调用。
