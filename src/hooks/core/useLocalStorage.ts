@@ -2,7 +2,7 @@ import { useState } from 'react'
 
 // 使用local storage来缓存数据
 const useLocalStorage = (key: string, initialValue: any) => {
-  console.log(initialValue, 'initialValue....')
+  // console.log(initialValue, 'initialValue....')
   const [stateValue, setStateValue] = useState(() => {
     try {
       const item = localStorage.getItem(key)

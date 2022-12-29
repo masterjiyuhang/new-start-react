@@ -6,6 +6,7 @@ import LearnHook from '@/pages/learnHook'
 import TodoList from '@/pages/TodoList'
 import NewCar from '@/pages/newcar'
 import App from '@/App'
+import Download from '@/pages/able/download'
 
 export const globalRouters = createHashRouter([
   {
@@ -17,6 +18,15 @@ export const globalRouters = createHashRouter([
     element: <App />,
     loader: homeLoader,
     children: [
+      {
+        path: 'able',
+        children: [
+          {
+            path: 'download',
+            element: <Download />
+          }
+        ]
+      },
       {
         path: 'home',
         element: <Home />
@@ -32,9 +42,13 @@ export const globalRouters = createHashRouter([
       {
         path: 'car',
         element: <NewCar />
+      },
+      {
+        path: 'square'
       }
     ]
   },
+
   // 未匹配，，跳转Login页面
   {
     path: '*',
