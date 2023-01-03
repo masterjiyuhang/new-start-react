@@ -17,6 +17,7 @@ module.exports = {
     '@typescript-eslint/explicit-function-return-type': 0,
     'space-before-function-paren': 'off',
     '@typescript-eslint/space-before-function-paren': 'off',
-    '@typescript-eslint/no-floating-promises': 'off'
+    '@typescript-eslint/no-floating-promises': 'off',
+    '@typescript-eslint/restrict-plus-operands': 'off'
   }
 }

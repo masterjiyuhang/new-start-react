@@ -8,11 +8,15 @@ import zhCN from 'antd/locale/zh_CN'
 import { RouterProvider } from 'react-router-dom'
 import { globalRouters } from '@/router'
 
+import store from '@/store'
+import { Provider } from 'react-redux'
 ReactDOM.createRoot(document.getElementById('root') as HTMLElement).render(
   <React.StrictMode>
     <ConfigProvider locale={zhCN}>
       {/* <App /> */}
-      <RouterProvider router={globalRouters} />
+      <Provider store={store}>
+        <RouterProvider router={globalRouters} />
+      </Provider>
     </ConfigProvider>
   </React.StrictMode>
 )
