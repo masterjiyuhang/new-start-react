@@ -1,9 +1,12 @@
 import LogsDemo from '@/components/logsdemo'
+
 import React from 'react'
-import { Outlet } from 'react-router-dom'
+import { redirect } from 'react-router-dom'
 import './index.less'
 
 export function homeLoader() {
+  // const user = useUserInfo()
+  // console.log(user, 'user....')
   console.log('this is home loader..')
   return null
 }

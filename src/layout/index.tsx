@@ -3,7 +3,9 @@ import React, { useState } from 'react'
 import { MenuFoldOutlined, MenuUnfoldOutlined, UploadOutlined, UserOutlined, VideoCameraOutlined, TeamOutlined } from '@ant-design/icons'
 import { Navigate, Outlet, useNavigate } from 'react-router-dom'
 import useLocalStorage from '@/hooks/core/useLocalStorage'
-import SysTabs from './tabs'
+import { PrivateOutlet } from '@/components/PrivateOutlet'
+
+// import SysTabs from './tabs'
 
 const { Header, Sider, Content } = Layout
 
@@ -29,6 +31,7 @@ const SysLayout: React.FC = () => {
   }
 
   const navigate = useNavigate()
+
   const clickMenuItem = (e: any) => {
     console.log(e.key, 'key 是什么')
     // switch (e.key) {
@@ -86,6 +89,10 @@ const SysLayout: React.FC = () => {
           key: 'able/download',
           icon: <TeamOutlined />,
           label: '下载页面'
+        },
+        {
+          key: 'square',
+          label: '正方形的脑袋'
         }
       ]
     }
@@ -131,7 +138,8 @@ const SysLayout: React.FC = () => {
             minHeight: 280,
             background: colorBgContainer
           }}>
-          <Outlet />
+          {/* <Outlet /> */}
+          <PrivateOutlet />
         </Content>
       </Layout>
     </Layout>

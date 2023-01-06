@@ -1,12 +1,14 @@
-import { createHashRouter, Navigate } from 'react-router-dom'
+import { createHashRouter, createBrowserRouter, Navigate } from 'react-router-dom'
 import type { RouteObject } from 'react-router-dom'
+import App from '@/App'
 import Home, { homeLoader } from '@/pages/home'
 import Login from '../pages/login'
 import LearnHook from '@/pages/learnHook'
 import TodoList from '@/pages/TodoList'
 import NewCar from '@/pages/newcar'
-import App from '@/App'
 import Download from '@/pages/able/download'
+import Square from '@/pages/Square'
+import SquareChild from '@/pages/Square/components/SquareChild'
 
 export const globalRouters = createHashRouter([
   {
@@ -55,3 +57,59 @@ export const globalRouters = createHashRouter([
     element: <Navigate to='/login' />
   }
 ] as RouteObject[])
+
+const defaultRoutes = [
+  {
+    path: '/login',
+    element: <Login />
+  },
+  {
+    path: '/',
+    element: <App />,
+    loader: homeLoader,
+    children: [
+      {
+        path: 'able',
+        children: [
+          {
+            path: 'download',
+            element: <Download />
+          }
+        ]
+      },
+      {
+        path: 'home',
+        element: <Home />
+      },
+      {
+        path: 'learn',
+        element: <LearnHook />
+      },
+      {
+        path: 'todolist',
+        element: <TodoList />
+      },
+      {
+        path: 'car',
+        element: <NewCar />
+      },
+      {
+        path: 'square',
+        element: <Square />,
+        children: [
+          {
+            path: ':id',
+            element: <SquareChild />
+          }
+        ]
+      }
+    ]
+  },
+
+  // 未匹配，，跳转Login页面
+  {
+    path: '*',
+    element: <Navigate to='/login' />
+  }
+]
+export const browserRouters = createBrowserRouter(defaultRoutes)
