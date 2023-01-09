@@ -11,6 +11,7 @@ function Login() {
   const navigate = useNavigate()
 
   const [current, setCurrentUser] = useLocalStorage('currentUser', '')
+  const [token, setToken] = useLocalStorage('token', '')
 
   const onFinish = (values: any) => {
     console.log('Success:', values)
@@ -19,7 +20,7 @@ function Login() {
   }
 
   const userInfo = useAppSelector(selectCurrentUser)
-  console.log(userInfo)
+  // console.log(userInfo, '用户信息')
 
   const dispatch = useAppDispatch()
 
@@ -29,11 +30,14 @@ function Login() {
     // 设置userInfo
     dispatch(
       setCurrentUserInfo({
-        user: res.data.name,
+        user: {
+          userName: res.data.name ?? ''
+        },
         token: res.data.token
       })
     )
     setCurrentUser(res.data.name)
+    setToken(res.data.token)
     // 登录跳转
     navigate('/')
   }
@@ -44,7 +48,7 @@ function Login() {
 
   const [form] = Form.useForm()
 
-  console.log(form)
+  // console.log(form)
 
   return (
     <div className='login'>

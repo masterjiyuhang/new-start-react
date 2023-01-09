@@ -1,25 +1,38 @@
 {
   "compilerOptions": {
     "target": "ESNext",
-    "useDefineForClassFields": true,
-    "lib": ["DOM", "DOM.Iterable", "ESNext"],
-    "allowJs": false,
-    "skipLibCheck": true,
-    "esModuleInterop": false,
-    "allowSyntheticDefaultImports": true,
-    "strict": true,
-    "forceConsistentCasingInFileNames": true,
     "module": "ESNext",
     "moduleResolution": "Node",
+    "strict": true,
+    "lib": ["DOM", "DOM.Iterable", "ESNext"],
+    "forceConsistentCasingInFileNames": true,
+    "allowSyntheticDefaultImports": true,
+    "jsx": "react-jsx",
+    "baseUrl": "./",
+    "allowJs": false,
+    "useDefineForClassFields": true,
+    "skipLibCheck": true,
+    "esModuleInterop": false,
     "resolveJsonModule": true,
     "isolatedModules": true,
     "noEmit": true,
-    "jsx": "react-jsx",
-    "baseUrl": "./",
     "paths": {
       "@/*": ["src/*"]
     }
   },
-  "include": ["src"],
+  "include": [
+    "tests/**/*.ts",
+    "src/**/*.ts",
+    "src/**/*.d.ts",
+    "src/**/*.tsx",
+    "src/**/*.vue",
+    "types/**/*.d.ts",
+    "types/**/*.ts",
+    "build/**/*.ts",
+    "build/**/*.d.ts",
+    "mock/**/*.ts",
+    "vite.config.ts"
+  ],
+  "exclude": ["node_modules", "tests/server/**/*.ts", "dist", "**/*.js"],
   "references": [{ "path": "./tsconfig.node.json" }]
 }

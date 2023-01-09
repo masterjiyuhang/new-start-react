@@ -12,6 +12,7 @@ function App(props: any) {
   const [msg, setMsg] = useState('hi')
 
   const navigate = useNavigate()
+
   const goback = () => {
     console.log('回退', navigate)
     navigate(-1)
