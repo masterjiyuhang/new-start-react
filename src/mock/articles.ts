@@ -1,26 +1,20 @@
+import Mock from 'mockjs'
 import { post } from '@/utils/request'
-import { MockMethod } from 'vite-plugin-mock'
+import { serverUrl } from '@/utils/tools'
 
-export default [
-  {
-    url: '/articles/list',
-    method: 'post',
-    response: () => {
-      return {
-        success: true,
-        data: {
-          list: [
-            {
-              name: '一念永恒'
-            }
-          ],
-          total: 1
-        }
+Mock.mock(serverUrl + '/getArticlesList', {
+  data: {
+    'list|1-20': [
+      {
+        key: '@id',
+        name: '@name', // 随机生成姓名
+        author: '@cname',
+        'desc|1-20': '@cword'
       }
-    }
+    ]
   }
-] as MockMethod[]
+})
 
 export const getArticlesListApi = (data?: object) => {
-  return post('articles/list', data)
+  return post('/getArticlesList', data)
 }

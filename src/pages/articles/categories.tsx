@@ -8,12 +8,17 @@ import { getArticlesListApi } from '@/mock/articles'
 function ArticleCategories() {
   const [isShow, setIsShow] = useState(false)
   const [myForm] = useForm()
+  const [tableData, setTableData] = useState([])
   const [imageUrl, setImageUrl] = useState<string>('') // 上传之后的数据
 
   useEffect(() => {
     const getList = () => {
       getArticlesListApi({}).then((res) => {
-        console.log(res)
+        const {
+          data: { list }
+        } = res
+        setTableData(list)
+        console.log(list)
       })
     }
     getList()
@@ -28,7 +33,6 @@ function ArticleCategories() {
             <Button type='primary' icon={<PlusOutlined />} onClick={() => setIsShow(true)}></Button>
           </>
         }>
-        ArticleCategories
         <Form
           layout='inline'
           onFinish={(v) => {
@@ -44,8 +48,21 @@ function ArticleCategories() {
           </Form.Item>
         </Form>
         <Table
+          dataSource={tableData}
           style={{ width: '100%' }}
-          columns={[{ title: '序号', width: '80px' }, { title: '名称', width: '120px' }, { title: '作者', width: '120px' }, { title: '简介', width: '120px' }, { title: '操作' }]}
+          columns={[
+            {
+              title: '序号',
+              width: '80px',
+              key: 'index',
+              dataIndex: 'index',
+              render: (text, record, index) => <a>{index + 1}</a>
+            },
+            { title: '名称', key: 'name', dataIndex: 'name' },
+            { title: '作者', width: '120px', key: 'author', dataIndex: 'author' },
+            { title: '简介', key: 'desc', dataIndex: 'desc' },
+            { title: '操作', render: (text, record, index) => <><Button>哈哈</Button></> }
+          ]}
         />
       </Card>
       <Modal

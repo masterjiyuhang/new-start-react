@@ -68,7 +68,7 @@ const SysLayout = ({ children }: any) => {
   } = hhs.useToken()
   const navigate = useNavigate()
   const clickMenuItem = (e: any) => {
-    console.log(e.eky)
+    console.log(e.key, '点击的key')
     setCurrent(e.key)
     navigate(e.key)
   }
@@ -130,7 +130,16 @@ const SysLayout = ({ children }: any) => {
     <Layout>
       <Sider trigger={null} collapsible collapsed={collapsed} theme={theme}>
         <div>
-          <h1 style={{ textAlign: 'center', overflow: 'hidden', textOverflow: 'ellipsis', whiteSpace: 'nowrap', color: theme === 'dark' ? '#fff' : '#333' }}>阿三大苏打系统</h1>
+          <h1
+            style={{
+              textAlign: 'center',
+              overflow: 'hidden',
+              textOverflow: 'ellipsis',
+              whiteSpace: 'nowrap',
+              color: theme === 'dark' ? '#fff' : '#333'
+            }}>
+            CCH的小系统
+          </h1>
         </div>
         <div className='logo'>
           <img src={logo} alt='cc' />
