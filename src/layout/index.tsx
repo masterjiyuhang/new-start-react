@@ -1,9 +1,10 @@
-import { Layout, Menu, theme as hhs, Avatar, Badge, Switch, MenuTheme, Tabs } from 'antd'
+import { Layout, Menu, theme as hhs, Avatar, Badge, Switch, MenuTheme, Tabs, Dropdown } from 'antd'
 import React, { useState } from 'react'
 import { MenuFoldOutlined, MenuUnfoldOutlined, UploadOutlined, UserOutlined, VideoCameraOutlined, TeamOutlined } from '@ant-design/icons'
-import { Navigate, Outlet, useNavigate } from 'react-router-dom'
+import { Navigate, Outlet, useLocation, useNavigate } from 'react-router-dom'
 import useLocalStorage from '@/hooks/core/useLocalStorage'
 import { PrivateOutlet } from '@/components/PrivateOutlet'
+import logo from '../assets/logo.jpg'
 
 // import SysTabs from './tabs'
 
@@ -11,42 +12,49 @@ const { Header, Sider, Content } = Layout
 
 const SysLayout: React.FC = () => {
   const [collapsed, setCollapsed] = useState(false)
-  const [theme, setTheme] = useState<MenuTheme>('dark')
+  const [theme, setTheme] = useState<MenuTheme>('light')
   const [current, setCurrent] = useLocalStorage('currentKey', '/')
-  // const [tabList, setTabList] = useState([
-  //   {
-  //     title: '首页',
-  //     key: '/',
-  //     closable: false,
-  //     path: '/'
-  //   }
-  // ])
+  const [defaultSelectedKeys, setDefaultSelectedKeys] = useLocalStorage('defaultSelectedKeys', ['/'])
+
+  /**
+   * 查找当前选中的menu菜单的值
+   * @param key
+   * @returns
+   */
+  const findOpenKeys = (key: string, menus: any) => {
+    const result: string[] = []
+    const findInfo = (arr: any) => {
+      arr.forEach((item: any) => {
+        if (key.includes(item.key)) {
+          result.push(item.key)
+          if (item.children) {
+            findInfo(item.children) // 使用递归的方式查找当前页面刷新之后的默认选中项
+          }
+        }
+      })
+    }
+    findInfo(menus)
+    return result
+  }
 
   const {
     token: { colorBgContainer }
   } = hhs.useToken()
 
   const changeTheme = (value: boolean) => {
-    setTheme(value ? 'dark' : 'light')
+    setTheme(value ? 'light' : 'dark')
   }
 
   const navigate = useNavigate()
 
   const clickMenuItem = (e: any) => {
-    console.log(e.key, 'key 是什么')
-    // switch (e.key) {
-    //   case 'learn':
-    //     console.log('当前key为learn')
-    //     setTabList((pre) => pre.concat({ title: '搜索页', key: '/learn', closable: false, path: '/learn' }))
-    //     break
-    //   default:
-    //     break
-    // }
+    console.log(e, '点击了menu')
     setCurrent(e.key)
+    setDefaultSelectedKeys(e.keyPath)
     navigate(e.key)
   }
 
-  const defaultSelectedKeys = ['/']
+  // const defaultSelectedKeys = ['/']
   const menuItems = [
     {
       key: '/',
@@ -98,19 +106,23 @@ const SysLayout: React.FC = () => {
     }
   ]
 
+  const { pathname } = useLocation() // 获取location中的数据
+  const tmpOpenKeys = findOpenKeys(pathname, menuItems)
   return (
     <Layout>
       <Sider trigger={null} collapsible collapsed={collapsed} theme={theme}>
-        <div className='logo' style={{ background: '#eee', margin: 24, height: '32px' }}>
-          {current}
+        <div>
+          <h1 style={{ textAlign: 'center', overflow: 'hidden', textOverflow: 'ellipsis', whiteSpace: 'nowrap', color: theme === 'dark' ? '#fff' : '#333' }}>阿三大苏打系统</h1>
+        </div>
+        <div className='logo'>
+          <img src={logo} alt='cc' />
         </div>
 
-        <Switch checked={theme === 'dark'} onChange={changeTheme} checkedChildren='Dark' unCheckedChildren='Light' />
         <Menu
           theme={theme}
           mode='inline'
           defaultSelectedKeys={defaultSelectedKeys}
-          defaultOpenKeys={['3']}
+          defaultOpenKeys={defaultSelectedKeys}
           selectedKeys={[current]}
           onClick={clickMenuItem}
           items={menuItems}></Menu>
@@ -121,15 +133,69 @@ const SysLayout: React.FC = () => {
             className: 'trigger',
             onClick: () => setCollapsed(!collapsed)
           })}
-
-          <span className='avatar-item'>
-            <Badge count={1}>
-              <Avatar shape='square' icon={<UserOutlined />} />
-            </Badge>
-          </span>
+          <Dropdown
+            menu={{
+              items: [
+                {
+                  label: '个人中心',
+                  key: 'userCenter'
+                },
+                {
+                  label: (
+                    <span
+                      onClick={() => {
+                        setTheme(theme === 'dark' ? 'light' : 'dark')
+                      }}>
+                      切换模式
+                    </span>
+                  ),
+                  key: 'changeTheme'
+                },
+                {
+                  label: (
+                    <span
+                      onClick={() => {
+                        // console.log('退出');
+                        navigate('/login')
+                      }}>
+                      退出
+                    </span>
+                  ),
+                  key: 'logOut'
+                }
+              ]
+            }}>
+            <div
+              style={{
+                width: '30px',
+                borderRadius: '50%',
+                float: 'right',
+                marginTop: '16px',
+                marginRight: '20px'
+              }}>
+              <Badge count={1}>
+                <img
+                  src={logo}
+                  style={{
+                    width: '30px',
+                    borderRadius: '50%',
+                    float: 'right'
+                  }}
+                />
+              </Badge>
+            </div>
+            {/* <img
+              src={logo}
+              style={{
+                width: '30px',
+                borderRadius: '50%',
+                float: 'right',
+                marginTop: '16px',
+                marginRight: '20px'
+              }}
+            /> */}
+          </Dropdown>
         </Header>
-
-        {/* <SysTabs tabList={tabList} /> */}
 
         <Content
           style={{
@@ -138,7 +204,6 @@ const SysLayout: React.FC = () => {
             minHeight: 280,
             background: colorBgContainer
           }}>
-          {/* <Outlet /> */}
           <PrivateOutlet />
         </Content>
       </Layout>

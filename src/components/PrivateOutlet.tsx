@@ -9,7 +9,7 @@ export function PrivateOutlet() {
   // const dispatch = useAppDispatch()
 
   const userInfo = useUserInfo()
-  const location = useLocation()
+  // const location = useLocation()
 
   // useEffect(() => {
   //   dispatch(
@@ -20,6 +20,6 @@ export function PrivateOutlet() {
   //   )
   // }, [location])
 
-  console.log(userInfo, 'userInfo...')
-  return userInfo.user != null ? <Outlet /> : <Navigate to='/login' state={{ from: location }} />
+  // console.log(userInfo, 'userInfo...')
+  return localStorage.getItem('currentUser') != null ? <Outlet /> : <Navigate to='/login' state={{ from: location }} />
 }

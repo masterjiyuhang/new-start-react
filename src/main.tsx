@@ -5,11 +5,12 @@ import App from './App'
 import './common/styles/global.less'
 import { ConfigProvider } from 'antd'
 import zhCN from 'antd/locale/zh_CN'
-import { RouterProvider } from 'react-router-dom'
-import { globalRouters, browserRouters } from '@/router'
 
 import store from '@/store'
 import { Provider } from 'react-redux'
+import { globalRouters, browserRouters } from '@/router'
+import { RouterProvider } from 'react-router-dom'
+
 ReactDOM.createRoot(document.getElementById('root') as HTMLElement).render(
   <React.StrictMode>
     <ConfigProvider locale={zhCN}>

@@ -9,6 +9,7 @@ import NewCar from '@/pages/newcar'
 import Download from '@/pages/able/download'
 import Square from '@/pages/Square'
 import SquareChild from '@/pages/Square/components/SquareChild'
+import React from 'react'
 
 export const globalRouters = createHashRouter([
   {
