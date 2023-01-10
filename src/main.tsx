@@ -9,16 +9,24 @@ import zhCN from 'antd/locale/zh_CN'
 import store from '@/store'
 import { Provider } from 'react-redux'
 import { globalRouters, browserRouters } from '@/router'
-import { RouterProvider } from 'react-router-dom'
+import { BrowserRouter, Route, RouterProvider, Routes } from 'react-router-dom'
+import Login from './pages/login'
 
 ReactDOM.createRoot(document.getElementById('root') as HTMLElement).render(
   <React.StrictMode>
-    <ConfigProvider locale={zhCN}>
-      {/* <App /> */}
-      <Provider store={store}>
-        {/* <RouterProvider router={globalRouters} /> */}
-        <RouterProvider router={browserRouters} />
-      </Provider>
-    </ConfigProvider>
+    <BrowserRouter>
+      <ConfigProvider locale={zhCN}>
+        {/* <App /> */}
+        <Provider store={store}>
+          {/* <RouterProvider router={globalRouters} /> */}
+          {/* <RouterProvider router={browserRouters} /> */}
+          <Routes>
+            <Route path='/login' element={<Login />} />
+            <Route path='/admin/*' element={<App />} />
+            <Route path='*' element={<Login />} />
+          </Routes>
+        </Provider>
+      </ConfigProvider>
+    </BrowserRouter>
   </React.StrictMode>
 )

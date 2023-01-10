@@ -39,7 +39,7 @@ function Login() {
     setCurrentUser(res.data.name)
     setToken(res.data.token)
     // 登录跳转
-    navigate('/')
+    navigate('/admin/dashboard')
   }
 
   const onFinishFailed = (errorInfo: any) => {

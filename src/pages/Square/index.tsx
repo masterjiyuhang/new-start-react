@@ -14,7 +14,7 @@ export default function Square() {
 
   const navigate = useNavigate()
   const gotoLink = () => {
-    navigate('/square/3?name=jiyuhang', {
+    navigate('/admin/function/square/3?name=jiyuhang', {
       state: {
         canshu1: 'asdadqwe',
         canshu2: 123,
@@ -32,7 +32,7 @@ export default function Square() {
         {data.map((item) => {
           return (
             <li key={item.id}>
-              <Link to={`/square/${item.id}`}>点击进入子页面{item.id}</Link>
+              <Link to={`/admin/function/square/${item.id}`}>点击进入子页面{item.id}</Link>
             </li>
           )
         })}
