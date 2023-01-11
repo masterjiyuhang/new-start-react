@@ -96,6 +96,18 @@ const SysLayout = ({ children }: any) => {
       ]
     },
     {
+      key: '/admin/medicine',
+      icon: <MenuFoldOutlined />,
+      label: '药品管理',
+      children: [
+        {
+          label: '药品分类',
+          icon: <MenuUnfoldOutlined />,
+          key: '/admin/medicine/categories'
+        }
+      ]
+    },
+    {
       key: '/admin/user',
       icon: <UserOutlined />,
       label: '个人中心'

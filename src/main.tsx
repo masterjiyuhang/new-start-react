@@ -13,7 +13,7 @@ import { BrowserRouter, Route, RouterProvider, Routes } from 'react-router-dom'
 import Login from './pages/login'
 
 ReactDOM.createRoot(document.getElementById('root') as HTMLElement).render(
-  <React.StrictMode>
+  <>
     <BrowserRouter>
       <ConfigProvider locale={zhCN}>
         {/* <App /> */}
@@ -28,5 +28,5 @@ ReactDOM.createRoot(document.getElementById('root') as HTMLElement).render(
         </Provider>
       </ConfigProvider>
     </BrowserRouter>
-  </React.StrictMode>
+  </>
 )

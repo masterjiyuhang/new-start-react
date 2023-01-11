@@ -25,6 +25,7 @@ export const setToken = (token: string) => sessionStorage.setItem('token', token
  * @returns
  */
 export const getToken = () => sessionStorage.getItem('token')
+export const getTokenBySession = () => JSON.parse(sessionStorage.getItem('token') as string)
 
 /**
  * 图片处理

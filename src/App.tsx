@@ -8,6 +8,7 @@ import ArticleList from './pages/articles/list'
 import Download from './pages/able/download'
 import Square from './pages/Square'
 import SquareChild from './pages/Square/components/SquareChild'
+import MedicineCategories from './pages/medicine/categories'
 
 function App(props: any) {
   // // 某些特定的值在两次重新渲染之间没有发生变化，可以通知react跳过对effect的调用。
@@ -22,6 +23,7 @@ function App(props: any) {
           <Route path='dashboard' element={<Dashboard />} />
           <Route path='articles/categories' element={<ArticleCategories />} />
           <Route path='articles/list' element={<ArticleList />} />
+          <Route path='medicine/categories' element={<MedicineCategories />} />
           <Route path='function/download' element={<Download />} />
           <Route path='function/square' element={<Square />}>
             <Route path=':id' element={<SquareChild />} />

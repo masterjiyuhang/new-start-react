@@ -1,4 +1,4 @@
-import { serverUrl, getToken } from './tools'
+import { serverUrl, getToken, getTokenBySession } from './tools'
 import axios from 'axios'
 import NProgress from 'nprogress'
 import 'nprogress/nprogress.css'
@@ -12,8 +12,9 @@ const instance = axios.create({
 // Add a request interceptor，发起请求之前执行
 instance.interceptors.request.use(
   function (config: any) {
+    console.log(getTokenBySession(), '获取token')
     // Do something before request is sent
-    config.headers.token = getToken()
+    config.headers.token = getTokenBySession()
     NProgress.start() // 启动loading
     return config
   },

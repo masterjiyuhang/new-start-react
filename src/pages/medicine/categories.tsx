@@ -1,11 +1,13 @@
-import { Button, Card, Form, Input, message, Modal, Table } from 'antd'
+import { Button, Card, Form, Input, message, Modal, Space, Table } from 'antd'
 import React, { useEffect, useState } from 'react'
-import { PlusOutlined, SearchOutlined } from '@ant-design/icons'
 import { useForm } from 'antd/lib/form/Form'
 import MyUpload from '@/components/MyUpload'
 import { getArticlesListApi } from '@/mock/articles'
 
-function ArticleCategories() {
+import { loadDataAPI, insertAPI, updateByIdAPI, delByIdAPI } from '../../api/medicine-categories'
+import { PlusOutlined, SearchOutlined, EditOutlined, DeleteOutlined } from '@ant-design/icons'
+
+function MedicineCategories() {
   const [isShow, setIsShow] = useState(false)
   const [query, setQUeryData] = useState({})
   const [myForm] = useForm()
@@ -14,7 +16,7 @@ function ArticleCategories() {
 
   useEffect(() => {
     const getList = () => {
-      getArticlesListApi({}).then((res) => {
+      loadDataAPI({}).then((res) => {
         const {
           data: { list }
         } = res
@@ -28,7 +30,7 @@ function ArticleCategories() {
   return (
     <>
       <Card
-        title='文章分类'
+        title='药品分类'
         extra={
           <>
             <Button type='primary' icon={<PlusOutlined />} onClick={() => setIsShow(true)}></Button>
@@ -52,6 +54,7 @@ function ArticleCategories() {
         <Table
           dataSource={tableData}
           style={{ width: '100%' }}
+          rowKey='id'
           columns={[
             {
               title: '序号',
@@ -66,9 +69,14 @@ function ArticleCategories() {
             {
               title: '操作',
               render: (text, record, index) => (
-                <>
-                  <Button>哈哈</Button>
-                </>
+                <Space>
+                  <Button type='primary' size='small' icon={<EditOutlined />}>
+                    编辑
+                  </Button>
+                  <Button type='primary' size='small' danger icon={<DeleteOutlined />}>
+                    删除
+                  </Button>
+                </Space>
               )
             }
           ]}
@@ -106,4 +114,4 @@ function ArticleCategories() {
   )
 }
 
-export default ArticleCategories
+export default MedicineCategories
