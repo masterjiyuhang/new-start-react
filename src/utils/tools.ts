@@ -5,8 +5,8 @@ export const defaultImg = logo
 /**
  * 服务器地址
  */
-export const serverUrl = 'http://localhost:6173'
-// export const serverUrl = 'http://localhost:3006'
+// export const serverUrl = 'http://localhost:6173'
+export const serverUrl = 'http://localhost:3006'
 
 /**
  * 文件上传接口

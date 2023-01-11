@@ -12,7 +12,7 @@
     "allowJs": false,
     "useDefineForClassFields": true,
     "skipLibCheck": true,
-    "esModuleInterop": false,
+    "esModuleInterop": true,
     "resolveJsonModule": true,
     "isolatedModules": true,
     "noEmit": true,
@@ -21,6 +21,7 @@
     }
   },
   "include": [
+    "server/**/*.ts",
     "tests/**/*.ts",
     "src/**/*.ts",
     "src/**/*.d.ts",

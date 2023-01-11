@@ -1,5 +1,5 @@
 function reddenPage() {
-  alert('浏览器插件启动了' + Math.random(1000))
+  alert('浏览器插件启动了111' + Math.random(1000))
 
   const randomColor = () => {
     return '#' + Math.floor(Math.random() * 16777215).toString(16)
