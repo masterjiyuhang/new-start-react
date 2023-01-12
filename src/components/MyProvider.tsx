@@ -95,7 +95,9 @@ function Myprovider({ children }: any) {
 
   if (oldRole) {
     defaultMenus = findRoles(oldRole)
+
     defaultRoutes = flatRoutes(defaultMenus)
+    defaultMenus = findRolesByMeta(oldRole)
   }
 
   const [menus, setMenus] = useState(defaultMenus)
@@ -107,8 +109,9 @@ function Myprovider({ children }: any) {
     sessionStorage.setItem('role', role)
     // 此处重置菜单和路由数据
     const tmpMenu = findRoles(role)
-    setMenus(tmpMenu)
     setRoutes(flatRoutes(tmpMenu))
+    const tmp = findRolesByMeta(role)
+    setMenus(tmp)
   }
   return <context.Provider value={{ menus, routes, resetMyMenus }}>{children}</context.Provider>
 }
@@ -129,17 +132,39 @@ function findRoles(role: string) {
       if (info.roles) {
         if (info.roles?.includes(role)) parent ? parent.push(info) : arr.push(info)
       } else {
-        // if (parent) {
-        //   if (info.meta) {
-        //     // eslint-disable-next-line @typescript-eslint/no-unused-expressions
-        //     info.meta.isShow ? parent.push(info) : null
-        //     return
-        //   }
-        //   parent.push(info)
-        // } else {
-        //   arr.push(info)
-        // }
         parent ? parent.push(info) : arr.push(info)
+      }
+    })
+  }
+  return arr
+}
+function findRolesByMeta(role: string) {
+  const arr: any = []
+  findInfo(sidebarMenu)
+  function findInfo(data: any, parent: any = null) {
+    data.forEach((item: any) => {
+      const { children, ...info } = item
+
+      if (children) {
+        info.children = []
+        findInfo(children, info.children)
+        // eslint-disable-next-line @typescript-eslint/no-unused-expressions
+        info.children.length === 0 ? delete info.children : null
+      }
+      if (info.roles) {
+        if (info.roles?.includes(role)) parent ? parent.push(info) : arr.push(info)
+      } else {
+        if (parent) {
+          if (info.meta) {
+            // eslint-disable-next-line @typescript-eslint/no-unused-expressions
+            info.meta.isShow ? parent.push(info) : null
+            return
+          }
+          parent.push(info)
+        } else {
+          arr.push(info)
+        }
+        // parent ? parent.push(info) : arr.push(info)
       }
     })
   }

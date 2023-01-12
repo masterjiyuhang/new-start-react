@@ -80,6 +80,7 @@ const SysLayout = ({ children }: any) => {
   const { pathname } = useLocation() // 获取location中的数据
   const tmpOpenKeys = findOpenKeys(pathname, sidebarMenu)
 
+  console.log(tmpOpenKeys, 'tmpOpenKeys')
   // 监听pathname的改变，重新这是面包屑数据
   useEffect(() => {
     setBreadcrumbs(findDeepPath(pathname, sidebarMenu))
@@ -109,7 +110,7 @@ const SysLayout = ({ children }: any) => {
           mode='inline'
           defaultSelectedKeys={tmpOpenKeys}
           defaultOpenKeys={tmpOpenKeys}
-          selectedKeys={[current]}
+          selectedKeys={tmpOpenKeys}
           onClick={clickMenuItem}
           items={sidebarMenu}></Menu>
       </Sider>
