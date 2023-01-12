@@ -1,16 +1,16 @@
-import React from 'react'
+import React, { useContext } from 'react'
 import { Button, Checkbox, Form, Input, message } from 'antd'
 import './index.less'
 import { loginAPI, loginApi } from '@/api/auth'
 import { useAppSelector, useAppDispatch } from '@/hooks/core/StoreHooks'
 import { setCurrentUserInfo, selectCurrentUser } from '@/store/userInfo/reducer'
 import { useNavigate } from 'react-router-dom'
-import useLocalStorage from '@/hooks/core/useLocalStorage'
 import useSessionStorage from '@/hooks/core/useSessionStorage'
+import { context } from '@/components/MyProvider'
 
 function Login() {
   const navigate = useNavigate()
-
+  const { resetMyMenus } = useContext(context)
   const [current, setCurrentUser] = useSessionStorage('currentUser', '')
   const [token, setToken] = useSessionStorage('token', '')
 
@@ -28,7 +28,7 @@ function Login() {
   const login = async (params: any) => {
     // const res = await loginApi(params)
     const res = await loginAPI(params)
-    console.log(res)
+    // console.log(res)
 
     if (res.success) {
       // 设置userInfo
@@ -42,6 +42,8 @@ function Login() {
       )
       setCurrentUser(res.data.name || form.getFieldsValue().userName)
       setToken(res.data)
+
+      resetMyMenus('admin')
       // 登录跳转
       navigate('/admin/dashboard')
     } else {

@@ -1,8 +1,13 @@
 import { createContext, useEffect, useState } from 'react'
-import { UploadOutlined, UserOutlined, VideoCameraOutlined, DashboardOutlined } from '@ant-design/icons'
+import { UploadOutlined, UserOutlined, VideoCameraOutlined, DashboardOutlined, MenuFoldOutlined, MenuUnfoldOutlined, FireOutlined, TeamOutlined } from '@ant-design/icons'
 import Dashboard from '../pages/dashboard'
 import ArticleCategories from '../pages/articles/categories'
 import ArticleList from '../pages/articles/list'
+import MedicineCategories from '../pages/medicine/categories'
+import UserInfo from '@/pages/UserInfo'
+import Download from '@/pages/able/download'
+import Square from '@/pages/Square'
+import SquareChild from '@/pages/Square/components/SquareChild'
 
 export const context = createContext<any>({})
 

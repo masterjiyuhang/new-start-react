@@ -11,9 +11,10 @@ import { Provider } from 'react-redux'
 import { globalRouters, browserRouters } from '@/router'
 import { BrowserRouter, Route, RouterProvider, Routes } from 'react-router-dom'
 import Login from './pages/login'
+import MyProvider from './components/MyProvider'
 
 ReactDOM.createRoot(document.getElementById('root') as HTMLElement).render(
-  <>
+  <MyProvider>
     <BrowserRouter>
       <ConfigProvider locale={zhCN}>
         {/* <App /> */}
@@ -28,5 +29,5 @@ ReactDOM.createRoot(document.getElementById('root') as HTMLElement).render(
         </Provider>
       </ConfigProvider>
     </BrowserRouter>
-  </>
+  </MyProvider>
 )

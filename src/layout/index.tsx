@@ -1,10 +1,11 @@
 import { Layout, Menu, theme as hhs, Badge, MenuTheme, Dropdown, Breadcrumb } from 'antd'
-import React, { useEffect, useState } from 'react'
+import React, { useContext, useEffect, useState } from 'react'
 import { FireOutlined, DashboardOutlined, MenuFoldOutlined, MenuUnfoldOutlined, UploadOutlined, UserOutlined, VideoCameraOutlined, TeamOutlined } from '@ant-design/icons'
 import { useLocation, useNavigate } from 'react-router-dom'
 import { PrivateOutlet } from '@/components/PrivateOutlet'
 import logo from '../assets/logo.jpg'
 import useSessionStorage from '@/hooks/core/useSessionStorage'
+import { context } from '@/components/MyProvider'
 
 // import SysTabs from './tabs'
 
@@ -66,69 +67,15 @@ const SysLayout = ({ children }: any) => {
   const {
     token: { colorBgContainer }
   } = hhs.useToken()
+  const { menus: sidebarMenu } = useContext(context)
+
+  console.log(sidebarMenu, 'sidebarMenu//')
   const navigate = useNavigate()
   const clickMenuItem = (e: any) => {
     console.log(e.key, '点击的key')
     setCurrent(e.key)
     navigate(e.key)
   }
-  const sidebarMenu = [
-    {
-      key: '/admin/dashboard',
-      icon: <DashboardOutlined />,
-      label: '看板'
-    },
-    {
-      key: '/admin/articles',
-      icon: <MenuFoldOutlined />,
-      label: '文章管理',
-      children: [
-        {
-          label: '文章分类',
-          icon: <MenuUnfoldOutlined />,
-          key: '/admin/articles/categories'
-        },
-        {
-          label: '文章信息',
-          icon: <UploadOutlined />,
-          key: '/admin/articles/list'
-        }
-      ]
-    },
-    {
-      key: '/admin/medicine',
-      icon: <MenuFoldOutlined />,
-      label: '药品管理',
-      children: [
-        {
-          label: '药品分类',
-          icon: <MenuUnfoldOutlined />,
-          key: '/admin/medicine/categories'
-        }
-      ]
-    },
-    {
-      key: '/admin/user',
-      icon: <UserOutlined />,
-      label: '个人中心'
-    },
-    {
-      key: 'admin/function',
-      icon: <FireOutlined />,
-      label: '更多功能',
-      children: [
-        {
-          key: '/admin/function/download',
-          icon: <TeamOutlined />,
-          label: '下载'
-        },
-        {
-          key: '/admin/function/square',
-          label: '正方形的脑袋'
-        }
-      ]
-    }
-  ]
 
   const { pathname } = useLocation() // 获取location中的数据
   const tmpOpenKeys = findOpenKeys(pathname, sidebarMenu)

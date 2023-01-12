@@ -12,7 +12,7 @@ const instance = axios.create({
 // Add a request interceptor，发起请求之前执行
 instance.interceptors.request.use(
   function (config: any) {
-    console.log(getTokenBySession(), '获取token')
+    // console.log(getTokenBySession(), '获取token')
     // Do something before request is sent
     config.headers.token = getTokenBySession()
     NProgress.start() // 启动loading
