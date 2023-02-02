@@ -7,20 +7,21 @@ import { getArticlesListApi } from '@/mock/articles'
 
 function ArticleCategories() {
   const [isShow, setIsShow] = useState(false)
-  const [query, setQUeryData] = useState({})
+  const [query, setQUeryData] = useState({ name: '' })
   const [myForm] = useForm()
   const [tableData, setTableData] = useState([])
   const [imageUrl, setImageUrl] = useState<string>('') // 上传之后的数据
 
   useEffect(() => {
-    const getList = () => {
-      getArticlesListApi({}).then((res) => {
-        const {
-          data: { list }
-        } = res
-        setTableData(list)
-        console.log(list)
-      })
+    const getList = async () => {
+      console.log(query.name, '搜索条件')
+
+      const res = await getArticlesListApi({ name: query.name })
+      const {
+        data: { list }
+      } = res
+
+      setTableData(list)
     }
     getList()
   }, [query])
@@ -37,7 +38,6 @@ function ArticleCategories() {
         <Form
           layout='inline'
           onFinish={(v) => {
-            console.log(v)
             setQUeryData(v)
           }}>
           <Form.Item label='名字' name='name'>
@@ -88,10 +88,9 @@ function ArticleCategories() {
           form={myForm}
           onFinish={(v) => {
             message.success('修改成功')
-            console.log(v)
             setIsShow(false)
 
-            setQUeryData([]) // 重置查询条件，取数据
+            setQUeryData({ name: '' }) // 重置查询条件，取数据
           }}
           labelCol={{ span: 3 }}>
           <Form.Item label='名称' name='name' rules={[{ required: true, message: '请输入名称' }]}>

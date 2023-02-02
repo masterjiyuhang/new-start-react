@@ -1,8 +1,8 @@
-import { Layout, Menu, theme as hhs, Badge, MenuTheme, Dropdown, Breadcrumb } from 'antd'
+import { Layout, Menu, theme as hhs, Badge, MenuTheme, Dropdown, Breadcrumb, message } from 'antd'
+import type { MenuProps } from 'antd'
 import React, { useContext, useEffect, useState } from 'react'
-import { FireOutlined, DashboardOutlined, MenuFoldOutlined, MenuUnfoldOutlined, UploadOutlined, UserOutlined, VideoCameraOutlined, TeamOutlined } from '@ant-design/icons'
+import { MenuFoldOutlined, MenuUnfoldOutlined } from '@ant-design/icons'
 import { useLocation, useNavigate } from 'react-router-dom'
-import { PrivateOutlet } from '@/components/PrivateOutlet'
 import logo from '../assets/logo.jpg'
 import useSessionStorage from '@/hooks/core/useSessionStorage'
 import { context } from '@/components/MyProvider'
@@ -69,10 +69,10 @@ const SysLayout = ({ children }: any) => {
   } = hhs.useToken()
   const { menus: sidebarMenu } = useContext(context)
 
-  console.log(sidebarMenu, 'sidebarMenu//')
+  // console.log(sidebarMenu, 'sidebarMenu//')
   const navigate = useNavigate()
   const clickMenuItem = (e: any) => {
-    console.log(e.key, '点击的key')
+    // console.log(e.key, '点击的key')
     setCurrent(e.key)
     navigate(e.key)
   }
@@ -80,11 +80,45 @@ const SysLayout = ({ children }: any) => {
   const { pathname } = useLocation() // 获取location中的数据
   const tmpOpenKeys = findOpenKeys(pathname, sidebarMenu)
 
-  console.log(tmpOpenKeys, 'tmpOpenKeys')
+  // console.log(tmpOpenKeys, 'tmpOpenKeys')
   // 监听pathname的改变，重新这是面包屑数据
   useEffect(() => {
     setBreadcrumbs(findDeepPath(pathname, sidebarMenu))
   }, [pathname])
+
+  const onClickDropdown: MenuProps['onClick'] = ({ key }) => {
+    message.info(`Click on item ${key}`)
+
+    switch (key) {
+      case 'logOut':
+        navigate('/login')
+        break
+      case 'changeTheme':
+        setTheme(theme === 'dark' ? 'light' : 'dark')
+        break
+      case 'userCenter':
+        navigate('/admin/user')
+        break
+
+      default:
+        break
+    }
+  }
+
+  const dropdownMenuItems: MenuProps['items'] = [
+    {
+      label: '个人中心',
+      key: 'userCenter'
+    },
+    {
+      label: <span onClick={(e) => e.preventDefault()}>切换模式</span>,
+      key: 'changeTheme'
+    },
+    {
+      label: <span>退出11</span>,
+      key: 'logOut'
+    }
+  ]
 
   return (
     <Layout>
@@ -120,37 +154,11 @@ const SysLayout = ({ children }: any) => {
             className: 'trigger',
             onClick: () => setCollapsed(!collapsed)
           })}
+
           <Dropdown
             menu={{
-              items: [
-                {
-                  label: '个人中心',
-                  key: 'userCenter'
-                },
-                {
-                  label: (
-                    <span
-                      onClick={() => {
-                        setTheme(theme === 'dark' ? 'light' : 'dark')
-                      }}>
-                      切换模式
-                    </span>
-                  ),
-                  key: 'changeTheme'
-                },
-                {
-                  label: (
-                    <span
-                      onClick={() => {
-                        // console.log('退出');
-                        navigate('/login')
-                      }}>
-                      退出
-                    </span>
-                  ),
-                  key: 'logOut'
-                }
-              ]
+              items: dropdownMenuItems,
+              onClick: onClickDropdown
             }}>
             <div
               style={{
@@ -171,16 +179,6 @@ const SysLayout = ({ children }: any) => {
                 />
               </Badge>
             </div>
-            {/* <img
-              src={logo}
-              style={{
-                width: '30px',
-                borderRadius: '50%',
-                float: 'right',
-                marginTop: '16px',
-                marginRight: '20px'
-              }}
-            /> */}
           </Dropdown>
         </Header>
 

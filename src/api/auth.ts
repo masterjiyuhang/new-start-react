@@ -11,17 +11,23 @@ export interface UserResponse {
 }
 
 export interface LoginRequest {
-  username: string
+  userName: string
   password: string
 }
 
-export async function loginApi(params: LoginRequest): Promise<{ data: any }> {
+export async function loginApi(params: LoginRequest): Promise<{
+  success: boolean
+  errorMessage: string
+  data: any
+}> {
   return await new Promise((resolve) =>
     setTimeout(
       () =>
         resolve({
+          success: true,
+          errorMessage: '',
           data: {
-            name: params.username,
+            name: params.userName,
             token: 123456
           }
         }),

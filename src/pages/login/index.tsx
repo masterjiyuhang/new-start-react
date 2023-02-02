@@ -1,7 +1,8 @@
 import React, { useContext } from 'react'
 import { Button, Checkbox, Form, Input, message } from 'antd'
 import './index.less'
-import { loginAPI, loginApi } from '@/api/auth'
+// import { loginAPI, loginApi } from '@/api/auth'
+import { loginApi } from '@/mock/login'
 import { useAppSelector, useAppDispatch } from '@/hooks/core/StoreHooks'
 import { setCurrentUserInfo, selectCurrentUser } from '@/store/userInfo/reducer'
 import { useNavigate } from 'react-router-dom'
@@ -21,14 +22,13 @@ function Login() {
   }
 
   const userInfo = useAppSelector(selectCurrentUser)
-  // console.log(userInfo, '用户信息')
+  console.log(userInfo, '用户信息')
 
   const dispatch = useAppDispatch()
 
   const login = async (params: any) => {
-    // const res = await loginApi(params)
-    const res = await loginAPI(params)
-    // console.log(res)
+    const res = await loginApi(params)
+    // const res = await loginAPI(params)
 
     if (res.success) {
       // 设置userInfo
