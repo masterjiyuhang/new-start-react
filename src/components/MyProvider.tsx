@@ -1,13 +1,24 @@
 import React, { createContext, useState } from 'react'
-import { UploadOutlined, UserOutlined, DashboardOutlined, MenuFoldOutlined, MenuUnfoldOutlined, FireOutlined, TeamOutlined } from '@ant-design/icons'
 import Dashboard from '../pages/dashboard'
 import ArticleCategories from '../pages/articles/categories'
 import ArticleList from '../pages/articles/list'
 import MedicineCategories from '../pages/medicine/categories'
 import UserInfo from '@/pages/UserInfo'
 import Download from '@/pages/able/download'
+import Study from '@/pages/able/study'
 import Square from '@/pages/Square'
 import SquareChild from '@/pages/Square/components/SquareChild'
+import {
+  SmileOutlined,
+  UploadOutlined,
+  UserOutlined,
+  DashboardOutlined,
+  MenuFoldOutlined,
+  MenuUnfoldOutlined,
+  FireOutlined,
+  TeamOutlined,
+  CustomerServiceOutlined
+} from '@ant-design/icons'
 
 export const context = createContext<any>({})
 
@@ -65,6 +76,12 @@ const sidebarMenu = [
     label: '更多功能',
     children: [
       {
+        key: '/admin/function/study',
+        icon: <CustomerServiceOutlined />,
+        label: '学习',
+        element: <Study />
+      },
+      {
         key: '/admin/function/download',
         icon: <TeamOutlined />,
         label: '下载',
@@ -73,6 +90,7 @@ const sidebarMenu = [
       {
         key: '/admin/function/square',
         label: '正方形的脑袋',
+        icon: <SmileOutlined />,
         element: <Square />
       },
       {

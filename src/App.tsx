@@ -1,14 +1,7 @@
 import { Route, Routes } from 'react-router-dom'
 import SysLayout from './layout'
 import './App.css'
-import Dashboard from './pages/dashboard'
-import UserInfo from './pages/UserInfo'
-import ArticleCategories from './pages/articles/categories'
-import ArticleList from './pages/articles/list'
-import Download from './pages/able/download'
-import Square from './pages/Square'
-import SquareChild from './pages/Square/components/SquareChild'
-import MedicineCategories from './pages/medicine/categories'
+
 import { useContext } from 'react'
 import { context } from './components/MyProvider'
 
@@ -26,16 +19,6 @@ function App(props: any) {
           {routes.map((item: any) => (
             <Route key={item.key} path={item.key?.replace('/admin/', '')} element={item.element} />
           ))}
-
-          {/* <Route path='dashboard' element={<Dashboard />} />
-          <Route path='articles/categories' element={<ArticleCategories />} />
-          <Route path='articles/list' element={<ArticleList />} />
-          <Route path='medicine/categories' element={<MedicineCategories />} />
-          <Route path='function/download' element={<Download />} />
-          <Route path='function/square' element={<Square />}>
-            <Route path=':id' element={<SquareChild />} />
-          </Route>
-          <Route path='user' element={<UserInfo />} /> */}
         </Routes>
       </SysLayout>
     </div>
