@@ -1,8 +1,8 @@
 import Mock from 'mockjs'
-import { post } from '@/utils/request'
 import { serverUrl } from '@/utils/tools'
+import { post } from '@/utils/request'
 
-Mock.mock(serverUrl + '/loginApi', {
+Mock.mock(serverUrl + '/auth/adminLogin', {
   success: true,
   data: {
     name: '@cname',
@@ -11,5 +11,5 @@ Mock.mock(serverUrl + '/loginApi', {
 })
 
 export const loginApi = (data?: object) => {
-  return post('/loginApi', data)
+  return post('/auth/adminLogin', data)
 }

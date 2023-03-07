@@ -1,8 +1,8 @@
 import React, { useContext } from 'react'
 import { Button, Checkbox, Form, Input, message } from 'antd'
 import './index.less'
-// import { loginAPI, loginApi } from '@/api/auth'
 import { loginApi } from '@/mock/login'
+// import { loginAPI, loginApi } from '@/api/auth'
 import { useAppSelector, useAppDispatch } from '@/hooks/core/StoreHooks'
 import { setCurrentUserInfo, selectCurrentUser } from '@/store/userInfo/reducer'
 import { useNavigate } from 'react-router-dom'
@@ -16,7 +16,7 @@ function Login() {
   const [token, setToken] = useSessionStorage('token', '')
 
   const onFinish = (values: any) => {
-    console.log('Success:', values)
+    console.log('登录表单信息 Success:', values)
     // login api
     login(values)
   }
@@ -29,6 +29,7 @@ function Login() {
   const login = async (params: any) => {
     const res = await loginApi(params)
     // const res = await loginAPI(params)
+    console.log(res, '登录登录！！！！！！')
 
     if (res.success) {
       // 设置userInfo
@@ -37,11 +38,11 @@ function Login() {
           user: {
             userName: res.data.name ?? form.getFieldsValue().userName
           },
-          token: res.data
+          token: res.data.token
         })
       )
       setCurrentUser(res.data.name || form.getFieldsValue().userName)
-      setToken(res.data)
+      setToken(res.data.token)
 
       resetMyMenus('admin')
       // 登录跳转

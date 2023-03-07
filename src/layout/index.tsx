@@ -7,7 +7,7 @@ import logo from '../assets/logo.jpg'
 import useSessionStorage from '@/hooks/core/useSessionStorage'
 import { context } from '@/components/MyProvider'
 
-// import SysTabs from './tabs'
+import SysTabs from './tabs'
 
 const { Header, Sider, Content } = Layout
 
@@ -120,6 +120,14 @@ const SysLayout = ({ children }: any) => {
     }
   ]
 
+  const tableList: Array<{ title: string, key: string, closable: boolean, path: string }> = [
+    {
+      title: '首页',
+      key: 'dashboard',
+      closable: false,
+      path: '/dashboard'
+    }
+  ]
   return (
     <Layout>
       <Sider trigger={null} collapsible collapsed={collapsed} theme={theme}>
@@ -150,6 +158,7 @@ const SysLayout = ({ children }: any) => {
       </Sider>
       <Layout className='site-layout'>
         <Header style={{ padding: 0, background: colorBgContainer }}>
+          {/* 展开折叠 */}
           {React.createElement(collapsed ? MenuUnfoldOutlined : MenuFoldOutlined, {
             className: 'trigger',
             onClick: () => setCollapsed(!collapsed)
@@ -181,6 +190,7 @@ const SysLayout = ({ children }: any) => {
             </div>
           </Dropdown>
         </Header>
+        <SysTabs tabList={tableList} />
 
         <Content
           style={{

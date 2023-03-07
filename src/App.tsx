@@ -1,7 +1,14 @@
 import { Route, Routes } from 'react-router-dom'
 import SysLayout from './layout'
 import './App.css'
-
+// import Dashboard from './pages/dashboard'
+// import UserInfo from './pages/UserInfo'
+// import ArticleCategories from './pages/articles/categories'
+// import ArticleList from './pages/articles/list'
+// import Download from './pages/able/download'
+// import Square from './pages/Square'
+// import SquareChild from './pages/Square/components/SquareChild'
+// import MedicineCategories from './pages/medicine/categories'
 import { useContext } from 'react'
 import { context } from './components/MyProvider'
 
