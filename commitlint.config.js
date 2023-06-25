@@ -1,15 +1,39 @@
+// @see: https://cz-git.qbenben.com/zh/guide
+/** @type {import('cz-git').UserConfig} */
+
 module.exports = {
-  ignores: [commit => commit.includes("init")],
-  extends: ['@commitlint/config-conventional'],
-  rules: {
-    'body-leading-blank': [2, 'always'],
-    'footer-leading-blank': [1, 'always'],
-    'header-max-length': [2, 'always', 108],
-    'subject-empty': [2, 'never'],
-    'type-empty': [2, 'never'],
-    'subject-case': [0],
-    'type-enum': [2, 'always', ['feat', 'fix', 'perf', 'style', 'docs', 'test', 'refactor', 'build', 'ci', 'chore', 'revert', 'wip', 'workflow', 'types', 'release']]
-  },
+	ignores: [commit => commit.includes("init")],
+	extends: ["@commitlint/config-conventional"],
+	rules: {
+		// @see: https://commitlint.js.org/#/reference-rules
+		"body-leading-blank": [2, "always"],
+		"footer-leading-blank": [1, "always"],
+		"header-max-length": [2, "always", 108],
+		"subject-empty": [2, "never"],
+		"type-empty": [2, "never"],
+		"subject-case": [0],
+		"type-enum": [
+			2,
+			"always",
+			[
+				"feat",
+				"fix",
+				"docs",
+				"style",
+				"refactor",
+				"perf",
+				"test",
+				"build",
+				"ci",
+				"chore",
+				"revert",
+				"wip",
+				"workflow",
+				"types",
+				"release"
+			]
+		]
+	},
 	prompt: {
 		messages: {
 			type: "Select the type of change that you're committing:",
@@ -132,4 +156,4 @@ module.exports = {
 		defaultScope: "",
 		defaultSubject: ""
 	}
-}
+};
