@@ -79,5 +79,10 @@
 		"vite-plugin-eslint": "^1.8.1",
 		"vite-plugin-html": "^3.2.0",
 		"vite-plugin-svg-icons": "^2.0.1"
+	},
+	"config": {
+		"commitizen": {
+			"path": "node_modules/cz-git"
+		}
 	}
 }
