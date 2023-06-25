@@ -1,0 +1,13 @@
+root = true
+
+[*] # 表示所有文件适用
+charset = "utf-8"
+end_of_line = lf
+insert_final_newline = true
+ident_style = tab
+ident_size = 2
+max_line_length = 130
+
+[*.md]
+max_line_length = off
+trim_tralling_whitespace = false # 关闭末尾空格修剪

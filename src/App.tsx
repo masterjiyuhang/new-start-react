@@ -1,35 +1,30 @@
-import { Route, Routes } from 'react-router-dom'
-import SysLayout from './layout'
-import './App.css'
-// import Dashboard from './pages/dashboard'
-// import UserInfo from './pages/UserInfo'
-// import ArticleCategories from './pages/articles/categories'
-// import ArticleList from './pages/articles/list'
-// import Download from './pages/able/download'
-// import Square from './pages/Square'
-// import SquareChild from './pages/Square/components/SquareChild'
-// import MedicineCategories from './pages/medicine/categories'
-import { useContext } from 'react'
-import { context } from './components/MyProvider'
+import { useState } from "react";
+import reactLogo from "./assets/react.svg";
+import viteLogo from "/vite.svg";
 
-function App(props: any) {
-  // // 某些特定的值在两次重新渲染之间没有发生变化，可以通知react跳过对effect的调用。
-  // useEffect(() => {
-  //   document.title = `${count}You clicked ${count} times`
-  // }, [count])
-  const { routes } = useContext(context)
-  console.log(routes, 'routes///')
-  return (
-    <div className='App'>
-      <SysLayout>
-        <Routes>
-          {routes.map((item: any) => (
-            <Route key={item.key} path={item.key?.replace('/admin/', '')} element={item.element} />
-          ))}
-        </Routes>
-      </SysLayout>
-    </div>
-  )
+function App() {
+	const [count, setCount] = useState(0);
+
+	return (
+		<>
+			<div>
+				<a href="https://vitejs.dev" target="_blank" rel="noreferrer">
+					<img src={viteLogo} className="logo" alt="Vite logo" />
+				</a>
+				<a href="https://react.dev" target="_blank" rel="noreferrer">
+					<img src={reactLogo} className="logo react" alt="React logo" />
+				</a>
+			</div>
+			<h1>Vite + React</h1>
+			<div className="card">
+				<button onClick={() => setCount(count => count + 1)}>count is {count}</button>
+				<p>
+					Edit <code>src/App.tsx</code> and save to test HMR
+				</p>
+			</div>
+			<p className="read-the-docs">Click on the Vite and React logos to learn more</p>
+		</>
+	);
 }
 
-export default App
+export default App;
