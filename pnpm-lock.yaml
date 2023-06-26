@@ -147,6 +147,9 @@ devDependencies:
   prettier:
     specifier: ^2.8.8
     version: 2.8.8
+  qs:
+    specifier: ^6.11.2
+    version: 6.11.2
   rollup-plugin-visualizer:
     specifier: ^5.9.2
     version: 5.9.2
@@ -5993,6 +5996,13 @@ packages:
     dependencies:
       side-channel: 1.0.4
     dev: false
+
+  /qs@6.11.2:
+    resolution: {integrity: sha512-tDNIz22aBzCDxLtVH++VnTfzxlfeK5CbqohpSqpJgj1Wg/cQbStNAz3NuqCs5vV+pjBsK4x4pN9HlVh7rcYRiA==}
+    engines: {node: '>=0.6'}
+    dependencies:
+      side-channel: 1.0.4
+    dev: true
 
   /query-string@4.3.4:
     resolution: {integrity: sha512-O2XLNDBIg1DnTOa+2XrIwSiXEV8h2KImXUnjhhn2+UsvZ+Es2uyd5CCRTNQlDGbzUQOW3aYCBx9rVA6dzsiY7Q==}
