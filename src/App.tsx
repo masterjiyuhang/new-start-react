@@ -1,13 +1,12 @@
-import { useState } from "react";
+import Router from "@/routers/index";
+import { BrowserRouter } from "react-router-dom";
 
-function App() {
-	const [count, setCount] = useState(0);
-
+const App = () => {
 	return (
-		<>
-			<div onClick={() => setCount(count => count + 1)}>哈哈{count}</div>
-		</>
+		<BrowserRouter>
+			<Router />
+		</BrowserRouter>
 	);
-}
+};
 
 export default App;
