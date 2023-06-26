@@ -5,6 +5,11 @@ import NotFound from "@/components/ErrorMessage/404";
 import LayoutIndex from "@/layouts/index";
 import Home from "@/views/home";
 
+import DataScreen from "@/views/dataScreen/index";
+import UseHooks from "@/views/proTable/useHooks/index";
+import UseComponent from "@/views/proTable/useComponent/index";
+import DataVisualize from "@/views/dashboard/dataVisualize";
+
 const rootRouter: RouteObject[] = [
 	{
 		path: "/",
@@ -20,6 +25,22 @@ const rootRouter: RouteObject[] = [
 			{
 				path: "/home",
 				element: <Home />
+			},
+			{
+				path: "/dataScreen",
+				element: <DataScreen />
+			},
+			{
+				path: "/proTable/useHooks",
+				element: <UseHooks />
+			},
+			{
+				path: "/proTable/useComponent",
+				element: <UseComponent />
+			},
+			{
+				path: "/dashboard/dataVisualize",
+				element: <DataVisualize />
 			}
 		]
 	},

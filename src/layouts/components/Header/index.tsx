@@ -15,6 +15,7 @@ export default function LayoutHeader() {
 				<BreadcrumbNav />
 			</div>
 			<div className="header-ri">
+				<span className="username">CaiCai</span>
 				<AvatarIcon />
 			</div>
 		</Header>
