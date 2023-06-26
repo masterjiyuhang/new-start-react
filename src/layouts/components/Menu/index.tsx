@@ -1,27 +1,36 @@
 import { Menu } from "antd";
 import { useEffect, useState } from "react";
 import { useLocation, useNavigate } from "react-router-dom";
-import { AppstoreOutlined, AreaChartOutlined, HomeOutlined, TableOutlined } from "@ant-design/icons";
 import Logo from "./components/Logo";
 import "./index.scss";
 // import { Link } from "react-router-dom";
 import type { MenuProps } from "antd";
+import { getOpenKeys } from "@/utils/util";
+import { AppstoreOutlined, AreaChartOutlined, HomeOutlined, TableOutlined } from "@ant-design/icons";
 
 const LayoutMenu = () => {
-	const { pathname } = useLocation();
-	const [menuActive, setMenuActive] = useState(pathname);
+	const navigate = useNavigate();
 
-	const getSubMenuActive = () => {
-		menuList.forEach(item => {
-			if (item.children) {
-				item.children.forEach(child => {
-					if (child.key === pathname) {
-						setSubMenuActive(child.key);
-					}
-				});
-			}
-		});
+	const { pathname } = useLocation();
+	const [selectedKeys, setSelectedKeys] = useState<string[]>([pathname]);
+	const [openKeys, setOpenKeys] = useState<string[]>([]);
+
+	useEffect(() => {
+		setSelectedKeys([pathname]);
+		setOpenKeys(getOpenKeys(pathname));
+	}, [pathname]);
+
+	// 设置当前展开的 subMenu
+	const onOpenChange = (openKeys: string[]) => {
+		if (openKeys.length === 0 || openKeys.length === 1) return setOpenKeys(openKeys);
+		const latestOpenKey = openKeys[openKeys.length - 1];
+		// 最新展开的 SubMenu
+		if (latestOpenKey.includes(openKeys[0])) return setOpenKeys(openKeys);
+		setOpenKeys([latestOpenKey]);
 	};
+
+	// 点击菜单
+	const clickMenu: MenuProps["onClick"] = ({ key }: { key: string }) => navigate(key);
 
 	const menuList = [
 		{
@@ -53,25 +62,6 @@ const LayoutMenu = () => {
 			]
 		}
 	];
-	useEffect(() => {
-		getSubMenuActive();
-		setMenuActive(pathname);
-	}, [pathname]);
-
-	const navigate = useNavigate();
-
-	// 点击菜单
-	const clickMenu: MenuProps["onClick"] = e => navigate(e.key);
-
-	const [subMenuActive, setSubMenuActive] = useState("");
-
-	const openSubMenu = (openKeys: any) => {
-		if (openKeys.length > 0) {
-			setSubMenuActive(openKeys[1]);
-		} else {
-			return setSubMenuActive("");
-		}
-	};
 
 	return (
 		<div className="menu">
@@ -80,11 +70,11 @@ const LayoutMenu = () => {
 				theme="dark"
 				mode="inline"
 				triggerSubMenuAction="click"
-				openKeys={[subMenuActive]}
-				selectedKeys={[menuActive]}
+				openKeys={openKeys}
+				selectedKeys={selectedKeys}
 				items={menuList}
 				onClick={clickMenu}
-				onOpenChange={openSubMenu}
+				onOpenChange={onOpenChange}
 			></Menu>
 		</div>
 	);
