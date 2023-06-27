@@ -54,6 +54,9 @@
 				.ant-input-prefix {
 					margin-right: 10px;
 				}
+				.ant-input-affix-wrapper-lg {
+					padding: 8.3px 11px;
+				}
 				.ant-input-affix-wrapper {
 					font-size: 14px;
 					color: #b3b6bc;
@@ -70,7 +73,7 @@
 					display: flex;
 					justify-content: space-between;
 					.ant-btn {
-						width: 180px;
+						width: 175px;
 						span {
 							font-size: 14px;
 						}
