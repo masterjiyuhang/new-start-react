@@ -13,6 +13,7 @@ import LayoutIndex from "@/layouts/index";
 
 import lazyLoad from "./lazyLoad";
 import React from "react";
+import { HOME_URL } from "@/config/config";
 
 const rootRouter: RouteObject[] = [
 	{
@@ -29,11 +30,11 @@ const rootRouter: RouteObject[] = [
 		// element: lazyLoad(React.lazy(() => import("@/layouts/index"))),
 		children: [
 			{
-				path: "/home",
+				path: HOME_URL,
 				element: lazyLoad(React.lazy(() => import("@/views/home/index")))
 			},
 			{
-				path: "/dataScreen",
+				path: "/dataScreen/index",
 				element: lazyLoad(React.lazy(() => import("@/views/dataScreen/index")))
 			},
 			{
@@ -51,6 +52,10 @@ const rootRouter: RouteObject[] = [
 		]
 	},
 	{
+		path: "/404",
+		element: lazyLoad(React.lazy(() => import("@/components/ErrorMessage/404")))
+	},
+	{
 		path: "/403",
 		element: lazyLoad(React.lazy(() => import("@/components/ErrorMessage/403")))
 	},
@@ -60,7 +65,7 @@ const rootRouter: RouteObject[] = [
 	},
 	{
 		path: "*",
-		element: lazyLoad(React.lazy(() => import("@/components/ErrorMessage/404")))
+		element: <Navigate to={"/404"} />
 	}
 ];
 

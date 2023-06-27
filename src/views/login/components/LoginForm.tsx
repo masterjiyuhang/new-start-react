@@ -5,6 +5,7 @@ import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import md5 from "js-md5";
 import { loginApi } from "@/api/modules/login";
+import { HOME_URL } from "@/config/config";
 
 const LoginForm = () => {
 	const Item = Form.Item;
@@ -19,7 +20,7 @@ const LoginForm = () => {
 			values.password = md5(values.password);
 			await loginApi(values);
 			messageApi.success("login successfully");
-			navigate("/home");
+			navigate(HOME_URL);
 		} catch (error) {
 			console.log(error);
 		} finally {

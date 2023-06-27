@@ -1,3 +1,4 @@
+import { HOME_URL } from "@/config/config";
 import { HomeFilled } from "@ant-design/icons";
 import { Tabs } from "antd";
 import { useEffect, useState } from "react";
@@ -10,11 +11,11 @@ const LayoutTabs = () => {
 	const [tabsList] = useState([
 		{
 			title: "首页",
-			path: "/home"
+			path: HOME_URL
 		},
 		{
 			title: "数据大屏",
-			path: "/dataScreen"
+			path: "/dataScreen/index"
 		},
 		{
 			title: "使用 Hooks",
@@ -97,11 +98,11 @@ const LayoutTabs = () => {
 						key={item.path}
 						tab={
 							<span>
-								{item.path == "/home" ? <HomeFilled /> : ""}
+								{item.path == HOME_URL ? <HomeFilled /> : ""}
 								{item.title}
 							</span>
 						}
-						closable={item.path !== "/home"}
+						closable={item.path !== HOME_URL}
 					></TabPane>
 				);
 			})}

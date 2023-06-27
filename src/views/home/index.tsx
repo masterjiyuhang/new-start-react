@@ -3,5 +3,9 @@ import welcome from "@/assets/images/welcome.png";
 import "./index.scss";
 
 export default function Home() {
-	return <img src={welcome} alt="" />;
+	return (
+		<div className="home-container">
+			<img src={welcome} alt="" />
+		</div>
+	);
 }

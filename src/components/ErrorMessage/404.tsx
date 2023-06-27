@@ -2,11 +2,12 @@ import React from "react";
 import "./index.scss";
 import { useNavigate } from "react-router-dom";
 import { Button, Result } from "antd";
+import { HOME_URL } from "@/config/config";
 
 const NotFound: React.FC = () => {
 	const navigate = useNavigate();
 
-	const goHome = () => navigate("/home");
+	const goHome = () => navigate(HOME_URL);
 
 	return (
 		<Result
