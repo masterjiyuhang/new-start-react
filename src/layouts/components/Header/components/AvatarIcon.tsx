@@ -25,7 +25,10 @@ const AvatarIcon = () => {
 			content: "confirm logout?",
 			okText: "sure",
 			cancelText: "cancel",
-			onOk: () => message.success(" logout successfully")
+			onOk: () => {
+				message.success(" logout successfully");
+				navigate("login");
+			}
 		});
 	};
 
