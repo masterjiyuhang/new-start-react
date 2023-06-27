@@ -13,7 +13,7 @@ const LayoutIndex = () => {
 	const { pathname } = useLocation();
 	return (
 		<section className="container">
-			<Sider trigger={null} collapsible collapsed={false}>
+			<Sider trigger={null} collapsed={false} width={220} theme="dark">
 				<LayoutMenu></LayoutMenu>
 			</Sider>
 			<Layout>
