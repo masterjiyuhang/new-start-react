@@ -27,7 +27,7 @@ export default defineConfig(mode => {
 
 			viteEnv.VITE_REPORT && visualizer(),
 
-			viteEnv.VITE_BUILD_ZIP &&
+			viteEnv.VITE_BUILD_GZIP &&
 				viteCompression({
 					verbose: true,
 					disable: false,
@@ -42,19 +42,11 @@ export default defineConfig(mode => {
 			open: viteEnv.VITE_OPEN,
 			cors: true,
 			proxy: {
-				// 字符串简写写法
-				"/foo": "http://localhost:4567",
 				// 选项写法
 				"/api": {
-					target: "http://jsonplaceholder.typicode.com",
+					target: "http://101.42.21.153:8033/mock/649982d61d5a0a36692f05dc",
 					changeOrigin: true,
-					rewrite: path => path.replace(/^\/api/, "")
-				},
-				// 正则表达式写法
-				"^/fallback/.*": {
-					target: "http://jsonplaceholder.typicode.com",
-					changeOrigin: true,
-					rewrite: path => path.replace(/^\/fallback/, "")
+					rewrite: (path: string) => path.replace(/^\/api/, "")
 				}
 			}
 		},

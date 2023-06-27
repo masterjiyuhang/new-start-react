@@ -17,7 +17,7 @@ declare interface ViteEnv {
 	VITE_API_URL: string;
 	VITE_PORT: number;
 	VITE_OPEN: boolean;
-	VITE_GLOB_APP_TITLE: string;
+	VITE_GLOBAL_APP_TITLE: string;
 	VITE_DROP_CONSOLE: boolean;
 	VITE_PROXY_URL: string;
 	VITE_BUILD_GZIP: boolean;

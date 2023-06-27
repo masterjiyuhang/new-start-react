@@ -9,6 +9,11 @@ import { ResultData } from "./interface";
 
 const axiosCanceler = new AxiosCanceler();
 
+const navigateTo = (path: string) => {
+	const navigate = useNavigate();
+	navigate(path);
+};
+
 class RequestHttp {
 	service: AxiosInstance;
 	public constructor(config: AxiosRequestConfig) {
@@ -43,14 +48,13 @@ class RequestHttp {
 		this.service.interceptors.response.use(
 			(response: AxiosResponse) => {
 				const { data, config } = response;
-				const navigate = useNavigate();
 				// * 在请求结束后，移除本次请求(关闭loading)
 				axiosCanceler.removePending(config);
 				tryHideFullScreenLoading();
 				// * 登陆失效（code == 599）
 				if (data.code == ResultEnum.OVERDUE) {
 					message.error(data.msg);
-					navigate("/login");
+					navigateTo("/login");
 					return Promise.reject(data);
 				}
 				// * 全局错误信息拦截（防止下载文件得时候返回数据流，没有code，直接报错）
