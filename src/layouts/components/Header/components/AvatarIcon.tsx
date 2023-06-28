@@ -6,6 +6,7 @@ import { ExclamationCircleOutlined, SmileOutlined } from "@ant-design/icons";
 import type { MenuProps } from "antd";
 import InfoModal from "./InfoModal";
 import PasswordModal from "./PasswordModal";
+import { HOME_URL } from "@/config/config";
 
 const AvatarIcon = () => {
 	const navigate = useNavigate();
@@ -16,7 +17,7 @@ const AvatarIcon = () => {
 	const passRef = useRef<ModalProps>(null!);
 	const infoRef = useRef<ModalProps>(null!);
 
-	const goHome = () => navigate("/home");
+	const goHome = () => navigate(HOME_URL);
 
 	const logout = () => {
 		Modal.confirm({
@@ -92,10 +93,10 @@ const AvatarIcon = () => {
 				goHome();
 				break;
 			case "1":
-				infoRef.current.showModal({ name: 11 });
+				infoRef.current!.showModal({ name: 11 });
 				break;
 			case "3":
-				passRef.current.showModal({ name: 11 });
+				passRef.current!.showModal({ name: 11 });
 				break;
 			case "4":
 				logout();
@@ -105,7 +106,7 @@ const AvatarIcon = () => {
 	return (
 		<>
 			<Dropdown menu={{ items, onClick: dropItemClick }}>
-				<Avatar src={avatar} />
+				<Avatar size={"large"} src={avatar} />
 			</Dropdown>
 			<InfoModal innerRef={infoRef}></InfoModal>
 			<PasswordModal innerRef={passRef}></PasswordModal>

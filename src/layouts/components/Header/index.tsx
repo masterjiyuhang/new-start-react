@@ -4,7 +4,12 @@ import React from "react";
 import AvatarIcon from "./components/AvatarIcon";
 import CollapseIcon from "./components/CollapseIcon";
 import BreadcrumbNav from "./components/BreadcrumbNav";
+
 import "./index.scss";
+import AssemblySize from "./components/AssemblySize";
+import Language from "./components/Language";
+import Theme from "./components/Theme";
+import FullScreen from "./components/FullScreen";
 
 export default function LayoutHeader() {
 	const { Header } = Layout;
@@ -15,6 +20,10 @@ export default function LayoutHeader() {
 				<BreadcrumbNav />
 			</div>
 			<div className="header-ri">
+				<AssemblySize />
+				<Language />
+				<Theme />
+				<FullScreen />
 				<span className="username">CaiCai</span>
 				<AvatarIcon />
 			</div>
