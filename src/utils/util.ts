@@ -33,12 +33,14 @@ export const isType = (val: any): string => {
  * @param {Array} routes 路由列表
  * @returns array
  */
-export const searchRouteDetail = (path: string, routes: RouteObject[]): RouteObject | null => {
-	let result: any;
-	for (let item of routes || []) {
-		if (item.path === path) return (result = item);
-		const res = searchRouteDetail(path, item.children!);
-		if (res) result = res;
+export const searchRoute = (path: string, routes: RouteObject[]): RouteObject | null => {
+	let result: RouteObject | null = {};
+	for (let item of routes) {
+		if (item.path === path) return item;
+		if (item.children) {
+			const res = searchRoute(path, item.children);
+			if (Object.keys(res as RouteObject).length) result = res;
+		}
 	}
 	return result;
 };

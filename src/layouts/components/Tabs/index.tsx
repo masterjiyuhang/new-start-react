@@ -78,7 +78,7 @@ const LayoutTabs = () => {
 	const navigate = useNavigate();
 
 	const tabsClick = (path: string) => {
-		console.log(path);
+		console.log(path, "click tabs");
 		navigate(path);
 	};
 
