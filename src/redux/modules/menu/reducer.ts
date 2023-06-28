@@ -1,11 +1,7 @@
 import { AnyAction } from "redux";
 import produce from "immer";
 import * as types from "@/redux/mutation-types";
-
-export interface MenuState {
-	isCollapse: boolean;
-	menuList: Menu.MenuOptions[];
-}
+import { MenuState } from "@/redux/interface";
 
 const menuState: MenuState = {
 	// menu collapse

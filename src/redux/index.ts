@@ -7,11 +7,13 @@ import reduxPromise from "redux-promise";
 
 import menu from "./modules/menu/reducer";
 import countReducer from "./modules/count/reducer";
+import tabsReducer from "@/redux/modules/tabs/reducer";
 
 // 创建reducer(拆分reducer)
 const reducer = combineReducers({
 	menu,
-	countReducer
+	countReducer,
+	tabsReducer
 });
 
 // redux 持久化配置
