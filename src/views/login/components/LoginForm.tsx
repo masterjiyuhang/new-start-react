@@ -6,8 +6,10 @@ import { useNavigate } from "react-router-dom";
 import md5 from "js-md5";
 import { loginApi } from "@/api/modules/login";
 import { HOME_URL } from "@/config/config";
+import { connect } from "react-redux";
+import { setToken } from "@/redux/modules/global/aciotn";
 
-const LoginForm = () => {
+const LoginForm = (props: any) => {
 	const Item = Form.Item;
 	const [form] = Form.useForm();
 	const [loading, setLoading] = useState<boolean>(false);
@@ -19,7 +21,9 @@ const LoginForm = () => {
 		try {
 			setLoading(true);
 			values.password = md5(values.password);
-			await loginApi(values);
+			const { data } = await loginApi(values);
+			console.log(data, props);
+			props.setToken(data?.access_token);
 			messageApi.success("login successfully");
 			navigate(HOME_URL);
 		} catch (error) {
@@ -62,4 +66,7 @@ const LoginForm = () => {
 	);
 };
 
-export default LoginForm;
+// export default LoginForm;
+
+const mapDispatchToProps = { setToken };
+export default connect(null, mapDispatchToProps)(LoginForm);
