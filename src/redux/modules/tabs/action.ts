@@ -1,9 +1,9 @@
 import * as types from "@/redux/mutation-types";
 
-// addTabs
-export const addTabs = (tabItem: Menu.MenuOptions) => ({
+// Set Tabs List
+export const setTabsList = (tabsList: Menu.MenuOptions) => ({
 	type: types.SET_TABS_LIST,
-	tabItem
+	tabsList
 });
 
 // setTabsActive

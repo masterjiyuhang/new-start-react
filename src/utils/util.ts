@@ -100,3 +100,33 @@ export const getBreadcrumbList = (path: string, menuList: Menu.MenuOptions[]) =>
 		return tempPath.map(item => item.title);
 	}
 };
+
+/**
+ * @description 使用递归处理路由菜单，生成一维数组，做菜单权限判断 拍平
+ * @param {Array} menuList 所有菜单列表
+ * @param {Array} newArr 菜单的一维数组
+ * @return array
+ */
+export function handleRouter(routerList: Menu.MenuOptions[], newArr: string[] = []) {
+	routerList.forEach((item: Menu.MenuOptions) => {
+		typeof item === "object" && item.path && newArr.push(item.path);
+		item.children && item.children.length && handleRouter(item.children, newArr);
+	});
+	return newArr;
+}
+
+/**
+ * @description 双重递归 找出 所有面包屑生成对象存到 redux 中，就不用每次都去递归查找了
+ * @param {String} menuList 当前菜单列表
+ * @returns object
+ */
+export const findAllBreadcrumb = (menuList: Menu.MenuOptions[]): { [key: string]: any } => {
+	let handleBreadcrumbList: any = {};
+	const loop = (menuItem: Menu.MenuOptions) => {
+		// 下面判断代码解释 *** !item?.children?.length   ==>   (item.children && item.children.length > 0)
+		if (menuItem?.children?.length) menuItem.children.forEach(item => loop(item));
+		else handleBreadcrumbList[menuItem.path] = getBreadcrumbList(menuItem.path, menuList);
+	};
+	menuList.forEach(item => loop(item));
+	return handleBreadcrumbList;
+};

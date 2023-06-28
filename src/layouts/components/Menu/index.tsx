@@ -4,13 +4,14 @@ import { useLocation, useNavigate } from "react-router-dom";
 import Logo from "./components/Logo";
 import "./index.scss";
 import type { MenuProps } from "antd";
-import { getOpenKeys } from "@/utils/util";
+import { findAllBreadcrumb, getOpenKeys } from "@/utils/util";
 // import { AppstoreOutlined, AreaChartOutlined, HomeOutlined, TableOutlined } from "@ant-design/icons";
 import * as Icons from "@ant-design/icons";
 // import { HOME_URL } from "@/config/config";
 import { getMenuList } from "@/api/modules/login";
 import { connect } from "react-redux";
 import { updateCollapse, setMenuList } from "@/redux/modules/menu/action";
+import { setBreadcrumbList } from "@/redux/modules/breadcrumb/action";
 
 type MenuItem = Required<MenuProps>["items"][number];
 
@@ -42,7 +43,10 @@ const LayoutMenu = (props: any) => {
 		setLoading(true);
 		try {
 			const { data } = await getMenuList();
-			data && setMenuList(deepLoopFloat(data));
+			if (!data) return;
+			setMenuList(deepLoopFloat(data));
+			// 存储处理过后的所有面包屑导航栏到 redux 中
+			props.setBreadcrumbList(findAllBreadcrumb(data));
 		} finally {
 			setLoading(false);
 		}
@@ -66,6 +70,7 @@ const LayoutMenu = (props: any) => {
 		return React.createElement(customIcons[name]);
 	};
 
+	// 刷新页面保持菜单高亮
 	useEffect(() => {
 		setSelectedKeys([pathname]);
 		props.isCollapse ? null : setOpenKeys(getOpenKeys(pathname));
@@ -107,6 +112,6 @@ const LayoutMenu = (props: any) => {
 };
 
 // export default LayoutMenu;
-const mapDispatchToProps = { updateCollapse, setMenuList };
+const mapDispatchToProps = { updateCollapse, setMenuList, setBreadcrumbList };
 const mapStateToProps = (state: any) => state.menu;
 export default connect(mapStateToProps, mapDispatchToProps)(LayoutMenu);

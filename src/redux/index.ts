@@ -8,19 +8,25 @@ import reduxPromise from "redux-promise";
 import menu from "./modules/menu/reducer";
 import countReducer from "./modules/count/reducer";
 import tabsReducer from "@/redux/modules/tabs/reducer";
+import authReducer from "@/redux/modules/auth/reducer";
+import globalReducer from "./modules/global/reducer";
+import breadcrumbReducer from "./modules/breadcrumb/reducer";
 
 // 创建reducer(拆分reducer)
 const reducer = combineReducers({
 	menu,
 	countReducer,
-	tabsReducer
+	tabsReducer,
+	authReducer,
+	globalReducer,
+	breadcrumbReducer
 });
 
 // redux 持久化配置
 const persistConfig = {
 	key: "redux-state",
 	storage: storage,
-	blacklist: ["countReducer"]
+	blacklist: ["countReducer", "tabsReducer"]
 };
 const persistReducerConfig = persistReducer(persistConfig, reducer);
 

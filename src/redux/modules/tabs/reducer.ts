@@ -1,24 +1,24 @@
+import { AnyAction } from "redux";
+import { TabsState } from "@/redux/interface";
 import { HOME_URL } from "@/config/config";
 import produce from "immer";
 import * as types from "@/redux/mutation-types";
-import { TabsState } from "@/redux/interface";
-
-// interface TabsState {
-// 	tabsActive: string;
-// 	tabsList: Menu.MenuOptions[];
+// interface TabsStatSe {
+// 	name: string;
+// 	list: Menu.MenuOptions[];
 // }
-const tabState: TabsState = {
+const tabsState: TabsState = {
+	// tabsActive 其实没啥用，使用 pathname 就可以了😂
 	tabsActive: HOME_URL,
 	tabsList: [{ title: "首页", path: HOME_URL }]
 };
 
-const tabsReducer = (state: TabsState = tabState, action: any) => {
-	return produce(state, draftState => {
+// tabs reducer
+const tabsReducer = (state: TabsState = tabsState, action: AnyAction) =>
+	produce(state, draftState => {
 		switch (action.type) {
 			case types.SET_TABS_LIST:
-				if (draftState.tabsList.every(item => item.path !== action.tabItem.path)) {
-					draftState.tabsList.push(action.tabItem);
-				}
+				draftState.tabsList = action.tabsList;
 				break;
 			case types.SET_TABS_ACTIVE:
 				draftState.tabsActive = action.tabsActive;
@@ -27,6 +27,5 @@ const tabsReducer = (state: TabsState = tabState, action: any) => {
 				return draftState;
 		}
 	});
-};
 
 export default tabsReducer;
