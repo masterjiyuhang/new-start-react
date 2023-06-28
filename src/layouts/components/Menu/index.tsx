@@ -41,8 +41,8 @@ const LayoutMenu = () => {
 	const getMenuData = async () => {
 		setLoading(true);
 		try {
-			const res = await getMenuList();
-			res.data && setMenuList(deepLoopFloat(res.data));
+			const { data } = await getMenuList();
+			data && setMenuList(deepLoopFloat(data));
 		} finally {
 			setLoading(false);
 		}

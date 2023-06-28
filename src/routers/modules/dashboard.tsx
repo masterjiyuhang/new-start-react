@@ -6,7 +6,7 @@ import React from "react";
 const dashboardRouter: Array<RouteObject> = [
 	{
 		path: "/dashboard",
-		element: <LayoutIndex title={"Dashboard"} />,
+		element: <LayoutIndex />,
 		meta: { title: "Dashboard" },
 		children: [
 			{
