@@ -10,18 +10,16 @@ import * as Icons from "@ant-design/icons";
 // import { HOME_URL } from "@/config/config";
 import { getMenuList } from "@/api/modules/login";
 import { connect } from "react-redux";
-import { updateCollapse } from "@/redux/modules/menu/action";
+import { updateCollapse, setMenuList } from "@/redux/modules/menu/action";
+
+type MenuItem = Required<MenuProps>["items"][number];
 
 const LayoutMenu = (props: any) => {
 	const navigate = useNavigate();
-
 	const { pathname } = useLocation();
 	const [selectedKeys, setSelectedKeys] = useState<string[]>([pathname]);
 	const [openKeys, setOpenKeys] = useState<string[]>([]);
-
 	const [loading, setLoading] = useState<boolean>(false);
-
-	type MenuItem = Required<MenuProps>["items"][number];
 	const [menuList, setMenuList] = useState<MenuItem[]>([]);
 
 	const getItem = (
@@ -89,36 +87,6 @@ const LayoutMenu = (props: any) => {
 	// 点击菜单
 	const clickMenu: MenuProps["onClick"] = ({ key }: { key: string }) => navigate(key);
 
-	// const menuList = [
-	// 	{
-	// 		label: "首页",
-	// 		key: HOME_URL,
-	// 		icon: <HomeOutlined />
-	// 	},
-	// 	{
-	// 		label: "数据大屏",
-	// 		key: "/dataScreen",
-	// 		icon: <AreaChartOutlined />
-	// 	},
-	// 	{
-	// 		label: "超级表格",
-	// 		key: "/proTable",
-	// 		icon: <TableOutlined />,
-	// 		children: [
-	// 			{
-	// 				label: "使用 Hooks",
-	// 				key: "/proTable/useHooks",
-	// 				icon: <AppstoreOutlined />
-	// 			},
-	// 			{
-	// 				label: "使用 Component",
-	// 				key: "/proTable/useComponent",
-	// 				icon: <AppstoreOutlined />
-	// 			}
-	// 		]
-	// 	}
-	// ];
-
 	return (
 		<div className="menu">
 			<Spin spinning={loading} tip="Loading...">
@@ -139,6 +107,6 @@ const LayoutMenu = (props: any) => {
 };
 
 // export default LayoutMenu;
-const mapDispatchToProps = { updateCollapse };
+const mapDispatchToProps = { updateCollapse, setMenuList };
 const mapStateToProps = (state: any) => state.menu;
 export default connect(mapStateToProps, mapDispatchToProps)(LayoutMenu);

@@ -13,6 +13,7 @@ import "@/styles/common.scss";
 ReactDOM.createRoot(document.getElementById("root") as HTMLElement).render(
 	// * react 严格模式
 	// <React.StrictMode>
+	// * react-redux写法
 	<Provider store={store}>
 		<PersistGate persistor={persistor}>
 			<App />
