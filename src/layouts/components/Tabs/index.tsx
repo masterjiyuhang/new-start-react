@@ -3,13 +3,13 @@ import { setTabsList, setTabsActive } from "@/redux/modules/tabs/action";
 import { routerArray } from "@/routers";
 import { searchRoute } from "@/utils/util";
 import { HomeFilled } from "@ant-design/icons";
-import { Tabs, message } from "antd";
+import { Tabs, TabsProps, message } from "antd";
 import { useEffect, useState } from "react";
 import { connect } from "react-redux";
 import { useLocation, useNavigate } from "react-router-dom";
 
 const LayoutTabs = (props: any) => {
-	const { TabPane } = Tabs;
+	// const { TabPane } = Tabs;
 	const { pathname } = useLocation();
 	const [activeValue, setActiveValue] = useState<string>(pathname);
 
@@ -48,6 +48,18 @@ const LayoutTabs = (props: any) => {
 		message.success("删除Tabs标签 😆😆😆");
 		props.setTabsList(props.tabsList.filter((item: Menu.MenuOptions) => item.path !== tabPath));
 	};
+	const currentTabsList: TabsProps["items"] = tabsList.map((item: Menu.MenuOptions) => {
+		return {
+			label: (
+				<span>
+					{item.path == HOME_URL ? <HomeFilled /> : ""}
+					{item.title}
+				</span>
+			),
+			key: item.path,
+			closable: item.path !== HOME_URL
+		};
+	}) as TabsProps["items"];
 
 	return (
 		<Tabs
@@ -58,8 +70,9 @@ const LayoutTabs = (props: any) => {
 			onEdit={path => {
 				delTabs(path as string);
 			}}
+			items={currentTabsList}
 		>
-			{tabsList.map((item: Menu.MenuOptions) => {
+			{/* {tabsList.map((item: Menu.MenuOptions) => {
 				return (
 					<TabPane
 						key={item.path}
@@ -72,7 +85,7 @@ const LayoutTabs = (props: any) => {
 						closable={item.path !== HOME_URL}
 					></TabPane>
 				);
-			})}
+			})} */}
 		</Tabs>
 	);
 };
