@@ -1,5 +1,10 @@
 // import React from "react";
 import ReactDOM from "react-dom/client";
+
+import { PersistGate } from "redux-persist/integration/react";
+import { Provider } from "react-redux";
+import { store, persistor } from "@/redux";
+
 import App from "@/App";
 import "antd/dist/reset.css";
 import "@/styles/reset.scss";
@@ -8,6 +13,10 @@ import "@/styles/common.scss";
 ReactDOM.createRoot(document.getElementById("root") as HTMLElement).render(
 	// * react 严格模式
 	// <React.StrictMode>
-	<App />
+	<Provider store={store}>
+		<PersistGate persistor={persistor}>
+			<App />
+		</PersistGate>
+	</Provider>
 	// </React.StrictMode>
 );
