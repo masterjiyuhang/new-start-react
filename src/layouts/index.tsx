@@ -6,14 +6,17 @@ import LayoutTabs from "./components/Tabs";
 import { TransitionGroup, CSSTransition } from "react-transition-group";
 import LayoutFooter from "./components/Footer";
 import "./index.scss";
+import { connect } from "react-redux";
+import { updateCollapse } from "@/redux/modules/menu/action";
 
 const { Sider, Content } = Layout;
 
-const LayoutIndex = () => {
+const LayoutIndex = (props: any) => {
+	const { isCollapse } = props;
 	const { pathname } = useLocation();
 	return (
 		<section className="container">
-			<Sider trigger={null} collapsed={false} width={220} theme="dark">
+			<Sider trigger={null} collapsed={isCollapse} width={220} theme="dark">
 				<LayoutMenu></LayoutMenu>
 			</Sider>
 			<Layout>
@@ -33,4 +36,7 @@ const LayoutIndex = () => {
 	);
 };
 
-export default LayoutIndex;
+// export default LayoutIndex;
+const mapDispatchToProps = { updateCollapse };
+const mapStateToProps = (state: any) => state.menu;
+export default connect(mapStateToProps, mapDispatchToProps)(LayoutIndex);

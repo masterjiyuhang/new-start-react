@@ -5,7 +5,6 @@ export const increment = (payload?: number) => ({ type: INCREMENT, payload: payl
 export const decrement = (payload: number) => ({ type: DECREMENT, payload: payload });
 
 export const incrementAsync = (delay: number) => {
-	console.log(delay, "能打印出来吗");
 	return (dispatch: Dispatch<any>) => {
 		setTimeout(() => {
 			dispatch(increment());

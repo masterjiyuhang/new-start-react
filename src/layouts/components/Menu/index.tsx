@@ -9,8 +9,10 @@ import { getOpenKeys } from "@/utils/util";
 import * as Icons from "@ant-design/icons";
 // import { HOME_URL } from "@/config/config";
 import { getMenuList } from "@/api/modules/login";
+import { connect } from "react-redux";
+import { updateCollapse } from "@/redux/modules/menu/action";
 
-const LayoutMenu = () => {
+const LayoutMenu = (props: any) => {
 	const navigate = useNavigate();
 
 	const { pathname } = useLocation();
@@ -68,8 +70,8 @@ const LayoutMenu = () => {
 
 	useEffect(() => {
 		setSelectedKeys([pathname]);
-		setOpenKeys(getOpenKeys(pathname));
-	}, [pathname]);
+		props.isCollapse ? null : setOpenKeys(getOpenKeys(pathname));
+	}, [pathname, props.isCollapse]);
 
 	useEffect(() => {
 		getMenuData();
@@ -136,4 +138,7 @@ const LayoutMenu = () => {
 	);
 };
 
-export default LayoutMenu;
+// export default LayoutMenu;
+const mapDispatchToProps = { updateCollapse };
+const mapStateToProps = (state: any) => state.menu;
+export default connect(mapStateToProps, mapDispatchToProps)(LayoutMenu);

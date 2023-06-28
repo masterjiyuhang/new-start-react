@@ -1,3 +1,4 @@
+import { HOME_URL } from "@/config/config";
 import { routerArray } from "@/routers";
 import { LayoutTitleContext } from "@/routers/constant";
 import { getBreadcrumbList, searchRoute } from "@/utils/util";
@@ -252,9 +253,9 @@ const BreadcrumbNav = () => {
 			{/* <Breadcrumb.Item>Home</Breadcrumb.Item>
 			<Breadcrumb.Item>List</Breadcrumb.Item>
 			<Breadcrumb.Item>App</Breadcrumb.Item> */}
-			<Breadcrumb.Item href="#/home/index">首页</Breadcrumb.Item>
+			<Breadcrumb.Item href={`#${HOME_URL}`}>首页</Breadcrumb.Item>
 			{breadcrumbList1?.map(item => {
-				return <Breadcrumb.Item key={item}>{item}</Breadcrumb.Item>;
+				return <Breadcrumb.Item key={item}>{item !== "首页" ? item : null}</Breadcrumb.Item>;
 			})}
 		</Breadcrumb>
 	);
