@@ -1,3 +1,4 @@
+import { useEffect } from "react";
 import { Layout } from "antd";
 import { Outlet, useLocation } from "react-router-dom";
 import LayoutMenu from "./components/Menu";
@@ -8,12 +9,24 @@ import LayoutFooter from "./components/Footer";
 import "./index.scss";
 import { connect } from "react-redux";
 import { updateCollapse } from "@/redux/modules/menu/action";
-
-const { Sider, Content } = Layout;
+import { setAuthButtons } from "@/redux/modules/auth/action";
+import { getAuthorButtons } from "@/api/modules/login";
 
 const LayoutIndex = (props: any) => {
+	const { Sider, Content } = Layout;
 	const { isCollapse } = props;
 	const { pathname } = useLocation();
+	const { setAuthButtons } = props;
+
+	// 获取按钮权限列表
+	const getAuthButtonsData = async () => {
+		const { data } = await getAuthorButtons();
+		setAuthButtons(data);
+	};
+
+	useEffect(() => {
+		getAuthButtonsData();
+	}, []);
 	return (
 		// 这里不用 Layout 组件原因是切换页面时样式会先错乱在正常，造成闪屏效果
 		<section className="container">
@@ -38,6 +51,8 @@ const LayoutIndex = (props: any) => {
 };
 
 // export default LayoutIndex;
-const mapDispatchToProps = { updateCollapse };
+// * react-redux写法(高阶组件)
+// * connect具有两个参数，第一个参数是mapStateToProps，第二个参数是mapDispatchToProps
+const mapDispatchToProps = { updateCollapse, setAuthButtons };
 const mapStateToProps = (state: any) => state.menu;
 export default connect(mapStateToProps, mapDispatchToProps)(LayoutIndex);

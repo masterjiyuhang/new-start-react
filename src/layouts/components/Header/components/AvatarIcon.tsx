@@ -8,7 +8,7 @@ import InfoModal from "./InfoModal";
 import PasswordModal from "./PasswordModal";
 import { HOME_URL } from "@/config/config";
 import { connect } from "react-redux";
-import { setToken } from "@/redux/modules/global/aciotn";
+import { setToken } from "@/redux/modules/global/action";
 
 const AvatarIcon = (props: any) => {
 	const navigate = useNavigate();

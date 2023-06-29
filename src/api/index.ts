@@ -6,6 +6,7 @@ import { ResultEnum } from "@/enums/httpEnum";
 import { message } from "antd";
 import { checkStatus } from "./helper/checkStatus";
 import { ResultData } from "./interface";
+import { store } from "@/redux";
 
 const axiosCanceler = new AxiosCanceler();
 
@@ -31,8 +32,8 @@ class RequestHttp {
 				axiosCanceler.addPending(config);
 				// * 如果当前请求不需要显示 loading,在api服务中通过指定的第三个参数: { headers: { noLoading: true } }来控制不显示loading，参见loginApi
 				config.headers!.noLoading || showFullScreenLoading();
-				// const token: string = store.getState().global.token;
-				const token: string = "123456";
+				const token: string = store.getState().globalReducer.token;
+				// const token: string = "123456";
 				return { ...config, headers: { "x-access-token": token } };
 			},
 			(error: AxiosError) => {
@@ -67,12 +68,12 @@ class RequestHttp {
 			},
 			async (error: AxiosError) => {
 				const { response } = error;
-				const navigate = useNavigate();
+				// const navigate = useNavigate();
 				tryHideFullScreenLoading();
 				// 根据响应的错误状态码，做不同的处理
 				if (response) return checkStatus(response.status);
 				// 服务器结果都没有返回(可能服务器错误可能客户端断网) 断网处理:可以跳转到断网页面
-				if (!window.navigator.onLine) return navigate("/500");
+				if (!window.navigator.onLine) return navigateTo("/500");
 				return Promise.reject(error);
 			}
 		);

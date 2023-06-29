@@ -7,7 +7,7 @@ import md5 from "js-md5";
 import { loginApi } from "@/api/modules/login";
 import { HOME_URL } from "@/config/config";
 import { connect } from "react-redux";
-import { setToken } from "@/redux/modules/global/aciotn";
+import { setToken } from "@/redux/modules/global/action";
 
 const LoginForm = (props: any) => {
 	const Item = Form.Item;
