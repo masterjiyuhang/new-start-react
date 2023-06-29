@@ -27,6 +27,8 @@
 		overflow-x: hidden;
 		overflow-y: auto;
 	}
+
+	/* 去除菜单 Loading 遮罩层 */
 	.ant-spin-nested-loading,
 	.ant-spin-container {
 		display: flex;

@@ -31,6 +31,7 @@ const persistConfig = {
 const persistReducerConfig = persistReducer(persistConfig, reducer);
 
 // 开启 redux-devtools
+// @ts-ignore
 const composeEnhancers = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose;
 
 // 使用 redux 中间件

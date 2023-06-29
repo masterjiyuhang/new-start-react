@@ -1,7 +1,7 @@
 // * Menu
 declare namespace Menu {
 	interface MenuOptions {
-		label: any;
+		label?: any;
 		path: string;
 		title: string;
 		icon?: string;
