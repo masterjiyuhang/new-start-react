@@ -1,6 +1,6 @@
 import React from "react";
 import { RouteObject } from "@/routers/interface";
-import lazyLoad from "@/routers/lazyLoad";
+import lazyLoad from "@/routers/util/lazyLoad";
 
 const errorRouter: Array<RouteObject> = [
 	{

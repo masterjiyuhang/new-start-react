@@ -1,7 +1,8 @@
 import React from "react";
+import "./index.less";
 
 const Embedded = () => {
-	return <div>Embedded</div>;
+	return <iframe src="https://react.docschina.org/" frameBorder="0" className="full-iframe"></iframe>;
 };
 
 export default Embedded;

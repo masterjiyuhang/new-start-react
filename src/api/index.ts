@@ -7,6 +7,7 @@ import { message } from "antd";
 import { checkStatus } from "./helper/checkStatus";
 import { ResultData } from "./interface";
 import { store } from "@/redux";
+import NProgress from "@/utils/nprogress";
 
 const axiosCanceler = new AxiosCanceler();
 
@@ -28,6 +29,7 @@ class RequestHttp {
 		 */
 		this.service.interceptors.request.use(
 			(config: AxiosRequestConfig | any) => {
+				NProgress.start();
 				// * 将当前请求添加到 pending 中
 				axiosCanceler.addPending(config);
 				// * 如果当前请求不需要显示 loading,在api服务中通过指定的第三个参数: { headers: { noLoading: true } }来控制不显示loading，参见loginApi
@@ -49,6 +51,7 @@ class RequestHttp {
 		this.service.interceptors.response.use(
 			(response: AxiosResponse) => {
 				const { data, config } = response;
+				NProgress.done();
 				// * 在请求结束后，移除本次请求(关闭loading)
 				axiosCanceler.removePending(config);
 				tryHideFullScreenLoading();
@@ -69,6 +72,7 @@ class RequestHttp {
 			async (error: AxiosError) => {
 				const { response } = error;
 				// const navigate = useNavigate();
+				NProgress.done();
 				tryHideFullScreenLoading();
 				// 根据响应的错误状态码，做不同的处理
 				if (response) return checkStatus(response.status);
