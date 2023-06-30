@@ -1,7 +1,7 @@
 import React from "react";
 import { LayoutIndex } from "@/routers/constant";
 import { RouteObject } from "@/routers/interface";
-import lazyLoad from "@/routers/util/lazyLoad";
+import lazyLoad from "@/routers/lazyLoad";
 
 const dataScreenRouter: Array<RouteObject> = [
 	{

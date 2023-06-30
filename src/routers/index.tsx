@@ -1,4 +1,3 @@
-// eslint-disable-next-line @typescript-eslint/no-unused-vars
 import { Navigate, useRoutes } from "react-router-dom";
 // import type { RouteObject } from "react-router-dom";
 
@@ -96,10 +95,10 @@ export const rootRouter: RouteObject[] = [
 	}
 ];
 
-// const Router = () => {
-// 	const routes = useRoutes(rootRouter as any);
-// 	return routes;
-// };
-const Router = rootRouter;
+const Router = () => {
+	const routes = useRoutes(rootRouter as any);
+	return routes;
+};
+// const Router = rootRouter;
 
 export default Router;

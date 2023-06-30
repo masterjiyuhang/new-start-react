@@ -76,6 +76,7 @@ const LayoutMenu = (props: any) => {
 		props.isCollapse ? null : setOpenKeys(getOpenKeys(pathname));
 	}, [pathname, props.isCollapse]);
 
+	// 动态获取menu菜单
 	useEffect(() => {
 		getMenuData();
 	}, []);

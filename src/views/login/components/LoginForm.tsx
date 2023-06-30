@@ -8,6 +8,7 @@ import { loginApi } from "@/api/modules/login";
 import { HOME_URL } from "@/config/config";
 import { connect } from "react-redux";
 import { setToken } from "@/redux/modules/global/action";
+import { setTabsList } from "@/redux/modules/tabs/action";
 
 const LoginForm = (props: any) => {
 	const Item = Form.Item;
@@ -24,6 +25,7 @@ const LoginForm = (props: any) => {
 			const { data } = await loginApi(values);
 			console.log(data, props);
 			props.setToken(data?.access_token);
+			props.setTabsList([]);
 			messageApi.success("login successfully");
 			navigate(HOME_URL);
 		} catch (error) {
@@ -68,5 +70,5 @@ const LoginForm = (props: any) => {
 
 // export default LoginForm;
 
-const mapDispatchToProps = { setToken };
+const mapDispatchToProps = { setToken, setTabsList };
 export default connect(null, mapDispatchToProps)(LoginForm);
