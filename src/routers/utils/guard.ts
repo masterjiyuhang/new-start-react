@@ -24,6 +24,8 @@ const guard = (location: Location, navigate: NavigateFunction, routes: RouteObje
 	const staticRouter = [HOME_URL, "/403"];
 	const routerList = dynamicRouter.concat(staticRouter);
 
+	console.log(routerList, "routerList");
+
 	// * 如果访问的地址没有在路由表中重定向到403页面
 	if (routerList.indexOf(pathname) == -1) return navigate("/403");
 };

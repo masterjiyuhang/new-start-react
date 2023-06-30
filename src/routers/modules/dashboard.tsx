@@ -1,6 +1,6 @@
 import { LayoutIndex } from "@/routers/constant";
 import { RouteObject } from "@/routers/interface";
-import lazyLoad from "../util/lazyLoad";
+import lazyLoad from "../utils/lazyLoad";
 import React from "react";
 
 const dashboardRouter: Array<RouteObject> = [

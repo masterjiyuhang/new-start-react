@@ -4,7 +4,7 @@ import { useLocation, useNavigate } from "react-router-dom";
 import Logo from "./components/Logo";
 import "./index.scss";
 import type { MenuProps } from "antd";
-import { findAllBreadcrumb, getOpenKeys } from "@/utils/util";
+import { findAllBreadcrumb, getOpenKeys, handleRouter } from "@/utils/util";
 // import { AppstoreOutlined, AreaChartOutlined, HomeOutlined, TableOutlined } from "@ant-design/icons";
 import * as Icons from "@ant-design/icons";
 // import { HOME_URL } from "@/config/config";
@@ -12,6 +12,7 @@ import { getMenuList } from "@/api/modules/login";
 import { connect } from "react-redux";
 import { updateCollapse, setMenuList } from "@/redux/modules/menu/action";
 import { setBreadcrumbList } from "@/redux/modules/breadcrumb/action";
+import { setAuthRouter } from "@/redux/modules/auth/action";
 
 type MenuItem = Required<MenuProps>["items"][number];
 
@@ -22,6 +23,7 @@ const LayoutMenu = (props: any) => {
 	const [openKeys, setOpenKeys] = useState<string[]>([]);
 	const [loading, setLoading] = useState<boolean>(false);
 	const [menuList, setMenuList] = useState<MenuItem[]>([]);
+	const { setAuthRouter } = props;
 
 	const getItem = (
 		label: React.ReactNode,
@@ -47,6 +49,9 @@ const LayoutMenu = (props: any) => {
 			setMenuList(deepLoopFloat(data));
 			// 存储处理过后的所有面包屑导航栏到 redux 中
 			props.setBreadcrumbList(findAllBreadcrumb(data));
+			const dynamicRouter = handleRouter(data);
+			setAuthRouter(dynamicRouter);
+			props.setMenuList(data);
 		} finally {
 			setLoading(false);
 		}
@@ -113,6 +118,6 @@ const LayoutMenu = (props: any) => {
 };
 
 // export default LayoutMenu;
-const mapDispatchToProps = { updateCollapse, setMenuList, setBreadcrumbList };
+const mapDispatchToProps = { updateCollapse, setMenuList, setBreadcrumbList, setAuthRouter };
 const mapStateToProps = (state: any) => state.menu;
 export default connect(mapStateToProps, mapDispatchToProps)(LayoutMenu);

@@ -1,6 +1,6 @@
 import Layout from "@/layouts/index";
 import { createContext } from "react";
-import AuthRouter from "@/routers/util/authRouter";
+import AuthRouter from "@/routers/utils/authRouter";
 
 export const LayoutTitleContext = createContext({});
 
