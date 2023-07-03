@@ -38,17 +38,19 @@ const LayoutTabs = (props: any) => {
 	};
 
 	// delete tabs
-	const delTabs = () => {
+	const delTabs = (tabPath?: string) => {
 		// 首页不能被删除
-		if (pathname === HOME_URL) return;
-		props.tabsList.forEach((item: Menu.MenuOptions, index: number) => {
-			if (item.path !== pathname) return;
-			const nextTab = props.tabsList[index + 1] || props.tabsList[index - 1];
-			if (!nextTab) return;
-			navigate(nextTab.path);
-		});
+		if (tabPath === HOME_URL) return;
+		if (pathname === tabPath) {
+			props.tabsList.forEach((item: Menu.MenuOptions, index: number) => {
+				if (item.path !== pathname) return;
+				const nextTab = props.tabsList[index + 1] || props.tabsList[index - 1];
+				if (!nextTab) return;
+				navigate(nextTab.path);
+			});
+		}
 		message.success("删除Tabs标签 😆😆😆");
-		props.setTabsList(props.tabsList.filter((item: Menu.MenuOptions) => item.path !== pathname));
+		props.setTabsList(props.tabsList.filter((item: Menu.MenuOptions) => item.path !== tabPath));
 	};
 
 	// // close multipleTab
@@ -108,8 +110,8 @@ const LayoutTabs = (props: any) => {
 				onChange={tabsClick}
 				hideAdd
 				type="editable-card"
-				onEdit={() => {
-					delTabs();
+				onEdit={path => {
+					delTabs(path as string);
 				}}
 				items={currentTabsList}
 			></Tabs>

@@ -37,7 +37,7 @@ const MoreButton = (props: any) => {
 	const dropdownItemClick: MenuProps["onClick"] = ({ key }) => {
 		switch (key) {
 			case "closeCurrent":
-				delTabs();
+				() => delTabs(pathname);
 				break;
 			case "closeOthers":
 				closeMultipleTab(pathname);

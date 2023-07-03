@@ -8,6 +8,7 @@ import { checkStatus } from "./helper/checkStatus";
 import { ResultData } from "./interface";
 import { store } from "@/redux";
 import NProgress from "@/utils/nprogress";
+import { setToken } from "@/redux/modules/global/action";
 
 const axiosCanceler = new AxiosCanceler();
 
@@ -36,7 +37,8 @@ class RequestHttp {
 				config.headers!.noLoading || showFullScreenLoading();
 				const token: string = store.getState().globalReducer.token;
 				// const token: string = "123456";
-				return { ...config, headers: { "x-access-token": token } };
+				// return { ...config, headers: { "x-access-token": token } };
+				return { ...config, headers: { ...config.headers, "x-access-token": token } };
 			},
 			(error: AxiosError) => {
 				return Promise.reject(error);
@@ -55,8 +57,9 @@ class RequestHttp {
 				// * 在请求结束后，移除本次请求(关闭loading)
 				axiosCanceler.removePending(config);
 				tryHideFullScreenLoading();
-				// * 登陆失效（code == 599）
+				// * 登录失效（code == 599）
 				if (data.code == ResultEnum.OVERDUE) {
+					store.dispatch(setToken(""));
 					message.error(data.msg);
 					navigateTo("/login");
 					return Promise.reject(data);
@@ -75,9 +78,9 @@ class RequestHttp {
 				NProgress.done();
 				tryHideFullScreenLoading();
 				// 根据响应的错误状态码，做不同的处理
-				if (response) return checkStatus(response.status);
+				if (response) checkStatus(response.status);
 				// 服务器结果都没有返回(可能服务器错误可能客户端断网) 断网处理:可以跳转到断网页面
-				if (!window.navigator.onLine) return navigateTo("/500");
+				if (!window.navigator.onLine) navigateTo("/500");
 				return Promise.reject(error);
 			}
 		);
