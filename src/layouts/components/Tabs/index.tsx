@@ -2,11 +2,12 @@ import { HOME_URL } from "@/config/config";
 import { setTabsList, setTabsActive } from "@/redux/modules/tabs/action";
 import { routerArray } from "@/routers";
 import { searchRoute } from "@/utils/util";
-import { HomeFilled } from "@ant-design/icons";
-import { Tabs, TabsProps, message } from "antd";
+import { DownOutlined, HomeFilled } from "@ant-design/icons";
+import { Button, Dropdown, Menu, MenuProps, Tabs, TabsProps, message } from "antd";
 import { useEffect, useState } from "react";
 import { connect } from "react-redux";
 import { useLocation, useNavigate } from "react-router-dom";
+import "./index.scss";
 
 const LayoutTabs = (props: any) => {
 	// const { TabPane } = Tabs;
@@ -36,17 +37,55 @@ const LayoutTabs = (props: any) => {
 	};
 
 	// delete tabs
-	const delTabs = (tabPath: string) => {
-		if (tabPath === pathname) {
-			props.tabsList.forEach((item: Menu.MenuOptions, index: number) => {
-				if (item.path !== tabPath) return;
-				const nextTab = props.tabsList[index + 1] || props.tabsList[index - 1];
-				if (!nextTab) return;
-				navigate(nextTab.path);
-			});
-		}
+	const delTabs = () => {
+		// 首页不能被删除
+		if (pathname === HOME_URL) return;
+		props.tabsList.forEach((item: Menu.MenuOptions, index: number) => {
+			if (item.path !== pathname) return;
+			const nextTab = props.tabsList[index + 1] || props.tabsList[index - 1];
+			if (!nextTab) return;
+			navigate(nextTab.path);
+		});
 		message.success("删除Tabs标签 😆😆😆");
-		props.setTabsList(props.tabsList.filter((item: Menu.MenuOptions) => item.path !== tabPath));
+		props.setTabsList(props.tabsList.filter((item: Menu.MenuOptions) => item.path !== pathname));
+	};
+
+	// close multipleTab
+	const closeMultipleTab = (tabPath?: string) => {
+		const handleTabsList = props.tabsList.filter((item: Menu.MenuOptions) => {
+			return item.path === tabPath || item.path === HOME_URL;
+		});
+		props.setTabsList(handleTabsList);
+		tabPath ?? navigate(HOME_URL);
+	};
+
+	const items: MenuProps["items"] = [
+		{
+			label: <span>关闭当前</span>,
+			key: "closeCurrent"
+		},
+		{
+			label: <span>关闭其他</span>,
+			key: "closeOthers"
+		},
+		{
+			label: <span>关闭所有</span>,
+			key: "closeAll"
+		}
+	];
+
+	const dropdownItemClick: MenuProps["onClick"] = ({ key }) => {
+		switch (key) {
+			case "closeCurrent":
+				delTabs();
+				break;
+			case "closeOthers":
+				closeMultipleTab(pathname);
+				break;
+			default:
+				closeMultipleTab();
+				break;
+		}
 	};
 	const currentTabsList: TabsProps["items"] = tabsList.map((item: Menu.MenuOptions) => {
 		return {
@@ -62,31 +101,28 @@ const LayoutTabs = (props: any) => {
 	}) as TabsProps["items"];
 
 	return (
-		<Tabs
-			activeKey={activeValue}
-			onChange={tabsClick}
-			hideAdd
-			type="editable-card"
-			onEdit={path => {
-				delTabs(path as string);
-			}}
-			items={currentTabsList}
-		>
-			{/* {tabsList.map((item: Menu.MenuOptions) => {
-				return (
-					<TabPane
-						key={item.path}
-						tab={
-							<span>
-								{item.path == HOME_URL ? <HomeFilled /> : ""}
-								{item.title}
-							</span>
-						}
-						closable={item.path !== HOME_URL}
-					></TabPane>
-				);
-			})} */}
-		</Tabs>
+		<div className="tabs">
+			<Tabs
+				activeKey={activeValue}
+				onChange={tabsClick}
+				hideAdd
+				type="editable-card"
+				onEdit={() => {
+					delTabs();
+				}}
+				items={currentTabsList}
+			></Tabs>
+			<Dropdown
+				menu={{ items, onClick: dropdownItemClick }}
+				placement="bottom"
+				arrow={{ pointAtCenter: true }}
+				trigger={["click"]}
+			>
+				<Button className="more-button" type="primary" size="small">
+					更多 <DownOutlined />
+				</Button>
+			</Dropdown>
+		</div>
 	);
 };
 
