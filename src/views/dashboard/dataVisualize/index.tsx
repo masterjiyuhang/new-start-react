@@ -1,5 +1,9 @@
 const DataVisualize = () => {
-	return <h1>DataVisualize</h1>;
+	return (
+		<div className="content-box">
+			<h1 className="text">DataVisualize</h1>
+		</div>
+	);
 };
 
 export default DataVisualize;

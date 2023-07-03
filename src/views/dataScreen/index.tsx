@@ -11,14 +11,15 @@ const dataScreen = (props: any) => {
 	};
 
 	return (
-		<>
+		<div className="content-box">
+			<span className="text">DataScreen 🍓🍇🍈🍉</span>
 			<Button type="primary" onClick={requestMenuList}>
 				发起网络请求
 			</Button>
 			<Button danger type="dashed" onClick={increment}>
 				increment: {count}
 			</Button>
-		</>
+		</div>
 	);
 };
 
