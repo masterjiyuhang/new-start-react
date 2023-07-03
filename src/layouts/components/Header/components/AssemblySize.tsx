@@ -1,15 +1,16 @@
+import { setAssemblySize } from "@/redux/modules/global/action";
 import { LayoutOutlined } from "@ant-design/icons";
 import { Dropdown, Tooltip } from "antd";
 import type { MenuProps } from "antd";
 import React, { useState } from "react";
+import { connect } from "react-redux";
 
-const AssemblySize = () => {
+const AssemblySize = (props: any) => {
 	const [open, setOpen] = useState(false);
+	const { setAssemblySize } = props;
 
 	const handleMenuClick: MenuProps["onClick"] = e => {
-		if (e.key === "3") {
-			setOpen(false);
-		}
+		setAssemblySize(e.key);
 	};
 
 	const handleOpenChange = (flag: boolean) => {
@@ -18,15 +19,18 @@ const AssemblySize = () => {
 
 	const items: MenuProps["items"] = [
 		{
-			key: "1",
+			key: "middle",
+			disabled: props.assemblySize == "middle",
 			label: <span>默认</span>
 		},
 		{
-			key: "2",
+			key: "large",
+			disabled: props.assemblySize == "large",
 			label: <span>大型</span>
 		},
 		{
-			key: "3",
+			key: "small",
+			disabled: props.assemblySize == "small",
 			label: <span>小型</span>
 		}
 	];
@@ -46,4 +50,6 @@ const AssemblySize = () => {
 	);
 };
 
-export default AssemblySize;
+const mapStateToProps = (state: any) => state.globalReducer;
+const mapDispatchToProps = { setAssemblySize };
+export default connect(mapStateToProps, mapDispatchToProps)(AssemblySize);
