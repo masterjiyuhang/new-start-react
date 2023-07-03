@@ -2,11 +2,12 @@ import { HOME_URL } from "@/config/config";
 import { setTabsList, setTabsActive } from "@/redux/modules/tabs/action";
 import { routerArray } from "@/routers";
 import { searchRoute } from "@/utils/util";
-import { DownOutlined, HomeFilled } from "@ant-design/icons";
-import { Button, Dropdown, Menu, MenuProps, Tabs, TabsProps, message } from "antd";
+import { HomeFilled } from "@ant-design/icons";
+import { Tabs, TabsProps, message } from "antd";
 import { useEffect, useState } from "react";
 import { connect } from "react-redux";
 import { useLocation, useNavigate } from "react-router-dom";
+import MoreButton from "@/layouts/components/Tabs/components/MoreButton";
 import "./index.scss";
 
 const LayoutTabs = (props: any) => {
@@ -50,43 +51,43 @@ const LayoutTabs = (props: any) => {
 		props.setTabsList(props.tabsList.filter((item: Menu.MenuOptions) => item.path !== pathname));
 	};
 
-	// close multipleTab
-	const closeMultipleTab = (tabPath?: string) => {
-		const handleTabsList = props.tabsList.filter((item: Menu.MenuOptions) => {
-			return item.path === tabPath || item.path === HOME_URL;
-		});
-		props.setTabsList(handleTabsList);
-		tabPath ?? navigate(HOME_URL);
-	};
+	// // close multipleTab
+	// const closeMultipleTab = (tabPath?: string) => {
+	// 	const handleTabsList = props.tabsList.filter((item: Menu.MenuOptions) => {
+	// 		return item.path === tabPath || item.path === HOME_URL;
+	// 	});
+	// 	props.setTabsList(handleTabsList);
+	// 	tabPath ?? navigate(HOME_URL);
+	// };
 
-	const items: MenuProps["items"] = [
-		{
-			label: <span>关闭当前</span>,
-			key: "closeCurrent"
-		},
-		{
-			label: <span>关闭其他</span>,
-			key: "closeOthers"
-		},
-		{
-			label: <span>关闭所有</span>,
-			key: "closeAll"
-		}
-	];
+	// const items: MenuProps["items"] = [
+	// 	{
+	// 		label: <span>关闭当前</span>,
+	// 		key: "closeCurrent"
+	// 	},
+	// 	{
+	// 		label: <span>关闭其他</span>,
+	// 		key: "closeOthers"
+	// 	},
+	// 	{
+	// 		label: <span>关闭所有</span>,
+	// 		key: "closeAll"
+	// 	}
+	// ];
 
-	const dropdownItemClick: MenuProps["onClick"] = ({ key }) => {
-		switch (key) {
-			case "closeCurrent":
-				delTabs();
-				break;
-			case "closeOthers":
-				closeMultipleTab(pathname);
-				break;
-			default:
-				closeMultipleTab();
-				break;
-		}
-	};
+	// const dropdownItemClick: MenuProps["onClick"] = ({ key }) => {
+	// 	switch (key) {
+	// 		case "closeCurrent":
+	// 			delTabs();
+	// 			break;
+	// 		case "closeOthers":
+	// 			closeMultipleTab(pathname);
+	// 			break;
+	// 		default:
+	// 			closeMultipleTab();
+	// 			break;
+	// 	}
+	// };
 	const currentTabsList: TabsProps["items"] = tabsList.map((item: Menu.MenuOptions) => {
 		return {
 			label: (
@@ -112,16 +113,17 @@ const LayoutTabs = (props: any) => {
 				}}
 				items={currentTabsList}
 			></Tabs>
-			<Dropdown
+			{/* <Dropdown
 				menu={{ items, onClick: dropdownItemClick }}
 				placement="bottom"
 				arrow={{ pointAtCenter: true }}
 				trigger={["click"]}
 			>
 				<Button className="more-button" type="primary" size="small">
-					更多 <DownOutlined />
+					{t("tabs.more")} <DownOutlined />
 				</Button>
-			</Dropdown>
+			</Dropdown> */}
+			<MoreButton delTabs={delTabs} {...props} />
 		</div>
 	);
 };

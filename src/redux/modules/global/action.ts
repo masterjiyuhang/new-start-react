@@ -7,7 +7,14 @@ export const setToken = (token: string) => ({
 	token
 });
 
+// * setAssemblySize
 export const setAssemblySize = (assemblySize: SizeType) => ({
 	type: types.SET_ASSEMBLY_SIZE,
 	assemblySize
+});
+
+// * setLanguage
+export const setLanguage = (language: string) => ({
+	type: types.SET_LANGUAGE,
+	language
 });
