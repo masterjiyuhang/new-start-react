@@ -1,6 +1,6 @@
 import { ThemeConfigProp } from "@/redux/interface";
-import defaultTheme from "@/styles/theme/theme-default.scss";
-import darkTheme from "@/styles/theme/theme-dark.scss";
+import defaultTheme from "@/styles/theme/theme-default.scss?inline";
+import darkTheme from "@/styles/theme/theme-dark.scss?inline";
 
 const useTheme = (themeConfig: ThemeConfigProp) => {
 	const { weakOrGray, isDark } = themeConfig;
