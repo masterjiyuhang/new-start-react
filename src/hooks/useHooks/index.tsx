@@ -33,7 +33,7 @@ const UseHooks = () => {
 			key: "address"
 		}
 	];
-	return <Table dataSource={dataSource} columns={columns}></Table>;
+	return <Table dataSource={dataSource} columns={columns} style={{ width: "100%" }}></Table>;
 };
 
 export default UseHooks;
