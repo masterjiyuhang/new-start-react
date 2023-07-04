@@ -11,11 +11,14 @@ import MoreButton from "@/layouts/components/Tabs/components/MoreButton";
 import "./index.scss";
 
 const LayoutTabs = (props: any) => {
-	// const { TabPane } = Tabs;
 	const { pathname } = useLocation();
 	const [activeValue, setActiveValue] = useState<string>(pathname);
 
-	const { setTabsList, tabsList } = props;
+	const { tabsList: propsTabsList } = props.tabsReducer;
+	const { setTabsList: propsSetTabsList } = props;
+	const {
+		themeConfig: { tabs: isShowTabs }
+	} = props.globalReducer;
 
 	useEffect(() => {
 		addTabs();
@@ -29,11 +32,11 @@ const LayoutTabs = (props: any) => {
 
 	const addTabs = () => {
 		const route = searchRoute(pathname, routerArray);
-		let tabsList = JSON.parse(JSON.stringify(props.tabsList));
-		if (props.tabsList.every((item: any) => item.path !== route?.path)) {
+		let tabsList = JSON.parse(JSON.stringify(propsTabsList));
+		if (propsTabsList.every((item: any) => item.path !== route?.path)) {
 			tabsList.push({ title: route?.meta!.title, path: route?.path });
 		}
-		setTabsList(tabsList);
+		propsSetTabsList(tabsList);
 		setActiveValue(pathname);
 	};
 
@@ -42,55 +45,18 @@ const LayoutTabs = (props: any) => {
 		// 首页不能被删除
 		if (tabPath === HOME_URL) return;
 		if (pathname === tabPath) {
-			props.tabsList.forEach((item: Menu.MenuOptions, index: number) => {
+			propsTabsList.forEach((item: Menu.MenuOptions, index: number) => {
 				if (item.path !== pathname) return;
-				const nextTab = props.tabsList[index + 1] || props.tabsList[index - 1];
+				const nextTab = propsTabsList[index + 1] || propsTabsList[index - 1];
 				if (!nextTab) return;
 				navigate(nextTab.path);
 			});
 		}
 		message.success("删除Tabs标签 😆😆😆");
-		props.setTabsList(props.tabsList.filter((item: Menu.MenuOptions) => item.path !== tabPath));
+		propsSetTabsList(propsTabsList.filter((item: Menu.MenuOptions) => item.path !== tabPath));
 	};
 
-	// // close multipleTab
-	// const closeMultipleTab = (tabPath?: string) => {
-	// 	const handleTabsList = props.tabsList.filter((item: Menu.MenuOptions) => {
-	// 		return item.path === tabPath || item.path === HOME_URL;
-	// 	});
-	// 	props.setTabsList(handleTabsList);
-	// 	tabPath ?? navigate(HOME_URL);
-	// };
-
-	// const items: MenuProps["items"] = [
-	// 	{
-	// 		label: <span>关闭当前</span>,
-	// 		key: "closeCurrent"
-	// 	},
-	// 	{
-	// 		label: <span>关闭其他</span>,
-	// 		key: "closeOthers"
-	// 	},
-	// 	{
-	// 		label: <span>关闭所有</span>,
-	// 		key: "closeAll"
-	// 	}
-	// ];
-
-	// const dropdownItemClick: MenuProps["onClick"] = ({ key }) => {
-	// 	switch (key) {
-	// 		case "closeCurrent":
-	// 			delTabs();
-	// 			break;
-	// 		case "closeOthers":
-	// 			closeMultipleTab(pathname);
-	// 			break;
-	// 		default:
-	// 			closeMultipleTab();
-	// 			break;
-	// 	}
-	// };
-	const currentTabsList: TabsProps["items"] = tabsList.map((item: Menu.MenuOptions) => {
+	const currentTabsList: TabsProps["items"] = propsTabsList.map((item: Menu.MenuOptions) => {
 		return {
 			label: (
 				<span>
@@ -104,32 +70,24 @@ const LayoutTabs = (props: any) => {
 	}) as TabsProps["items"];
 
 	return (
-		<div className="tabs">
-			<Tabs
-				activeKey={activeValue}
-				onChange={tabsClick}
-				hideAdd
-				type="editable-card"
-				onEdit={path => {
-					delTabs(path as string);
-				}}
-				items={currentTabsList}
-			></Tabs>
-			{/* <Dropdown
-				menu={{ items, onClick: dropdownItemClick }}
-				placement="bottom"
-				arrow={{ pointAtCenter: true }}
-				trigger={["click"]}
-			>
-				<Button className="more-button" type="primary" size="small">
-					{t("tabs.more")} <DownOutlined />
-				</Button>
-			</Dropdown> */}
-			<MoreButton delTabs={delTabs} {...props} />
-		</div>
+		isShowTabs && (
+			<div className="tabs">
+				<Tabs
+					activeKey={activeValue}
+					onChange={tabsClick}
+					hideAdd
+					type="editable-card"
+					onEdit={path => {
+						delTabs(path as string);
+					}}
+					items={currentTabsList}
+				></Tabs>
+				<MoreButton delTabs={delTabs} {...props} />
+			</div>
+		)
 	);
 };
 
-const mapStateToProps = (state: any) => state.tabsReducer;
+const mapStateToProps = (state: any) => state;
 const mapDispatchToProps = { setTabsList, setTabsActive };
 export default connect(mapStateToProps, mapDispatchToProps)(LayoutTabs);

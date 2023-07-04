@@ -46,9 +46,6 @@ dependencies:
   react-router-dom:
     specifier: ^6.14.0
     version: 6.14.0(react-dom@18.2.0)(react@18.2.0)
-  react-thunk:
-    specifier: ^1.0.0
-    version: 1.0.0(react@18.2.0)
   react-transition-group:
     specifier: ^4.4.5
     version: 4.4.5(react-dom@18.2.0)(react@18.2.0)
@@ -6718,14 +6715,6 @@ packages:
       react: '>=16.8'
     dependencies:
       '@remix-run/router': 1.7.0
-      react: 18.2.0
-    dev: false
-
-  /react-thunk@1.0.0(react@18.2.0):
-    resolution: {integrity: sha512-OhJ0AdnFASwN4qkQ62X2xCkVPPAKM12Ju7H8jxPt6q9gTwhIRlWuzlbg0RZqYPQ88MX/s5VEvYiTImBMJWspPQ==}
-    peerDependencies:
-      react: ~0.14.0 || ^15.0.0
-    dependencies:
       react: 18.2.0
     dev: false
 

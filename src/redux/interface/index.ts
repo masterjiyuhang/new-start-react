@@ -1,9 +1,14 @@
 import type { SizeType } from "antd/es/config-provider/SizeContext";
 
 /* themeConfigProp */
+/* themeConfigProp */
 export interface ThemeConfigProp {
 	primary: string;
 	isDark: boolean;
+	weakOrGray: string;
+	breadcrumb: boolean;
+	tabs: boolean;
+	footer: boolean;
 }
 
 /* GlobalState */
