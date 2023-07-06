@@ -48,6 +48,16 @@ const assemblyRouter: Array<RouteObject> = [
 					title: "批量导入数据",
 					key: "selectIcon"
 				}
+			},
+			{
+				path: "/assembly/earth",
+				element: lazyLoad(React.lazy(() => import("@/views/assembly/earth/index"))),
+				meta: {
+					keepAlive: true,
+					requiresAuth: true,
+					title: "3D地球",
+					key: "selectIcon"
+				}
 			}
 		]
 	}
