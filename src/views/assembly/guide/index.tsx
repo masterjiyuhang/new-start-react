@@ -34,7 +34,7 @@ const guide = () => {
 			<div id="step2" className="text">
 				hello setup2 !{" "}
 			</div>
-			<Button onClick={startIntro} className="intro-btn">
+			<Button onClick={startIntro} className="intro-btn" type="primary">
 				{" "}
 				开始指引{" "}
 			</Button>
