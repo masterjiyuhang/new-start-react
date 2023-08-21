@@ -50,7 +50,7 @@ const LoginForm = (props: any) => {
 			size="large"
 			autoComplete="off"
 		>
-			<Item name="username" rules={[{ required: true, message: "please input your user name!" }]}>
+			<Item name="username" rules={[{ required: true, message: "please input your user name!" }]} initialValue={"admin"}>
 				<Input placeholder="user name : admin / user" prefix={<UserOutlined />}></Input>
 			</Item>
 			<Item name="password" rules={[{ required: true, message: "please input your password!" }]} initialValue={"12345678"}>
@@ -69,6 +69,6 @@ const LoginForm = (props: any) => {
 };
 
 // export default LoginForm;
-
+const mapStateToProps = (state: any) => state;
 const mapDispatchToProps = { setToken, setTabsList };
-export default connect(null, mapDispatchToProps)(LoginForm);
+export default connect(mapStateToProps, mapDispatchToProps)(LoginForm);

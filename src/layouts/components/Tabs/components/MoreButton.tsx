@@ -4,6 +4,7 @@ import { Button, Dropdown, MenuProps } from "antd";
 import React from "react";
 import { useTranslation } from "react-i18next";
 import { useLocation, useNavigate } from "react-router-dom";
+
 const MoreButton = (props: any) => {
 	const { tabsList, delTabs } = props;
 	let { t } = useTranslation();
@@ -37,7 +38,7 @@ const MoreButton = (props: any) => {
 	const dropdownItemClick: MenuProps["onClick"] = ({ key }) => {
 		switch (key) {
 			case "closeCurrent":
-				() => delTabs(pathname);
+				delTabs(pathname);
 				break;
 			case "closeOthers":
 				closeMultipleTab(pathname);
@@ -58,3 +59,6 @@ const MoreButton = (props: any) => {
 };
 
 export default MoreButton;
+// const mapStateToProps = (state: any) => state;
+// const mapDispatchToProps = { setTabsList, setTabsActive };
+// export default connect(mapStateToProps, mapDispatchToProps)(MoreButton);

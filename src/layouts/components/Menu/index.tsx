@@ -24,6 +24,7 @@ const LayoutMenu = (props: any) => {
 	const [loading, setLoading] = useState<boolean>(false);
 	const [menuList, setMenuList] = useState<MenuItem[]>([]);
 	const { setAuthRouter } = props;
+	const { isDark } = props.globalReducer.themeConfig;
 
 	const getItem = (
 		label: React.ReactNode,
@@ -78,8 +79,8 @@ const LayoutMenu = (props: any) => {
 	// 刷新页面保持菜单高亮
 	useEffect(() => {
 		setSelectedKeys([pathname]);
-		props.isCollapse ? null : setOpenKeys(getOpenKeys(pathname));
-	}, [pathname, props.isCollapse]);
+		props.menu.isCollapse ? null : setOpenKeys(getOpenKeys(pathname));
+	}, [pathname, props.menu.isCollapse]);
 
 	// 动态获取menu菜单
 	useEffect(() => {
@@ -97,7 +98,7 @@ const LayoutMenu = (props: any) => {
 
 	// 点击菜单
 	const clickMenu: MenuProps["onClick"] = ({ key }: { key: string }) => {
-		const route = searchRoute(key, props.menuList);
+		const route = searchRoute(key, props.menu.menuList);
 		if (route?.isLink) window.open(route.isLink, "_blank");
 		navigate(key);
 	};
@@ -107,7 +108,7 @@ const LayoutMenu = (props: any) => {
 			<Spin spinning={loading} tip="Loading...">
 				<Logo />
 				<Menu
-					theme="dark"
+					theme={isDark ? "dark" : "light"}
 					mode="inline"
 					triggerSubMenuAction="click"
 					openKeys={openKeys}
@@ -123,5 +124,5 @@ const LayoutMenu = (props: any) => {
 
 // export default LayoutMenu;
 const mapDispatchToProps = { updateCollapse, setMenuList, setBreadcrumbList, setAuthRouter };
-const mapStateToProps = (state: any) => state.menu;
+const mapStateToProps = (state: any) => state;
 export default connect(mapStateToProps, mapDispatchToProps)(LayoutMenu);

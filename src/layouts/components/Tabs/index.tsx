@@ -9,6 +9,7 @@ import { connect } from "react-redux";
 import { useLocation, useNavigate } from "react-router-dom";
 import MoreButton from "@/layouts/components/Tabs/components/MoreButton";
 import "./index.scss";
+import { toPath } from "lodash-es";
 
 const LayoutTabs = (props: any) => {
 	const { pathname } = useLocation();
@@ -42,6 +43,7 @@ const LayoutTabs = (props: any) => {
 
 	// delete tabs
 	const delTabs = (tabPath?: string) => {
+		console.log(toPath, "这事啥");
 		// 首页不能被删除
 		if (tabPath === HOME_URL) return;
 		if (pathname === tabPath) {
@@ -82,7 +84,7 @@ const LayoutTabs = (props: any) => {
 					}}
 					items={currentTabsList}
 				></Tabs>
-				<MoreButton delTabs={delTabs} {...props} />
+				<MoreButton delTabs={delTabs} tabsList={propsTabsList} setTabsList={propsSetTabsList} />
 			</div>
 		)
 	);
