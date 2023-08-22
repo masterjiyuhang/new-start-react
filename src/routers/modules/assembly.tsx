@@ -58,6 +58,16 @@ const assemblyRouter: Array<RouteObject> = [
 					title: "3D地球",
 					key: "selectIcon"
 				}
+			},
+			{
+				path: "/assembly/button",
+				element: lazyLoad(React.lazy(() => import("@/views/assembly/button/index"))),
+				meta: {
+					keepAlive: true,
+					requiresAuth: true,
+					title: "常见button",
+					key: "selectIcon"
+				}
 			}
 		]
 	}
