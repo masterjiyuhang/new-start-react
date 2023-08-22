@@ -10,8 +10,12 @@ const axiosCanceler = new AxiosCanceler();
  * @description 路由守卫组件
  */
 const AuthRouter = (props: { children: JSX.Element }) => {
+	// console.log("自定义路由守卫");
+
 	const { pathname } = useLocation();
 	const route = searchRoute(pathname, rootRouter);
+
+	document.title = route?.meta?.title || "";
 
 	// * 在跳转路由之前，清除所有的请求
 	axiosCanceler.removeAllPending();
