@@ -1,5 +1,6 @@
 import React from "react";
 import styles from "./index.module.scss";
+import HoverButton from "./src/HoverButton";
 
 const SelfButton = () => {
 	return (
@@ -21,6 +22,8 @@ const SelfButton = () => {
 			<button type="button" className={styles.btn4}>
 				有边的我
 			</button>
+
+			<HoverButton />
 		</div>
 	);
 };
