@@ -7,27 +7,28 @@
 	height: 100%;
 
 	// font-family: monospace;
-	background: #1e0f21;
+	background: #ffffff;
 
 	@mixin default-btn {
 		position: relative;
 		width: 160px;
 		padding: 20px 0;
 		margin: auto;
-		overflow: hidden;
 		font-size: 16px;
 		font-weight: 600;
+		text-align: center;
 		text-decoration: none;
 		letter-spacing: 0.05em;
 		cursor: pointer;
 		background: #ffffff;
 		border: none;
 		border-radius: 4px;
-		transition-delay: 0.6s;
 	}
 	.btn-1 {
 		@include default-btn;
 
+		overflow: hidden;
+		background-color: #1e0f21;
 		transform: translate3d(0, 0%, 0);
 		&::before {
 			position: absolute;
@@ -132,6 +133,82 @@
 			content: "\e8ff";
 			opacity: 0;
 			transition: all 0.2s linear 0s;
+		}
+	}
+	.btn3 {
+		@include default-btn;
+
+		background-image: linear-gradient(to right, #25aae1, #40e495, #30dd8a, #2bb673);
+		background-size: 300% 100%;
+		border-radius: 50px;
+		box-shadow: 0 4px 15px 0 rgb(49 196 190 / 75%);
+		&:hover {
+			background-position: 100% 0;
+			transition: all 0.4s ease-in-out;
+		}
+		&:focus {
+			outline: none;
+		}
+	}
+	.btn4 {
+		@include default-btn;
+
+		z-index: 0;
+		color: #ffffff;
+		cursor: pointer;
+		background: #111111;
+		border: none;
+		border-radius: 10px;
+		outline: none;
+
+		@keyframes glowing {
+			0% {
+				background-position: 0 0;
+			}
+			50% {
+				background-position: 400% 0;
+			}
+			100% {
+				background-position: 0 0;
+			}
+		}
+		&::before {
+			position: absolute;
+			top: -7px;
+			left: -7px;
+			z-index: -1;
+			width: calc(100% + 14px);
+			height: calc(100% + 14px);
+			content: "";
+			background: linear-gradient(45deg, #ff0000, #ff7300, #fffb00, #48ff00, #00ffd5, #002bff, #7a00ff, #ff00c8, #ff0000);
+			filter: blur(5px);
+			background-size: 400%;
+			border-radius: 10px;
+			opacity: 1;
+			transition: opacity 0.3s ease-in-out;
+			animation: glowing 20s linear infinite;
+		}
+		&::after {
+			position: absolute;
+			top: 0;
+			left: 0;
+			z-index: -1;
+			width: 100%;
+			height: 100%;
+			content: "";
+			background: #111111;
+			border-radius: 10px;
+		}
+		&:active {
+			color: #7a00ff;
+		}
+		&:active::after {
+			background: transparent;
+		}
+		&:hover::before {
+			filter: blur(25px);
+			opacity: 0.8;
+			animation: glowing 3s linear infinite;
 		}
 	}
 }

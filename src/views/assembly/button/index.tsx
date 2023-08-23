@@ -14,6 +14,13 @@ const SelfButton = () => {
 			<button type="button" className={styles.btn2}>
 				View More
 			</button>
+
+			<button type="button" className={styles.btn3}>
+				彩色的我
+			</button>
+			<button type="button" className={styles.btn4}>
+				有边的我
+			</button>
 		</div>
 	);
 };
