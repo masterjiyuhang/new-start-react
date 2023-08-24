@@ -1,0 +1,124 @@
+@import "https://fonts.googleapis.com/css?family=Mukta:700";
+
+$bg: #f3f8fa;
+$white: #ffffff;
+$black: #282936;
+
+@mixin transition($property: all, $duration: 0.45s, $ease: cubic-bezier(0.65, 0, 0.076, 1)) {
+	transition: $property $duration $ease;
+}
+* {
+	box-sizing: border-box;
+	&::before,
+	&::after {
+		box-sizing: border-box;
+	}
+}
+body {
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	min-height: 100vh;
+	margin: 0;
+	font-family: Mukta, sans-serif;
+	font-size: 1rem;
+	line-height: 1.5;
+	background: $bg;
+}
+button {
+	position: relative;
+	display: inline-block;
+	padding: 0;
+	font-family: inherit;
+	font-size: inherit;
+	text-decoration: none;
+	vertical-align: middle;
+	cursor: pointer;
+	background: transparent;
+	border: 0;
+	outline: none;
+	&.learn-more {
+		width: 12rem;
+		height: auto;
+		.circle {
+			@include transition(all, 0.45s, cubic-bezier(0.65, 0, 0.076, 1));
+
+			position: relative;
+			display: block;
+			width: 3rem;
+			height: 3rem;
+			margin: 0;
+			background: $black;
+			border-radius: 1.625rem;
+			.icon {
+				@include transition(all, 0.45s, cubic-bezier(0.65, 0, 0.076, 1));
+
+				position: absolute;
+				top: 0;
+				bottom: 0;
+				margin: auto;
+				background: $white;
+				&.arrow {
+					@include transition(all, 0.45s, cubic-bezier(0.65, 0, 0.076, 1));
+
+					left: 0.625rem;
+					width: 1.125rem;
+					height: 0.125rem;
+					background: none;
+					&::before {
+						position: absolute;
+						top: -0.25rem;
+						right: 0.0625rem;
+						width: 0.625rem;
+						height: 0.625rem;
+						content: "";
+						border-top: 0.125rem solid #ffffff;
+						border-right: 0.125rem solid #ffffff;
+						transform: rotate(45deg);
+					}
+				}
+			}
+		}
+		.button-text {
+			@include transition(all, 0.45s, cubic-bezier(0.65, 0, 0.076, 1));
+
+			position: absolute;
+			inset: 0;
+			padding: 0.75rem 0;
+			margin: 0 0 0 1.85rem;
+			font-weight: 700;
+			line-height: 1.6;
+			color: $black;
+			text-align: center;
+			text-transform: uppercase;
+		}
+	}
+	&:hover {
+		.circle {
+			width: 100%;
+			.icon {
+				&.arrow {
+					background: $white;
+					transform: translate(1rem, 0);
+				}
+			}
+		}
+		.button-text {
+			color: $white;
+		}
+	}
+}
+
+@supports (display: grid) {
+	body {
+		display: grid;
+		grid-template-areas: ". main main ." ". main main .";
+		grid-template-columns: repeat(4, 1fr);
+		grid-gap: 0.625rem;
+	}
+	#container {
+		grid-area: main;
+		align-self: center;
+		justify-self: center;
+	}
+}
