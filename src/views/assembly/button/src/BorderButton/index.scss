@@ -1,0 +1,133 @@
+.container {
+	display: flex;
+	align-items: center;
+	justify-content: space-between;
+	.button {
+		position: relative;
+		padding: 1em 1.5em;
+		margin: 1em 0.8em;
+		font-size: 18px;
+		cursor: pointer;
+		background-color: transparent;
+		border: none;
+		outline: none;
+	}
+
+	$colors: (
+		effect1: #a972cb,
+		effect2: #ef6eae,
+		effect3: #ff7f82
+	);
+
+	@each $button, $color in $colors {
+		.#{$button} {
+			--color: #{$color};
+			--hover: #{$color};
+		}
+	}
+	button {
+		color: var(--color);
+		transition: 0.25s;
+		&:hover,
+		&:focus {
+			color: #080808;
+			border-color: var(--hover);
+		}
+	}
+	.effect1 {
+		&::before,
+		&::after {
+			position: absolute;
+			display: block;
+			width: 20%;
+			height: 20%;
+			content: "";
+			border: 2px solid;
+			border-radius: 2px;
+			transition: all 0.6s ease;
+		}
+		&::after {
+			right: 0;
+			bottom: 0;
+			border-color: transparent #566473 #566473 transparent;
+		}
+		&::before {
+			top: 0;
+			left: 0;
+			border-color: #566473 transparent transparent #566473;
+		}
+		&:hover::before,
+		&:hover::after {
+			width: 100%;
+			height: 100%;
+		}
+	}
+	.effect2 {
+		&::before,
+		&::after {
+			position: absolute;
+			top: 100%;
+			left: 0;
+			display: block;
+			width: 100%;
+			height: 2px;
+			content: "";
+			background-color: #16a085;
+			transition: all 0.3s ease;
+			transform: scale(0.85);
+		}
+		&:hover::before {
+			top: 0;
+			transform: scale(1);
+		}
+		&:hover::after {
+			transform: scale(1.2);
+		}
+	}
+	.effect3 {
+		&::before,
+		&::after {
+			position: absolute;
+			display: block;
+			width: 20%;
+			height: 20%;
+			content: "";
+			border: 2px solid;
+			border-radius: 2px;
+			transition: all 0.6s ease;
+		}
+		&::after {
+			right: 0;
+			bottom: 0;
+			border-color: transparent #435a6b #435a6b transparent;
+		}
+		&::before {
+			top: 0;
+			left: 0;
+			border-color: #435a6b transparent transparent #435a6b;
+		}
+		&:hover::before,
+		&:hover::after {
+			width: 100%;
+			height: 100%;
+			border-color: #435a6b;
+		}
+	}
+	.effect4 {
+		&::after {
+			position: absolute;
+			bottom: 0;
+			left: 0;
+			display: block;
+			width: 0;
+			height: 2px;
+			content: "";
+			background-color: red;
+			transition: width 0.3s ease-in-out;
+		}
+		&:hover::after {
+			width: 2rem;
+			box-shadow: 2px 2px 2px 1px #435a6b;
+		}
+	}
+}

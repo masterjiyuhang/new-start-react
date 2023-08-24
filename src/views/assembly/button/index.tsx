@@ -2,6 +2,7 @@ import React from "react";
 import styles from "./index.module.scss";
 import HoverButton from "./src/HoverButton";
 import ExpandButton from "./src/ExpandButton";
+import BorderButton from "./src/BorderButton";
 
 const SelfButton = () => {
 	return (
@@ -31,6 +32,8 @@ const SelfButton = () => {
 			</div>
 
 			<ExpandButton />
+
+			<BorderButton />
 		</div>
 	);
 };
