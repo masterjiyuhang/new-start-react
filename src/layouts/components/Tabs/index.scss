@@ -9,7 +9,11 @@
 			&::before {
 				border: none;
 			}
+			.ant-tabs-ink-bar {
+				visibility: visible;
+			}
 			.ant-tabs-tab {
+				padding: 8px 22px;
 				color: #cccccc;
 				background: none;
 				border: none;
@@ -31,6 +35,18 @@
 				border-bottom: 2px solid $primary-color !important;
 				.ant-tabs-tab-remove {
 					color: $primary-color;
+				}
+			}
+			.ant-tabs-tab.ant-tabs-tab-with-remove {
+				&:hover {
+					.ant-tabs-tab-remove {
+						top: 1px;
+						opacity: 1;
+						transition: 0.6s ease-in-out;
+					}
+					.ant-tabs-tab-btn {
+						transform: translateX(-9px);
+					}
 				}
 			}
 		}

@@ -26,7 +26,7 @@ const reducer = combineReducers({
 const persistConfig = {
 	key: "redux-state",
 	storage: storage,
-	blacklist: ["countReducer", "tabsReducer"]
+	blacklist: ["countReducer"]
 };
 const persistReducerConfig = persistReducer(persistConfig, reducer);
 
