@@ -4,6 +4,9 @@ import styles from "./expand.module.scss";
 const ExpandButton = () => {
 	return (
 		<div className={styles.container}>
+			<h1>
+				Expand <code>Button</code>
+			</h1>
 			<button className={styles["basic-button"]}>
 				<span className={styles.circle}>
 					<span className={`${styles.icon}`}></span>

@@ -3,7 +3,7 @@ import "./hover-button.scss";
 
 const HoverButton = () => {
 	return (
-		<div>
+		<div style={{ margin: "30px 0 0 0" }}>
 			<h1>
 				Simple hover effects with <code>box-shadow</code>
 			</h1>

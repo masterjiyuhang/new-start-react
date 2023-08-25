@@ -7,6 +7,9 @@ import BorderButton from "./src/BorderButton";
 const SelfButton = () => {
 	return (
 		<div className={styles.container}>
+			<h1>
+				Useful <code>Button</code>
+			</h1>
 			<div className={styles.innerBox}>
 				<button className={styles["btn-1"]}>
 					<div>
