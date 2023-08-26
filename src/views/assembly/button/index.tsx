@@ -3,6 +3,8 @@ import styles from "./index.module.scss";
 import HoverButton from "./src/HoverButton";
 import ExpandButton from "./src/ExpandButton";
 import BorderButton from "./src/BorderButton";
+import DrawButton from "./src/DrawButton";
+import ViewMore from "./src/ViewMore";
 
 const SelfButton = () => {
 	return (
@@ -37,6 +39,10 @@ const SelfButton = () => {
 			<ExpandButton />
 
 			<BorderButton />
+
+			<DrawButton />
+
+			<ViewMore />
 		</div>
 	);
 };
