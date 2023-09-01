@@ -1,0 +1,26 @@
+$count: 8;
+
+@function random-num($max, $min: 0, $u: 1) {
+	@return ($min + random($max)) * $u;
+}
+
+@function random-color() {
+	@return rgb(randomNum(255), randomNum(255), randomNum(255));
+}
+
+@for $i from 1 to $count + 1 {
+	.g-item:nth-child(#{$i}) {
+		position: relative;
+		margin: 0.5vw;
+		background: random-color();
+		&::after {
+			position: absolute;
+			top: 50%;
+			left: 50%;
+			font-size: 2vw;
+			color: #ffffff;
+			content: "#{$i}";
+			transform: translate(-50%, -50%);
+		}
+	}
+}
