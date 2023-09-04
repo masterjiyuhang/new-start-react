@@ -41,10 +41,10 @@ body {
 		border-right: 1px solid $light-border-color !important;
 		.ant-menu {
 			&::-webkit-scrollbar {
-				background-color: #001529 !important;
+				background-color: $light-bg-color !important;
 			}
 			&::-webkit-scrollbar-thumb {
-				background-color: #41444b !important;
+				background-color: $light-border-color !important;
 			}
 		}
 		.logo-box {
