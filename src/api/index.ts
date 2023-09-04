@@ -6,9 +6,10 @@ import { ResultEnum } from "@/enums/httpEnum";
 import { message } from "antd";
 import { checkStatus } from "./helper/checkStatus";
 import { ResultData } from "./interface";
-import { store } from "@/redux";
+import { store } from "@/redux-toolkit";
 import NProgress from "@/utils/nprogress";
-import { setToken } from "@/redux/modules/global/action";
+import { setToken } from "@/redux-toolkit/reducer/global";
+// import { setToken } from "@/redux/modules/global/action";
 
 const axiosCanceler = new AxiosCanceler();
 
@@ -35,7 +36,7 @@ class RequestHttp {
 				axiosCanceler.addPending(config);
 				// * 如果当前请求不需要显示 loading,在api服务中通过指定的第三个参数: { headers: { noLoading: true } }来控制不显示loading，参见loginApi
 				config.headers!.noLoading || showFullScreenLoading();
-				const token: string = store.getState().globalReducer.token;
+				const token: string = store.getState().global.token;
 				// const token: string = "123456";
 				// return { ...config, headers: { "x-access-token": token } };
 				return { ...config, headers: { ...config.headers, "x-access-token": token } };

@@ -9,22 +9,31 @@ import { findAllBreadcrumb, getOpenKeys, handleRouter, searchRoute } from "@/uti
 import * as Icons from "@ant-design/icons";
 // import { HOME_URL } from "@/config/config";
 import { getMenuList } from "@/api/modules/login";
-import { connect } from "react-redux";
-import { updateCollapse, setMenuList } from "@/redux/modules/menu/action";
-import { setBreadcrumbList } from "@/redux/modules/breadcrumb/action";
-import { setAuthRouter } from "@/redux/modules/auth/action";
+import { RootState, useDispatch, useSelector } from "@/redux-toolkit";
+import { setMenuList as reduxSetMenuList } from "@/redux-toolkit/reducer/menu";
+import { setBreadcrumbList } from "@/redux-toolkit/reducer/breadcrumb";
+import { setAuthRouter } from "@/redux-toolkit/reducer/auth";
+// import { connect } from "react-redux";
+// import { updateCollapse, setMenuList } from "@/redux/modules/menu/action";
+// import { setBreadcrumbList } from "@/redux/modules/breadcrumb/action";
+// import { setAuthRouter } from "@/redux/modules/auth/action";
 
 type MenuItem = Required<MenuProps>["items"][number];
 
-const LayoutMenu = (props: any) => {
+const LayoutMenu = () => {
 	const navigate = useNavigate();
 	const { pathname } = useLocation();
 	const [selectedKeys, setSelectedKeys] = useState<string[]>([pathname]);
 	const [openKeys, setOpenKeys] = useState<string[]>([]);
 	const [loading, setLoading] = useState<boolean>(false);
 	const [menuList, setMenuList] = useState<MenuItem[]>([]);
-	const { setAuthRouter } = props;
-	const { isDark } = props.globalReducer.themeConfig;
+	// const { setAuthRouter } = props;
+	// const { isDark } = props.globalReducer.themeConfig;
+	const { isDark } = useSelector((state: RootState) => state.global.themeConfig);
+
+	const dispatch = useDispatch();
+
+	const { isCollapse, menuList: reduxMenuList } = useSelector((state: RootState) => state.menu);
 
 	const getItem = (
 		label: React.ReactNode,
@@ -49,10 +58,12 @@ const LayoutMenu = (props: any) => {
 			if (!data) return;
 			setMenuList(deepLoopFloat(data));
 			// 存储处理过后的所有面包屑导航栏到 redux 中
-			props.setBreadcrumbList(findAllBreadcrumb(data));
+			dispatch(setBreadcrumbList(findAllBreadcrumb(data)));
 			const dynamicRouter = handleRouter(data);
-			setAuthRouter(dynamicRouter);
-			props.setMenuList(data);
+			dispatch(setAuthRouter(dynamicRouter));
+			dispatch(reduxSetMenuList(data));
+		} catch (error) {
+			console.log(error);
 		} finally {
 			setLoading(false);
 		}
@@ -79,8 +90,8 @@ const LayoutMenu = (props: any) => {
 	// 刷新页面保持菜单高亮
 	useEffect(() => {
 		setSelectedKeys([pathname]);
-		props.menu.isCollapse ? null : setOpenKeys(getOpenKeys(pathname));
-	}, [pathname, props.menu.isCollapse]);
+		isCollapse ? null : setOpenKeys(getOpenKeys(pathname));
+	}, [pathname, isCollapse]);
 
 	// 动态获取menu菜单
 	useEffect(() => {
@@ -98,7 +109,7 @@ const LayoutMenu = (props: any) => {
 
 	// 点击菜单
 	const clickMenu: MenuProps["onClick"] = ({ key }: { key: string }) => {
-		const route = searchRoute(key, props.menu.menuList);
+		const route = searchRoute(key, reduxMenuList);
 		if (route?.isLink) window.open(route.isLink, "_blank");
 		navigate(key);
 	};
@@ -106,7 +117,7 @@ const LayoutMenu = (props: any) => {
 	return (
 		<div className="menu">
 			<Spin spinning={loading} tip="Loading...">
-				<Logo />
+				<Logo isCollapse={isCollapse} />
 				<Menu
 					theme={isDark ? "dark" : "light"}
 					mode="inline"
@@ -122,7 +133,7 @@ const LayoutMenu = (props: any) => {
 	);
 };
 
-// export default LayoutMenu;
-const mapDispatchToProps = { updateCollapse, setMenuList, setBreadcrumbList, setAuthRouter };
-const mapStateToProps = (state: any) => state;
-export default connect(mapStateToProps, mapDispatchToProps)(LayoutMenu);
+export default LayoutMenu;
+// const mapDispatchToProps = { updateCollapse, setMenuList, setBreadcrumbList, setAuthRouter };
+// const mapStateToProps = (state: any) => state;
+// export default connect(mapStateToProps, mapDispatchToProps)(LayoutMenu);

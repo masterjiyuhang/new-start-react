@@ -1,16 +1,21 @@
-import { setAssemblySize } from "@/redux/modules/global/action";
+import { RootState, useDispatch, useSelector } from "@/redux-toolkit";
+import { setAssemblySize } from "@/redux-toolkit/reducer/global";
 import { LayoutOutlined } from "@ant-design/icons";
 import { Dropdown, Tooltip } from "antd";
 import type { MenuProps } from "antd";
+import { SizeType } from "antd/es/config-provider/SizeContext";
 import React, { useState } from "react";
-import { connect } from "react-redux";
+// import { setAssemblySize } from "@/redux/modules/global/action";
+// import { connect } from "react-redux";
 
-const AssemblySize = (props: any) => {
+const AssemblySize = () => {
 	const [open, setOpen] = useState(false);
-	const { setAssemblySize } = props;
+
+	const dispatch = useDispatch();
+	const { assemblySize } = useSelector((state: RootState) => state.global);
 
 	const handleMenuClick: MenuProps["onClick"] = e => {
-		setAssemblySize(e.key);
+		dispatch(setAssemblySize(e.key as SizeType));
 	};
 
 	const handleOpenChange = (flag: boolean) => {
@@ -20,17 +25,17 @@ const AssemblySize = (props: any) => {
 	const items: MenuProps["items"] = [
 		{
 			key: "middle",
-			disabled: props.assemblySize == "middle",
+			disabled: assemblySize == "middle",
 			label: <span>默认</span>
 		},
 		{
 			key: "large",
-			disabled: props.assemblySize == "large",
+			disabled: assemblySize == "large",
 			label: <span>大型</span>
 		},
 		{
 			key: "small",
-			disabled: props.assemblySize == "small",
+			disabled: assemblySize == "small",
 			label: <span>小型</span>
 		}
 	];
@@ -50,6 +55,7 @@ const AssemblySize = (props: any) => {
 	);
 };
 
-const mapStateToProps = (state: any) => state.globalReducer;
-const mapDispatchToProps = { setAssemblySize };
-export default connect(mapStateToProps, mapDispatchToProps)(AssemblySize);
+// const mapStateToProps = (state: any) => state.globalReducer;
+// const mapDispatchToProps = { setAssemblySize };
+// export default connect(mapStateToProps, mapDispatchToProps)(AssemblySize);
+export default AssemblySize;

@@ -1,11 +1,13 @@
-import { setThemeConfig } from "@/redux/modules/global/action";
+// import { setThemeConfig } from "@/redux/modules/global/action";
+import { RootState, useSelector } from "@/redux-toolkit";
 import "./index.scss";
-import { connect } from "react-redux";
+// import { connect } from "react-redux";
 
-const LayoutFooter = (props: any) => {
-	const {
-		themeConfig: { footer: isShowFooter }
-	} = props;
+const LayoutFooter = () => {
+	// const {
+	// 	themeConfig: { footer: isShowFooter }
+	// } = props;
+	const { footer: isShowFooter } = useSelector((state: RootState) => state.global.themeConfig);
 	return (
 		isShowFooter && (
 			<div className="footer">
@@ -17,6 +19,7 @@ const LayoutFooter = (props: any) => {
 	);
 };
 
-const mapStateToProps = (state: any) => state.globalReducer;
-const mapDispatchToProps = { setThemeConfig };
-export default connect(mapStateToProps, mapDispatchToProps)(LayoutFooter);
+// const mapStateToProps = (state: any) => state.globalReducer;
+// const mapDispatchToProps = { setThemeConfig };
+// export default connect(mapStateToProps, mapDispatchToProps)(LayoutFooter);
+export default LayoutFooter;

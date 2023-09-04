@@ -1,4 +1,6 @@
 import { HOME_URL } from "@/config/config";
+import { RootState, useDispatch, useSelector } from "@/redux-toolkit";
+import { setTabsList } from "@/redux-toolkit/reducer/tabs";
 import { DownOutlined } from "@ant-design/icons";
 import { Button, Dropdown, MenuProps } from "antd";
 import React from "react";
@@ -6,10 +8,13 @@ import { useTranslation } from "react-i18next";
 import { useLocation, useNavigate } from "react-router-dom";
 
 const MoreButton = (props: any) => {
-	const { tabsList, delTabs } = props;
+	const { delTabs } = props;
 	let { t } = useTranslation();
 	const navigate = useNavigate();
 	const { pathname } = useLocation();
+
+	const dispatch = useDispatch();
+	const { tabsList } = useSelector((state: RootState) => state.tabs);
 
 	const items: MenuProps["items"] = [
 		{
@@ -31,7 +36,7 @@ const MoreButton = (props: any) => {
 		const handleTabsList = tabsList.filter((item: Menu.MenuOptions) => {
 			return item.path === tabPath || item.path === HOME_URL;
 		});
-		props.setTabsList(handleTabsList);
+		dispatch(setTabsList(handleTabsList));
 		tabPath ?? navigate(HOME_URL);
 	};
 

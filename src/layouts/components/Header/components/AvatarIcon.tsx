@@ -7,15 +7,18 @@ import type { MenuProps } from "antd";
 import InfoModal from "./InfoModal";
 import PasswordModal from "./PasswordModal";
 import { HOME_URL } from "@/config/config";
-import { connect } from "react-redux";
-import { setToken } from "@/redux/modules/global/action";
+import { useDispatch } from "@/redux-toolkit";
+import { setToken } from "@/redux-toolkit/reducer/global";
+// import { connect } from "react-redux";
+// import { setToken } from "@/redux/modules/global/action";
 
-const AvatarIcon = (props: any) => {
+const AvatarIcon = () => {
 	const navigate = useNavigate();
 	interface ModalProps {
 		showModal: (params: { name: number }) => void;
 	}
 
+	const dispatch = useDispatch();
 	const passRef = useRef<ModalProps>(null!);
 	const infoRef = useRef<ModalProps>(null!);
 
@@ -29,7 +32,7 @@ const AvatarIcon = (props: any) => {
 			okText: "sure",
 			cancelText: "cancel",
 			onOk: () => {
-				props.setToken("");
+				dispatch(setToken(""));
 				message.success(" logout successfully");
 				navigate("login");
 			}
@@ -117,4 +120,5 @@ const AvatarIcon = (props: any) => {
 	);
 };
 
-export default connect(null, { setToken })(AvatarIcon);
+// export default connect(null, { setToken })(AvatarIcon);
+export default AvatarIcon;

@@ -1,12 +1,16 @@
-import { setThemeConfig } from "@/redux/modules/global/action";
+// import { setThemeConfig } from "@/redux/modules/global/action";
+import { RootState, useDispatch, useSelector } from "@/redux-toolkit";
+import { setThemeConfig } from "@/redux-toolkit/reducer/global";
 import { Switch } from "antd";
 import React from "react";
-import { connect } from "react-redux";
+// import { connect } from "react-redux";
 
-const SwitchDark = (props: any) => {
-	const { setThemeConfig, themeConfig } = props;
+const SwitchDark = () => {
+	const dispatch = useDispatch();
+	const { themeConfig } = useSelector((state: RootState) => state.global);
+	// const { setThemeConfig, themeConfig } = props;
 	const onChange = (checked: boolean) => {
-		setThemeConfig({ ...themeConfig, isDark: checked });
+		dispatch(setThemeConfig({ ...themeConfig, isDark: checked }));
 	};
 
 	return (
@@ -20,7 +24,7 @@ const SwitchDark = (props: any) => {
 	);
 };
 
-// export default SwitchDark;
-const mapStateToProps = (state: any) => state.globalReducer;
-const mapDispatchToProps = { setThemeConfig };
-export default connect(mapStateToProps, mapDispatchToProps)(SwitchDark);
+export default SwitchDark;
+// const mapStateToProps = (state: any) => state.globalReducer;
+// const mapDispatchToProps = { setThemeConfig };
+// export default connect(mapStateToProps, mapDispatchToProps)(SwitchDark);

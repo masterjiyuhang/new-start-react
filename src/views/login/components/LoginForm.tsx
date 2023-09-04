@@ -1,16 +1,20 @@
 import { Login } from "@/api/interface";
 import { CloseCircleOutlined, LockOutlined, UserOutlined } from "@ant-design/icons";
 import { Button, Form, Input, message } from "antd";
-import React, { useState } from "react";
+import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import md5 from "js-md5";
 import { loginApi } from "@/api/modules/login";
 import { HOME_URL } from "@/config/config";
-import { connect } from "react-redux";
-import { setToken } from "@/redux/modules/global/action";
-import { setTabsList } from "@/redux/modules/tabs/action";
+import { useDispatch } from "@/redux-toolkit";
+import { setToken } from "@/redux-toolkit/reducer/global";
+import { setTabsList } from "@/redux-toolkit/reducer/tabs";
+// import { connect } from "react-redux";
+// import { setToken } from "@/redux/modules/global/action";
+// import { setTabsList } from "@/redux/modules/tabs/action";
 
-const LoginForm = (props: any) => {
+const LoginForm = () => {
+	const dispatch = useDispatch();
 	const Item = Form.Item;
 	const [form] = Form.useForm();
 	const [loading, setLoading] = useState<boolean>(false);
@@ -23,9 +27,8 @@ const LoginForm = (props: any) => {
 			setLoading(true);
 			values.password = md5(values.password);
 			const { data } = await loginApi(values);
-			console.log(data, props);
-			props.setToken(data?.access_token);
-			props.setTabsList([]);
+			dispatch(setToken(data?.access_token as string));
+			dispatch(setTabsList([]));
 			messageApi.success("login successfully");
 			navigate(HOME_URL);
 		} catch (error) {
@@ -51,7 +54,7 @@ const LoginForm = (props: any) => {
 			autoComplete="off"
 		>
 			<Item name="username" rules={[{ required: true, message: "please input your user name!" }]} initialValue={"admin"}>
-				<Input placeholder="user name : admin / user" prefix={<UserOutlined />}></Input>
+				<Input placeholder="user name : admin / user" prefix={<UserOutlined />} />
 			</Item>
 			<Item name="password" rules={[{ required: true, message: "please input your password!" }]} initialValue={"12345678"}>
 				<Input.Password autoComplete="new-password" placeholder="password: 12345678" prefix={<LockOutlined />} />
@@ -68,7 +71,8 @@ const LoginForm = (props: any) => {
 	);
 };
 
-// export default LoginForm;
-const mapStateToProps = (state: any) => state;
-const mapDispatchToProps = { setToken, setTabsList };
-export default connect(mapStateToProps, mapDispatchToProps)(LoginForm);
+// // export default LoginForm;
+// const mapStateToProps = (state: any) => state;
+// const mapDispatchToProps = { setToken, setTabsList };
+// export default connect(mapStateToProps, mapDispatchToProps)(LoginForm);
+export default LoginForm;
