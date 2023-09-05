@@ -84,3 +84,5 @@ npx --no ：表示只使用本地项目 node_modules 下的脚本，不允许找
 
 commitlint --edit <文件名>：执行 commitlint 命令行工具，并使用 --edit 选项，从一个文件里提取 commit 内容来进行校验。
 校验规则由前面说的 commitlint.config.js 配置文件来指定。
+
+## add mobx
