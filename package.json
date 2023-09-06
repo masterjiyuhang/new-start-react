@@ -29,6 +29,8 @@
 		"intro.js": "^7.0.1",
 		"js-md5": "^0.7.3",
 		"lodash-es": "^4.17.21",
+		"mobx": "^6.10.2",
+		"mobx-react-lite": "^4.0.4",
 		"nprogress": "^0.2.0",
 		"react": "^18.2.0",
 		"react-dom": "^18.2.0",
