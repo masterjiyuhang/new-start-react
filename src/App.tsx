@@ -11,6 +11,7 @@ import AuthRouter from "@/routers/utils/authRouter";
 import useTheme from "@/hooks/useTheme";
 import i18n from "i18next";
 import { setLanguage } from "@/redux/modules/global/action";
+import { RootStoreProvider } from "./mobx-store";
 
 const App = (props: any) => {
 	const [i18nLocale, setI18nLocale] = useState(zhCN);
@@ -35,11 +36,13 @@ const App = (props: any) => {
 	}, [language]);
 	return (
 		<HashRouter>
-			<ConfigProvider locale={i18nLocale} componentSize={assemblySize}>
-				<AuthRouter>
-					<Router />
-				</AuthRouter>
-			</ConfigProvider>
+			<RootStoreProvider>
+				<ConfigProvider locale={i18nLocale} componentSize={assemblySize}>
+					<AuthRouter>
+						<Router />
+					</AuthRouter>
+				</ConfigProvider>
+			</RootStoreProvider>
 			{/* 添加路由守卫 */}
 			{/* <RouterGuard routes={Router} /> */}
 		</HashRouter>

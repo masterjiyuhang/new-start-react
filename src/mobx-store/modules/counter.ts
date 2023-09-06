@@ -20,5 +20,4 @@ class CounterStore {
 		this.count -= 1;
 	}
 }
-const counter = new CounterStore();
-export default counter;
+export default CounterStore;
