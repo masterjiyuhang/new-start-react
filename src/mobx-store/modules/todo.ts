@@ -1,4 +1,4 @@
-import { makeAutoObservable } from "mobx";
+import { action, makeObservable, observable } from "mobx";
 export default class Todo {
 	id: any;
 	title: any;
@@ -10,6 +10,27 @@ export default class Todo {
 		this.title = todo.title;
 		this.isCompleted = todo.isCompleted || false;
 		this.isEditing = false;
-		makeAutoObservable(this);
+		makeObservable(this, {
+			title: observable,
+			isCompleted: observable,
+			isEditing: observable,
+			modifyTodoIsCompleted: action.bound,
+			modifyTodoIsEditing: action.bound,
+			modifyTodoTitle: action.bound
+		});
+	}
+
+	modifyTodoIsCompleted() {
+		console.log(!this.isCompleted, "modifyTodoIsCompleted");
+		this.isCompleted = !this.isCompleted;
+	}
+
+	modifyTodoIsEditing() {
+		this.isEditing = !this.isEditing;
+	}
+
+	modifyTodoTitle(title: any) {
+		this.title = title;
+		this.isEditing = false;
 	}
 }

@@ -13,7 +13,8 @@
 		"lint:stylelint": "stylelint --cache --fix \"**/*.{less,postcss,css,scss}\" --cache --cache-location node_modules/.cache/stylelint/",
 		"lint-staged": "lint-staged",
 		"prepare": "husky install",
-		"commit": "git pull && git add -A && git-cz && git push"
+		"commit": "git pull && git add -A && git-cz && git push",
+		"json-server": "json-server --watch ./server/db.json --port 3001"
 	},
 	"dependencies": {
 		"@ant-design/icons": "^5.1.4",
@@ -21,6 +22,7 @@
 		"@tweenjs/tween.js": "^21.0.0",
 		"antd": "^5.6.2",
 		"axios": "^1.4.0",
+		"clsx": "^2.0.0",
 		"delaunator": "^5.0.0",
 		"echarts": "^5.4.2",
 		"express": "^4.18.2",
@@ -78,6 +80,7 @@
 		"eslint-plugin-react": "^7.32.2",
 		"eslint-plugin-react-hooks": "^4.6.0",
 		"husky": "^8.0.3",
+		"json-server": "^0.17.3",
 		"less": "^4.1.3",
 		"lint-staged": "^13.2.2",
 		"mockjs": "^1.1.0",
