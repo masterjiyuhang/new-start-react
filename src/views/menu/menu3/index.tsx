@@ -1,36 +1,37 @@
-import { useRootStore } from "@/mobx-store";
-import { useState } from "react";
-import TodoItem from "./TodoItem";
-import { observer } from "mobx-react-lite";
+// import { useRootStore } from "@/mobx-store";
+// import { useState } from "react";
+// import TodoItem from "./TodoItem";
+// import { observer } from "mobx-react-lite";
+import TodoList from "./TodoList";
 
-const MainDefault = () => {
-	const { todoListStore } = useRootStore();
-	const { todoList } = todoListStore;
+// const MainDefault = () => {
+// 	const { todoListStore } = useRootStore();
+// 	const { todoList } = todoListStore;
 
-	return (
-		<>
-			<section className="main">
-				<ul className="todo-list">
-					{todoList.map(todo => (
-						<TodoItem todo={todo} key={todo.id} />
-					))}
-				</ul>
-			</section>
-		</>
-	);
-};
+// 	return (
+// 		<>
+// 			<section className="main">
+// 				<ul className="todo-list">
+// 					{todoList.map(todo => (
+// 						<TodoItem todo={todo} key={todo.id} />
+// 					))}
+// 				</ul>
+// 			</section>
+// 		</>
+// 	);
+// };
 
-const Main = observer(MainDefault);
+// const Main = observer(MainDefault);
 
 const Menu3 = () => {
-	const [title, setTitle] = useState("");
-	const { todoListStore } = useRootStore();
-	const { addTodo } = todoListStore;
+	// const [title, setTitle] = useState("");
+	// const { todoListStore } = useRootStore();
+	// const { addTodo } = todoListStore;
 	return (
 		<div className="card content-box">
 			<span className="text">Menu3 🍓🍇🍈🍉</span>
 
-			<header className="header">
+			{/* <header className="header">
 				<h1>todoList</h1>
 				<input
 					type="text"
@@ -47,7 +48,9 @@ const Menu3 = () => {
 				/>
 			</header>
 
-			<Main />
+			<Main /> */}
+
+			<TodoList />
 		</div>
 	);
 };

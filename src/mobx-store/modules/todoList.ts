@@ -1,4 +1,4 @@
-import { observable, makeObservable, action, flow } from "mobx";
+import { observable, makeObservable, action, flow, computed } from "mobx";
 import Todo from "./todo";
 import axios from "axios";
 
@@ -11,7 +11,10 @@ export default class TodoList {
 			todoList: observable,
 			addTodo: action.bound,
 			loadTodoList: flow,
-			removeTodo: action.bound
+			removeTodo: action.bound,
+			removeCompletedTodo: action.bound,
+			hiddenCompletedTodo: action.bound,
+			unCompletedTodoListCount: computed
 		});
 
 		this.loadTodoList();
@@ -24,6 +27,17 @@ export default class TodoList {
 
 	removeTodo(id: any) {
 		this.todoList = this.todoList.filter(todo => todo.id !== id);
+	}
+
+	removeCompletedTodo() {
+		this.todoList = this.todoList.filter(todoItem => !todoItem.isCompleted);
+	}
+
+	hiddenCompletedTodo() {
+		// this.todoList.map(todoItem => {
+		// 	return (todoItem.isHidden = todoItem.isCompleted ? true : false);
+		// });
+		console.log("想要隐藏已经完成的");
 	}
 
 	createTodoId() {
@@ -42,5 +56,10 @@ export default class TodoList {
 		response.data.forEach((todo: { id: any; title: any; isCompleted?: boolean | undefined }) => {
 			this.todoList.push(new Todo(todo));
 		});
+	}
+
+	// 获取未完成的数量
+	get unCompletedTodoListCount() {
+		return this.todoList.filter((todo: Todo) => !todo.isCompleted).length;
 	}
 }

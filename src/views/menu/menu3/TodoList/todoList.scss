@@ -1,0 +1,11 @@
+.todoList-demo {
+	width: 100%;
+}
+.view {
+	display: flex;
+	justify-content: space-between;
+	.todo-label {
+		flex: 1;
+		padding-left: 20px;
+	}
+}
