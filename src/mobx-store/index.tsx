@@ -1,10 +1,13 @@
 import { createContext, useContext } from "react";
 import CounterStore from "./modules/counter";
+import TodoListStore from "./modules/todoList";
 
 class RootStore {
 	counterStore: CounterStore;
+	todoListStore: TodoListStore;
 	constructor() {
 		this.counterStore = new CounterStore();
+		this.todoListStore = new TodoListStore();
 	}
 }
 
