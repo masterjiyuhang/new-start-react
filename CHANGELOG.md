@@ -86,3 +86,50 @@ commitlint --edit <文件名>：执行 commitlint 命令行工具，并使用 --
 校验规则由前面说的 commitlint.config.js 配置文件来指定。
 
 ## add mobx
+
+安装对应的依赖
+`pnpm i mobx mobx-react-lite`
+`pnpm i mobx mobx-react`
+
+### mobx 支持装饰器
+
+1. 安装依赖
+   pnpm i -D @babel/plugin-proposal-decorators vite-plugin-babel
+
+2. 配置 vite.config.ts
+
+```typescript
+import babel from "vite-plugin-babel";
+
+return {
+	plugins: [
+    ...,
+    babel({
+			babelConfig: {
+				babelrc: false,
+				configFile: false,
+				plugins: [["@babel/plugin-proposal-decorators", { loose: true, version: "2022-03" }]]
+			}
+		}),
+  ]
+};
+```
+
+3. 修改 tsconfig
+
+```json
+{
+	"target": "ESNext",
+	"useDefineForClassFields": true,
+	"experimentalDecorators": true, // 启用装饰器支持。
+	"emitDecoratorMetadata": true // 启用装饰器的元数据支持。
+}
+```
+
+4. 修改 vs code 配置项
+
+在设置中搜索 experimentalDecorators 确保开启了这个配置项。 // 启用装饰器支持。
+
+5. 其他版本的安装依赖 可以忽略这步
+
+`pnpm i -D react-app-rewired customize-cra @babel/core @babel/plugin-proposal-decorators @babel/plugin-proposal-class-properties @babel/preset-env`

@@ -6,6 +6,7 @@ import eslintPlugin from "vite-plugin-eslint";
 import { wrapperEnv } from "./src/utils/getEnv";
 import viteCompression from "vite-plugin-compression";
 import { visualizer } from "rollup-plugin-visualizer";
+import babel from "vite-plugin-babel";
 
 // https://vitejs.dev/config/
 export default defineConfig((mode: ConfigEnv): UserConfig => {
@@ -14,6 +15,13 @@ export default defineConfig((mode: ConfigEnv): UserConfig => {
 	return {
 		plugins: [
 			react(),
+			babel({
+				babelConfig: {
+					babelrc: false,
+					configFile: false,
+					plugins: [["@babel/plugin-proposal-decorators", { loose: true, version: "2022-03" }]]
+				}
+			}),
 
 			createHtmlPlugin({
 				inject: {

@@ -5,6 +5,7 @@ import axios from "axios";
 export default class TodoList {
 	todoList: any[];
 	filterCondition: "All" | "Active" | "Completed";
+
 	constructor() {
 		this.todoList = [];
 		this.filterCondition = "All";
