@@ -6,13 +6,13 @@ import { observer } from "mobx-react-lite";
 
 const TodoListMain = () => {
 	const {
-		todoListStore: { todoList }
+		todoListStore: { filterTodoList }
 	} = useRootStore();
 	return (
 		<Content>
 			<section className="main">
 				<ul className="todo-list">
-					{todoList.map(todo => (
+					{filterTodoList?.map(todo => (
 						<TodoListItem todo={todo} key={todo.id} />
 					))}
 				</ul>

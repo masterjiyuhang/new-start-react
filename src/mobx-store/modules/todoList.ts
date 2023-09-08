@@ -4,8 +4,10 @@ import axios from "axios";
 
 export default class TodoList {
 	todoList: any[];
+	filterCondition: "All" | "Active" | "Completed";
 	constructor() {
 		this.todoList = [];
+		this.filterCondition = "All";
 
 		makeObservable(this, {
 			todoList: observable,
@@ -14,7 +16,11 @@ export default class TodoList {
 			removeTodo: action.bound,
 			removeCompletedTodo: action.bound,
 			hiddenCompletedTodo: action.bound,
-			unCompletedTodoListCount: computed
+			unCompletedTodoListCount: computed,
+
+			filterCondition: observable,
+			changeFilterCondition: action.bound,
+			filterTodoList: computed
 		});
 
 		this.loadTodoList();
@@ -37,7 +43,8 @@ export default class TodoList {
 		// this.todoList.map(todoItem => {
 		// 	return (todoItem.isHidden = todoItem.isCompleted ? true : false);
 		// });
-		console.log("想要隐藏已经完成的");
+		// console.log("想要隐藏已经完成的");
+		this.filterCondition = "Active";
 	}
 
 	createTodoId() {
@@ -61,5 +68,23 @@ export default class TodoList {
 	// 获取未完成的数量
 	get unCompletedTodoListCount() {
 		return this.todoList.filter((todo: Todo) => !todo.isCompleted).length;
+	}
+
+	changeFilterCondition(condition: any) {
+		console.log(condition, "condition");
+		this.filterCondition = condition;
+	}
+
+	get filterTodoList() {
+		switch (this.filterCondition) {
+			case "Active":
+				return this.todoList.filter(item => !item.isCompleted);
+			case "Completed":
+				return this.todoList.filter(item => item.isCompleted);
+			case "All":
+				return this.todoList;
+			default:
+				break;
+		}
 	}
 }
