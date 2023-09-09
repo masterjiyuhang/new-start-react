@@ -12,6 +12,11 @@ class TestStore {
 	changeName = (name: string) => {
 		this.name = name;
 	};
+
+	@action.bound
+	resetName = () => {
+		this.name = "二航 🚀🐢";
+	};
 }
 
 export default TestStore;
