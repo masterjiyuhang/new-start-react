@@ -132,4 +132,11 @@ return {
 
 5. 其他版本的安装依赖 可以忽略这步
 
-`pnpm i -D react-app-rewired customize-cra @babel/core @babel/plugin-proposal-decorators @babel/plugin-proposal-class-properties @babel/preset-env`
+`pnpm i -D react-app-rewired customize-cra @babel/core @babel/plugin-proposal-decorators @
+
+
+
+
+
+## 状态管理
+全局状态管理 区别和使用方式该捡一捡了babel/plugin-proposal-class-properties @babel/preset-env`
