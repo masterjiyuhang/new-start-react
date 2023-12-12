@@ -13,6 +13,7 @@ export default defineConfig((mode: ConfigEnv): UserConfig => {
 	const env = loadEnv(mode.mode, process.cwd());
 	const viteEnv = wrapperEnv(env);
 	return {
+		base: "/",
 		plugins: [
 			react(),
 			babel({
