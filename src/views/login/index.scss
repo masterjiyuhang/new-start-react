@@ -2,7 +2,7 @@
 	display: flex;
 	align-items: center;
 	justify-content: center;
-	min-width: 550px;
+	min-width: 320px;
 	height: 100%;
 	background-color: #eeeeee;
 	background-image: url("@/assets/images/login_bg.svg");
@@ -16,19 +16,20 @@
 		justify-content: space-around;
 		width: 100%;
 		height: 90%;
-		pad: 0 4% 0 20px;
+		padding: 0 4% 0 20px;
 		overflow: hidden;
-		background-color: hsla(0deg 0% 100% / 80%);
+		background-color: hsl(200deg 75% 45% / 80%);
 		border-radius: 10px;
 		.login-left {
-			width: 750px;
+			flex: 3;
 			img {
 				width: 100%;
 				height: 100%;
 			}
 		}
 		.login-form {
-			padding: 40px;
+			flex: 1;
+			padding: 10px;
 			background-color: rgba($color: #ffffff, $alpha: 100%);
 			border-radius: 10px;
 			box-shadow: 2px 3px 7px rgb(0 0 0 / 20%);
@@ -36,17 +37,21 @@
 				display: flex;
 				align-items: center;
 				justify-content: center;
+				margin-top: 20px;
 				margin-bottom: 40px;
 				.login-icon {
 					width: 70px;
 				}
 				.login-text {
 					padding-left: 25px;
-					font-size: 48px;
+					font-size: 40px;
 					font-weight: bold;
 					color: #475768;
 					white-space: nowrap;
 				}
+			}
+			.basic-form {
+				width: 100%;
 			}
 			.ant-form-item {
 				height: 75px;
@@ -84,5 +89,11 @@
 				}
 			}
 		}
+	}
+}
+
+@media screen and (width <= 420px) {
+	.login-left {
+		display: none;
 	}
 }

@@ -1,5 +1,5 @@
 import { Layout } from "antd";
-import React from "react";
+import React, { useEffect, useState } from "react";
 
 import AvatarIcon from "./components/AvatarIcon";
 import CollapseIcon from "./components/CollapseIcon";
@@ -13,11 +13,24 @@ import FullScreen from "./components/FullScreen";
 
 export default function LayoutHeader() {
 	const { Header } = Layout;
+	const [windowWidth, setWindowWidth] = useState(window.innerWidth);
+
+	useEffect(() => {
+		const handleResize = () => {
+			setWindowWidth(window.innerWidth);
+		};
+
+		window.addEventListener("resize", handleResize);
+
+		return () => {
+			window.removeEventListener("resize", handleResize);
+		};
+	}, []);
 	return (
 		<Header>
 			<div className="header-lf">
 				<CollapseIcon />
-				<BreadcrumbNav />
+				{windowWidth >= 420 && <BreadcrumbNav />}
 			</div>
 			<div className="header-ri">
 				<AssemblySize />

@@ -49,6 +49,7 @@ const LoginForm = (props: any) => {
 			onFinishFailed={onFinishFailed}
 			size="large"
 			autoComplete="off"
+			className="basic-form"
 		>
 			<Item name="username" rules={[{ required: true, message: "please input your user name!" }]} initialValue={"admin"}>
 				<Input placeholder="user name : admin / user" prefix={<UserOutlined />}></Input>
