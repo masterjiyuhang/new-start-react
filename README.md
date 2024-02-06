@@ -1,4 +1,4 @@
-# 一个用于学习的项目
+# 一个用于学习React的项目
 
 React18 + vite4 + antd + redux
 
