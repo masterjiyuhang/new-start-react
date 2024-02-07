@@ -9,4 +9,4 @@ prettier
 stylelint
 husky
 
-# 项目的一些计划
+## 项目的一些计划
