@@ -8,3 +8,5 @@ eslint
 prettier
 stylelint
 husky
+
+# 项目的一些计划
