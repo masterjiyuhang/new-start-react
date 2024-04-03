@@ -7,7 +7,7 @@ export function isDevFn(mode: string): boolean {
 }
 
 export function isProdFn(mode: string): boolean {
-	return mode === "production";
+	return mode === "prod";
 }
 
 /**

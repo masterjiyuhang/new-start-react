@@ -16,7 +16,7 @@ const BreadcrumbNav = (props: any) => {
 	const res: Array<any> = breadcrumbList[pathname]
 		? breadcrumbList[pathname].map((item: any) => {
 				return { title: item };
-		  })
+			})
 		: [];
 	if (pathname !== HOME_URL) {
 		res.unshift({ title: "首页啊啊", href: `#${HOME_URL}` });

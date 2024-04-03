@@ -11,11 +11,7 @@ const TodoListMain = () => {
 	return (
 		<Content>
 			<section className="main">
-				<ul className="todo-list">
-					{filterTodoList?.map(todo => (
-						<TodoListItem todo={todo} key={todo.id} />
-					))}
-				</ul>
+				<ul className="todo-list">{filterTodoList?.map(todo => <TodoListItem todo={todo} key={todo.id} />)}</ul>
 			</section>
 		</Content>
 	);

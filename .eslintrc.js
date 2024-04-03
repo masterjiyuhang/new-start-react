@@ -40,6 +40,9 @@ module.exports = {
 	 * "error" 或 2  ==>  规则作为一个错误（代码不能执行，界面报错）
 	 */
 	rules: {
+		// 3. 注意要加上这一句，开启 prettier 自动修复的功能
+		"prettier/prettier": "error",
+		
 		// eslint (http://eslint.cn/docs/rules)
 		"no-var": "error", // 要求使用 let 或 const 而不是 var
 		"no-multiple-empty-lines": ["error", { max: 1 }], // 不允许多个空行
