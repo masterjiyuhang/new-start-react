@@ -1,4 +1,4 @@
-import { ConfigEnv, UserConfig, defineConfig, loadEnv } from "vite";
+import { type ConfigEnv, type UserConfig, defineConfig, loadEnv } from "vite";
 import react from "@vitejs/plugin-react";
 import path from "path";
 import { createHtmlPlugin } from "vite-plugin-html";
@@ -36,7 +36,7 @@ export default defineConfig((mode: ConfigEnv): UserConfig => {
 			eslintPlugin(),
 
 			// * 是否生成包预览
-			// @ts-ignore
+			// @ts-expect-error
 			viteEnv.VITE_REPORT && visualizer(),
 
 			// * gzip compress
@@ -81,14 +81,14 @@ export default defineConfig((mode: ConfigEnv): UserConfig => {
 		build: {
 			outDir: "dist",
 			// esbuild 打包更快，但是不能去除 console.log，去除 console 使用 terser 模式
-			minify: "esbuild",
-			// minify: "terser",
-			// terserOptions: {
-			// 	compress: {
-			// 		drop_console: viteEnv.VITE_DROP_CONSOLE,
-			// 		drop_debugger: true
-			// 	}
-			// },
+			// minify: "esbuild",
+			minify: "terser",
+			terserOptions: {
+				compress: {
+					drop_console: viteEnv.VITE_DROP_CONSOLE,
+					drop_debugger: true
+				}
+			},
 			rollupOptions: {
 				output: {
 					chunkFileNames: "assets/js/[name]-[hash].js",
