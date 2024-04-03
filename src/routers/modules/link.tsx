@@ -1,10 +1,10 @@
 import React from "react";
 import lazyLoad from "@/routers/utils/lazyLoad";
 import { LayoutIndex } from "@/routers/constant";
-import { RouteObject } from "@/routers/interface";
+import { type RouteObject } from "@/routers/interface";
 
 // 外部链接模块
-const linkRouter: Array<RouteObject> = [
+const linkRouter: RouteObject[] = [
 	{
 		element: <LayoutIndex />,
 		meta: {
@@ -13,7 +13,7 @@ const linkRouter: Array<RouteObject> = [
 		children: [
 			{
 				path: "/link/github",
-				element: lazyLoad(React.lazy(() => import("@/views/link/github/index"))),
+				element: lazyLoad(React.lazy(async () => await import("@/views/link/github/index"))),
 				meta: {
 					requiresAuth: true,
 					title: "GitHub 仓库",
@@ -22,7 +22,7 @@ const linkRouter: Array<RouteObject> = [
 			},
 			{
 				path: "/link/juejin",
-				element: lazyLoad(React.lazy(() => import("@/views/link/juejin/index"))),
+				element: lazyLoad(React.lazy(async () => await import("@/views/link/juejin/index"))),
 				meta: {
 					requiresAuth: true,
 					title: "掘金文档",
@@ -31,7 +31,7 @@ const linkRouter: Array<RouteObject> = [
 			},
 			{
 				path: "/link/myBlog",
-				element: lazyLoad(React.lazy(() => import("@/views/link/myBlog/index"))),
+				element: lazyLoad(React.lazy(async () => await import("@/views/link/myBlog/index"))),
 				meta: {
 					requiresAuth: true,
 					title: "个人博客",

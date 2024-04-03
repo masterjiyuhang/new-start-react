@@ -77,12 +77,23 @@ const index = () => {
 										<Input />
 									</Form.Item>
 
-									<MinusCircleOutlined onClick={() => remove(field.name)} />
+									<MinusCircleOutlined
+										onClick={() => {
+											remove(field.name);
+										}}
+									/>
 								</Space>
 							))}
 
 							<Form.Item>
-								<Button type="dashed" onClick={() => add()} block icon={<PlusOutlined />}>
+								<Button
+									type="dashed"
+									onClick={() => {
+										add();
+									}}
+									block
+									icon={<PlusOutlined />}
+								>
 									Add sights
 								</Button>
 							</Form.Item>

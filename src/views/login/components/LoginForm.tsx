@@ -1,4 +1,4 @@
-import { Login } from "@/api/interface";
+import { type Login } from "@/api/interface";
 import { CloseCircleOutlined, LockOutlined, UserOutlined } from "@ant-design/icons";
 import { Button, Form, Input, message } from "antd";
 import React, { useState } from "react";
@@ -18,7 +18,7 @@ const LoginForm = (props: any) => {
 	const navigate = useNavigate();
 
 	// 登录
-	const onFinish = async (values: Login.ReqLoginForm) => {
+	const onFinish = async (values: Login.ReqLoginForm): Promise<void> => {
 		try {
 			setLoading(true);
 			values.password = md5(values.password);
@@ -36,7 +36,7 @@ const LoginForm = (props: any) => {
 	};
 	const onFinishFailed = (errorInfo: any) => {
 		console.log(errorInfo);
-		messageApi.error("login failed", 2);
+		void messageApi.error("login failed", 2);
 	};
 
 	return (
@@ -58,7 +58,12 @@ const LoginForm = (props: any) => {
 				<Input.Password autoComplete="new-password" placeholder="password: 12345678" prefix={<LockOutlined />} />
 			</Item>
 			<Item className="login-btn">
-				<Button icon={<CloseCircleOutlined />} onClick={() => form.resetFields()}>
+				<Button
+					icon={<CloseCircleOutlined />}
+					onClick={() => {
+						form.resetFields();
+					}}
+				>
 					重置 {contextHolder}
 				</Button>
 				<Button type="primary" icon={<UserOutlined />} htmlType="submit" loading={loading}>

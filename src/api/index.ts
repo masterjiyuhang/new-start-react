@@ -1,11 +1,11 @@
 import { showFullScreenLoading, tryHideFullScreenLoading } from "@/config/serviceLoading";
-import axios, { AxiosInstance, AxiosError, AxiosRequestConfig, AxiosResponse } from "axios";
+import axios, { type AxiosInstance, type AxiosError, type AxiosRequestConfig, type AxiosResponse } from "axios";
 import { AxiosCanceler } from "./helper/axiosCancel";
 import { useNavigate } from "react-router-dom";
 import { ResultEnum } from "@/enums/httpEnum";
 import { message } from "antd";
 import { checkStatus } from "./helper/checkStatus";
-import { ResultData } from "./interface";
+import { type ResultData } from "./interface";
 import { store } from "@/redux";
 import NProgress from "@/utils/nprogress";
 import { setToken } from "@/redux/modules/global/action";
@@ -40,8 +40,8 @@ class RequestHttp {
 				// return { ...config, headers: { "x-access-token": token } };
 				return { ...config, headers: { ...config.headers, "x-access-token": token } };
 			},
-			(error: AxiosError) => {
-				return Promise.reject(error);
+			async (error: AxiosError) => {
+				return await Promise.reject(error);
 			}
 		);
 
@@ -58,16 +58,18 @@ class RequestHttp {
 				axiosCanceler.removePending(config);
 				tryHideFullScreenLoading();
 				// * 登录失效（code == 599）
-				if (data.code == ResultEnum.OVERDUE) {
+				if (data.code === ResultEnum.OVERDUE) {
 					store.dispatch(setToken(""));
 					message.error(data.msg);
 					navigateTo("/login");
-					return Promise.reject(data);
+					const error = new Error(data.msg);
+					return Promise.reject(error);
 				}
 				// * 全局错误信息拦截（防止下载文件得时候返回数据流，没有code，直接报错）
 				if (data.code && data.code !== ResultEnum.SUCCESS) {
 					message.error(data.msg);
-					return Promise.reject(data);
+					const error = new Error(data.msg);
+					return Promise.reject(error);
 				}
 				// * 成功请求
 				return data;
@@ -81,23 +83,26 @@ class RequestHttp {
 				if (response) checkStatus(response.status);
 				// 服务器结果都没有返回(可能服务器错误可能客户端断网) 断网处理:可以跳转到断网页面
 				if (!window.navigator.onLine) navigateTo("/500");
-				return Promise.reject(error);
+				return await Promise.reject(error);
 			}
 		);
 	}
 
 	// * 常用请求方法封装
-	get<T>(url: string, params?: object, _object = {}): Promise<ResultData<T>> {
-		return this.service.get(url, { params, ..._object });
+	async get<T>(url: string, params?: object, _object = {}): Promise<ResultData<T>> {
+		return await this.service.get(url, { params, ..._object });
 	}
-	post<T>(url: string, params?: object, _object = {}): Promise<ResultData<T>> {
-		return this.service.post(url, params, _object);
+
+	async post<T>(url: string, params?: object, _object = {}): Promise<ResultData<T>> {
+		return await this.service.post(url, params, _object);
 	}
-	put<T>(url: string, params?: object, _object = {}): Promise<ResultData<T>> {
-		return this.service.put(url, params, _object);
+
+	async put<T>(url: string, params?: object, _object = {}): Promise<ResultData<T>> {
+		return await this.service.put(url, params, _object);
 	}
-	delete<T>(url: string, params?: any, _object = {}): Promise<ResultData<T>> {
-		return this.service.delete(url, { params, ..._object });
+
+	async delete<T>(url: string, params?: any, _object = {}): Promise<ResultData<T>> {
+		return await this.service.delete(url, { params, ..._object });
 	}
 }
 

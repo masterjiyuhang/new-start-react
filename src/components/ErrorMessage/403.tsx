@@ -5,7 +5,9 @@ import { HOME_URL } from "@/config/config";
 
 const NoAuth = () => {
 	const navigate = useNavigate();
-	const goHome = () => navigate(HOME_URL);
+	const goHome = () => {
+		navigate(HOME_URL);
+	};
 	return (
 		<Result
 			status={"403"}

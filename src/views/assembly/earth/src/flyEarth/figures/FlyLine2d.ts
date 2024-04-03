@@ -1,5 +1,5 @@
 import {
-	Vector3,
+	type Vector3,
 	Group,
 	BufferGeometry,
 	LineBasicMaterial,
@@ -12,8 +12,8 @@ import {
 } from "three";
 import { getFunctionExpression } from "@/views/assembly/earth/src/flyEarth/utils/math";
 import { setTween } from "@/views/assembly/earth/src/flyEarth/utils/tween";
-import { configType } from "@/views/assembly/earth/src/flyEarth/interface";
-import Store from "@/views/assembly/earth/src/flyEarth/store/store";
+import { type configType } from "@/views/assembly/earth/src/flyEarth/interface";
+import type Store from "@/views/assembly/earth/src/flyEarth/store/store";
 
 export default class FlyLine2d {
 	_config: configType;
@@ -40,6 +40,7 @@ export default class FlyLine2d {
 		});
 		return group;
 	}
+
 	createPathLine = (points: Vector3[]) => {
 		const geometry = new BufferGeometry().setFromPoints(points);
 		const material = new LineBasicMaterial({
@@ -49,17 +50,18 @@ export default class FlyLine2d {
 		pathLine.name = "pathLine";
 		return pathLine;
 	};
+
 	createShader = (points: Vector3[], tadpoleSize: number) => {
 		// Create the final object to add to the scene
 		const geometry = new BufferGeometry();
-		const newPoints = points.slice(0, tadpoleSize); //获取更多的点数
-		const percentArr = []; //attributes.percent的数据
+		const newPoints = points.slice(0, tadpoleSize); // 获取更多的点数
+		const percentArr = []; // attributes.percent的数据
 		for (let i = 0; i < newPoints.length; i++) {
 			percentArr.push(i / newPoints.length);
 		}
 		const colorArr = [];
-		const color1 = new Color(this._config.pathStyle.color); //尾拖线颜色
-		const color2 = new Color(this._config.flyWireStyle.color); //飞线蝌蚪头颜色
+		const color1 = new Color(this._config.pathStyle.color); // 尾拖线颜色
+		const color2 = new Color(this._config.flyWireStyle.color); // 飞线蝌蚪头颜色
 		for (let i = 0; i < newPoints.length; i++) {
 			const color = color1.lerp(color2, i / newPoints.length);
 			colorArr.push(color.r, color.g, color.b);
@@ -68,8 +70,8 @@ export default class FlyLine2d {
 		geometry.attributes.percent = new BufferAttribute(new Float32Array(percentArr), 1);
 		geometry.attributes.color = new BufferAttribute(new Float32Array(colorArr), 3);
 		const material = new PointsMaterial({
-			vertexColors: true, //使用顶点颜色渲染
-			size: 3.0 //点大小
+			vertexColors: true, // 使用顶点颜色渲染
+			size: 3.0 // 点大小
 		});
 		const tadpolePointsMesh = new Points(geometry, material);
 		material.onBeforeCompile = function (shader) {
@@ -77,7 +79,7 @@ export default class FlyLine2d {
 			shader.vertexShader = shader.vertexShader.replace(
 				"void main() {",
 				[
-					"attribute float percent;", //顶点大小百分比变量，控制点渲染大小
+					"attribute float percent;", // 顶点大小百分比变量，控制点渲染大小
 					"void main() {"
 				].join("\n") // .join()把数组元素合成字符串
 			);
@@ -90,8 +92,9 @@ export default class FlyLine2d {
 		tadpolePointsMesh.name = "tadpolePointsMesh";
 		return tadpolePointsMesh;
 	};
+
 	create(src: Vector3, dist: Vector3) {
-		//创建线
+		// 创建线
 		const flyLineMesh = this.createMesh([src, dist]);
 		return flyLineMesh;
 	}

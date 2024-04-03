@@ -8,7 +8,7 @@ export default class Todo {
 	constructor(todo: { id: any; title: any; isCompleted?: boolean }) {
 		this.id = todo.id;
 		this.title = todo.title;
-		this.isCompleted = todo.isCompleted || false;
+		this.isCompleted = todo.isCompleted ?? false;
 		this.isEditing = false;
 		makeObservable(this, {
 			title: observable,

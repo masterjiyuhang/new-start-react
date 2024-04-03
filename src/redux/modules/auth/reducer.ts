@@ -1,7 +1,7 @@
-import { AuthState } from "@/redux/interface";
+import { type AuthState } from "@/redux/interface";
 import * as types from "@/redux/mutation-types";
 import produce from "immer";
-import { AnyAction } from "redux";
+import { type AnyAction } from "redux";
 
 const authSate: AuthState = {
 	authButtons: {},

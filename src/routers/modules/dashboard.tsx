@@ -1,9 +1,9 @@
 import { LayoutIndex } from "@/routers/constant";
-import { RouteObject } from "@/routers/interface";
+import { type RouteObject } from "@/routers/interface";
 import lazyLoad from "../utils/lazyLoad";
 import React from "react";
 
-const dashboardRouter: Array<RouteObject> = [
+const dashboardRouter: RouteObject[] = [
 	{
 		path: "/dashboard",
 		element: <LayoutIndex />,
@@ -11,7 +11,7 @@ const dashboardRouter: Array<RouteObject> = [
 		children: [
 			{
 				path: "/dashboard/dataVisualize",
-				element: lazyLoad(React.lazy(() => import("@/views/dashboard/dataVisualize"))),
+				element: lazyLoad(React.lazy(async () => await import("@/views/dashboard/dataVisualize"))),
 				meta: {
 					keepAlive: true,
 					requiresAuth: true,
@@ -21,7 +21,7 @@ const dashboardRouter: Array<RouteObject> = [
 			},
 			{
 				path: "/dashboard/embedded",
-				element: lazyLoad(React.lazy(() => import("@/views/dashboard/embedded"))),
+				element: lazyLoad(React.lazy(async () => await import("@/views/dashboard/embedded"))),
 				meta: {
 					keepAlive: true,
 					requiresAuth: true,

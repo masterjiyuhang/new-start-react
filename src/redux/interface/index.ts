@@ -35,15 +35,11 @@ export interface TabsState {
 
 /* BreadcrumbState */
 export interface BreadcrumbState {
-	breadcrumbList: {
-		[key: string]: any;
-	};
+	breadcrumbList: Record<string, any>;
 }
 
 /* AuthState */
 export interface AuthState {
-	authButtons: {
-		[propName: string]: any;
-	};
+	authButtons: Record<string, any>;
 	authRouter: string[];
 }

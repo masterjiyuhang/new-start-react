@@ -1,4 +1,4 @@
-import { legacy_createStore as createStore, combineReducers, Store, compose } from "redux";
+import { legacy_createStore as createStore, combineReducers, type Store, compose } from "redux";
 import { persistStore, persistReducer } from "redux-persist";
 import storage from "redux-persist/lib/storage";
 import { applyMiddleware } from "redux"; // 应用中间件方法
@@ -25,13 +25,13 @@ const reducer = combineReducers({
 // redux 持久化配置
 const persistConfig = {
 	key: "redux-state",
-	storage: storage,
+	storage,
 	blacklist: ["countReducer"]
 };
 const persistReducerConfig = persistReducer(persistConfig, reducer);
 
 // 开启 redux-devtools
-// @ts-ignore
+// @ts-expect-error
 const composeEnhancers = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose;
 
 // 使用 redux 中间件

@@ -1,4 +1,4 @@
-import { Group, Object3D } from "three";
+import { type Group, type Object3D } from "three";
 type RGB = `rgb(${number}, ${number}, ${number})`;
 type RGBA = `rgba(${number}, ${number}, ${number}, ${number})`;
 type HEX = `#${string}`;
@@ -68,12 +68,12 @@ export interface Coordinates3D {
 	z: number;
 }
 export interface SetData {
-	flyLine: {
+	flyLine: Array<{
 		from: Coordinates;
 		to: Coordinates;
 		style?: Partial<LineStyle>;
 		userData?: Record<any, any>;
-	}[];
+	}>;
 	point: [Coordinates];
 }
 export type OptDataFunc = <K extends keyof SetData>(type: K, data: SetData[K], mainContainer?: Object3D) => Promise<Group[]>;

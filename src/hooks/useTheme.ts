@@ -1,4 +1,4 @@
-import { ThemeConfigProp } from "@/redux/interface";
+import { type ThemeConfigProp } from "@/redux/interface";
 import defaultTheme from "@/styles/theme/theme-default.scss?inline";
 import darkTheme from "@/styles/theme/theme-dark.scss?inline";
 
@@ -7,7 +7,7 @@ const useTheme = (themeConfig: ThemeConfigProp) => {
 
 	const initTheme = () => {
 		// 灰色和弱色切换
-		const body = document.documentElement as HTMLElement;
+		const body = document.documentElement;
 		if (!weakOrGray) body.setAttribute("style", "");
 		if (weakOrGray === "weak") body.setAttribute("style", "filter: invert(80%)");
 		if (weakOrGray === "gray") body.setAttribute("style", "filter: grayscale(1)");

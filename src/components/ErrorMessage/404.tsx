@@ -7,7 +7,9 @@ import { HOME_URL } from "@/config/config";
 const NotFound: React.FC = () => {
 	const navigate = useNavigate();
 
-	const goHome = () => navigate(HOME_URL);
+	const goHome = () => {
+		navigate(HOME_URL);
+	};
 
 	return (
 		<Result

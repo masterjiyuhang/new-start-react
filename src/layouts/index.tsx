@@ -27,7 +27,7 @@ const LayoutIndex = (props: any) => {
 	// 监听窗口大小变化
 	const listeningWindow = () => {
 		window.onresize = () => {
-			return (() => {
+			(() => {
 				let screenWidth = document.body.clientWidth;
 				if (props.isCollapse === false && screenWidth < 1200) props.updateCollapse(true);
 				if (props.isCollapse === false && screenWidth > 1200) props.updateCollapse(false);

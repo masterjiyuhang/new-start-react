@@ -1,10 +1,10 @@
 import React from "react";
 import lazyLoad from "@/routers/utils/lazyLoad";
 import { LayoutIndex } from "@/routers/constant";
-import { RouteObject } from "@/routers/interface";
+import { type RouteObject } from "@/routers/interface";
 
 // 超级表格模块
-const proTableRouter: Array<RouteObject> = [
+const proTableRouter: RouteObject[] = [
 	{
 		element: <LayoutIndex />,
 		meta: {
@@ -13,7 +13,7 @@ const proTableRouter: Array<RouteObject> = [
 		children: [
 			{
 				path: "/proTable/useHooks",
-				element: lazyLoad(React.lazy(() => import("@/views/proTable/useHooks"))),
+				element: lazyLoad(React.lazy(async () => await import("@/views/proTable/useHooks"))),
 				meta: {
 					keepAlive: true,
 					requiresAuth: true,
@@ -23,7 +23,7 @@ const proTableRouter: Array<RouteObject> = [
 			},
 			{
 				path: "/proTable/useComponent",
-				element: lazyLoad(React.lazy(() => import("@/views/proTable/useComponent"))),
+				element: lazyLoad(React.lazy(async () => await import("@/views/proTable/useComponent"))),
 				meta: {
 					keepAlive: true,
 					requiresAuth: true,

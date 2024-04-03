@@ -26,6 +26,7 @@ module.exports = {
 	plugins: ["react", "@typescript-eslint", "react-hooks", "prettier"],
 	/* 继承某些已有的规则 */
 	extends: [
+		"love",
 		"eslint:recommended",
 		"plugin:react/recommended",
 		"plugin:@typescript-eslint/recommended",
@@ -42,7 +43,15 @@ module.exports = {
 	rules: {
 		// 3. 注意要加上这一句，开启 prettier 自动修复的功能
 		"prettier/prettier": "error",
-		
+
+		// love
+		"@typescript-eslint/no-unsafe-argument": "off",
+		"@typescript-eslint/strict-boolean-expressions": "off",
+		"@typescript-eslint/triple-slash-reference": "off",
+		"@typescript-eslint/unbound-method": "off",
+		"@typescript-eslint/no-misused-promises": "off",
+		"@typescript-eslint/no-floating-promises": "off",
+
 		// eslint (http://eslint.cn/docs/rules)
 		"no-var": "error", // 要求使用 let 或 const 而不是 var
 		"no-multiple-empty-lines": ["error", { max: 1 }], // 不允许多个空行

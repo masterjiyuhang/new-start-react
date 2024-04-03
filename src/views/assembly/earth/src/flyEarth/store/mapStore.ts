@@ -1,4 +1,4 @@
-import { Feature } from "geojson";
+import { type Feature } from "geojson";
 
 class MapStore {
 	hashMap: Record<any, Feature[]> = {};

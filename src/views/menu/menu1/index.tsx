@@ -9,9 +9,21 @@ const Menu1 = () => {
 		<div className="card content-box">
 			<span className="text">Menu1 🍓🍇🍈🍉</span>
 
-			<Button onClick={() => store.increment()}>++</Button>
+			<Button
+				onClick={() => {
+					store.increment();
+				}}
+			>
+				++
+			</Button>
 			<Button>{store.count}</Button>
-			<Button onClick={() => store.decrement()}>--</Button>
+			<Button
+				onClick={() => {
+					store.decrement();
+				}}
+			>
+				--
+			</Button>
 		</div>
 	);
 };

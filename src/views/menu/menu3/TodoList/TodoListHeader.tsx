@@ -17,7 +17,9 @@ function TodoListHeader() {
 					placeholder="什么东西干完了？"
 					className="new-todo"
 					value={title}
-					onChange={e => setTitle(e.target.value)}
+					onChange={e => {
+						setTitle(e.target.value);
+					}}
 					onKeyUp={e => {
 						if (e.key !== "Enter") return;
 						addTodo(title);

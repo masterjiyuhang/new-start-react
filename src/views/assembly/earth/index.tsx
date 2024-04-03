@@ -1,7 +1,7 @@
 import React, { useEffect, useRef } from "react";
 import "./index.scss";
 import chart from "@/views/assembly/earth/src/flyEarth/index";
-import ChartScene from "@/views/assembly/earth/src/flyEarth/chartScene";
+import type ChartScene from "@/views/assembly/earth/src/flyEarth/chartScene";
 import worldTexture from "@/assets/images/earth.png";
 import { initData } from "./src/contants";
 
@@ -11,7 +11,7 @@ const index = () => {
 
 	useEffect(() => {
 		console.log(earthRef.current);
-		const dom = earthRef.current as HTMLDivElement;
+		const dom = earthRef.current!;
 
 		chartInstance = chart.init({
 			dom,
@@ -31,16 +31,16 @@ const index = () => {
 					areaColor: "#2e3564",
 					lineColor: "#797eff"
 				},
-				spriteColor: "#B0C4DE", //光圈
+				spriteColor: "#B0C4DE", // 光圈
 				pathStyle: {
-					color: "#6495ED" //飞线路径配置
+					color: "#6495ED" // 飞线路径配置
 				},
 				flyWireStyle: {
-					//飞线样式配置
+					// 飞线样式配置
 					color: "#4169E1"
 				},
 				scatterStyle: {
-					//涟漪
+					// 涟漪
 					color: "#00BFFF"
 				}
 			}

@@ -1,5 +1,5 @@
-import { Location, NavigateFunction } from "react-router-dom";
-import { RouteObject } from "../interface";
+import { type Location, type NavigateFunction } from "react-router-dom";
+import { type RouteObject } from "../interface";
 import { searchRoute } from "@/utils/util";
 import { store } from "@/redux";
 import { HOME_URL } from "@/config/config";
@@ -16,7 +16,10 @@ const guard = (location: Location, navigate: NavigateFunction, routes: RouteObje
 
 	// * 判断是否有token 没有就返回登陆页面
 	const token = store.getState().globalReducer.token;
-	if (!token) return navigate("/login");
+	if (!token) {
+		navigate("/login");
+		return;
+	}
 
 	// * Dynamic Router(动态路由，根据后端返回的菜单数据生成的一维数组)
 	const dynamicRouter = store.getState().authReducer.authRouter;
@@ -27,7 +30,9 @@ const guard = (location: Location, navigate: NavigateFunction, routes: RouteObje
 	console.log(routerList, "routerList");
 
 	// * 如果访问的地址没有在路由表中重定向到403页面
-	if (routerList.indexOf(pathname) == -1) return navigate("/403");
+	if (routerList.indexOf(pathname) === -1) {
+		navigate("/403");
+	}
 };
 
 export default guard;

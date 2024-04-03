@@ -15,11 +15,9 @@ import Login from "@/views/login/index";
 // import lazyLoad from "./lazyLoad";
 // import React from "react";
 // import { HOME_URL } from "@/config/config";
-import { RouteObject } from "@/routers/interface";
+import { type RouteObject } from "@/routers/interface";
 
-type MetaRouters = {
-	[key: string]: RouteObject[];
-};
+type MetaRouters = Record<string, RouteObject[]>;
 
 // * 导入所有router
 const metaRouters: MetaRouters = import.meta.glob("./modules/*.tsx", {
@@ -31,7 +29,7 @@ export const routerArray: RouteObject[] = [];
 
 Object.keys(metaRouters).forEach(item => {
 	Object.keys(metaRouters[item]).forEach((key: any) => {
-		// @ts-ignore
+		// @ts-expect-error
 		routerArray.push(...metaRouters[item][key]);
 	});
 });

@@ -3,7 +3,7 @@ import { setTabsList, setTabsActive } from "@/redux/modules/tabs/action";
 import { routerArray } from "@/routers";
 import { searchRoute } from "@/utils/util";
 import { HomeFilled } from "@ant-design/icons";
-import { Tabs, TabsProps, message } from "antd";
+import { Tabs, type TabsProps, message } from "antd";
 import { useEffect, useState } from "react";
 import { connect } from "react-redux";
 import { useLocation, useNavigate } from "react-router-dom";
@@ -62,7 +62,7 @@ const LayoutTabs = (props: any) => {
 		return {
 			label: (
 				<span>
-					{item.path == HOME_URL ? <HomeFilled /> : ""}
+					{item.path === HOME_URL ? <HomeFilled /> : ""}
 					{item.title}
 				</span>
 			),

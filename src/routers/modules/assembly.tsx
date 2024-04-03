@@ -1,9 +1,9 @@
-import { RouteObject } from "@/routers/interface";
+import { type RouteObject } from "@/routers/interface";
 import { LayoutIndex } from "../constant";
 import lazyLoad from "../utils/lazyLoad";
 import React from "react";
 
-const assemblyRouter: Array<RouteObject> = [
+const assemblyRouter: RouteObject[] = [
 	{
 		element: <LayoutIndex />,
 		meta: {
@@ -12,7 +12,7 @@ const assemblyRouter: Array<RouteObject> = [
 		children: [
 			{
 				path: "/assembly/guide",
-				element: lazyLoad(React.lazy(() => import("@/views/assembly/guide/index"))),
+				element: lazyLoad(React.lazy(async () => await import("@/views/assembly/guide/index"))),
 				meta: {
 					requiresAuth: true,
 					title: "引导页",
@@ -21,7 +21,7 @@ const assemblyRouter: Array<RouteObject> = [
 			},
 			{
 				path: "/assembly/selectIcon",
-				element: lazyLoad(React.lazy(() => import("@/views/assembly/selectIcon/index"))),
+				element: lazyLoad(React.lazy(async () => await import("@/views/assembly/selectIcon/index"))),
 				meta: {
 					keepAlive: true,
 					requiresAuth: true,
@@ -31,7 +31,7 @@ const assemblyRouter: Array<RouteObject> = [
 			},
 			{
 				path: "/assembly/svgIcon",
-				element: lazyLoad(React.lazy(() => import("@/views/assembly/svgIcon/index"))),
+				element: lazyLoad(React.lazy(async () => await import("@/views/assembly/svgIcon/index"))),
 				meta: {
 					keepAlive: true,
 					requiresAuth: true,
@@ -41,7 +41,7 @@ const assemblyRouter: Array<RouteObject> = [
 			},
 			{
 				path: "/assembly/batchImport",
-				element: lazyLoad(React.lazy(() => import("@/views/assembly/batchImport/index"))),
+				element: lazyLoad(React.lazy(async () => await import("@/views/assembly/batchImport/index"))),
 				meta: {
 					keepAlive: true,
 					requiresAuth: true,
@@ -51,7 +51,7 @@ const assemblyRouter: Array<RouteObject> = [
 			},
 			{
 				path: "/assembly/earth",
-				element: lazyLoad(React.lazy(() => import("@/views/assembly/earth/index"))),
+				element: lazyLoad(React.lazy(async () => await import("@/views/assembly/earth/index"))),
 				meta: {
 					keepAlive: true,
 					requiresAuth: true,
@@ -61,7 +61,7 @@ const assemblyRouter: Array<RouteObject> = [
 			},
 			{
 				path: "/assembly/button",
-				element: lazyLoad(React.lazy(() => import("@/views/assembly/button/index"))),
+				element: lazyLoad(React.lazy(async () => await import("@/views/assembly/button/index"))),
 				meta: {
 					keepAlive: true,
 					requiresAuth: true,

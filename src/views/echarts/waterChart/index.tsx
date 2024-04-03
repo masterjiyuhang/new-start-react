@@ -205,7 +205,7 @@ const index = () => {
 	option.animationDurationUpdate = 300;
 
 	useEffect(() => {
-		const myChart = echarts.init(echartsRef.current as HTMLDivElement);
+		const myChart = echarts.init(echartsRef.current);
 
 		useEcharts(myChart, option);
 

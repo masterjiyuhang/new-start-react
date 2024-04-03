@@ -20,17 +20,17 @@ const AssemblySize = (props: any) => {
 	const items: MenuProps["items"] = [
 		{
 			key: "middle",
-			disabled: props.assemblySize == "middle",
+			disabled: props.assemblySize === "middle",
 			label: <span>默认</span>
 		},
 		{
 			key: "large",
-			disabled: props.assemblySize == "large",
+			disabled: props.assemblySize === "large",
 			label: <span>大型</span>
 		},
 		{
 			key: "small",
-			disabled: props.assemblySize == "small",
+			disabled: props.assemblySize === "small",
 			label: <span>小型</span>
 		}
 	];

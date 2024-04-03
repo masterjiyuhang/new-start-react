@@ -49,7 +49,7 @@ export default class TodoList {
 	}
 
 	createTodoId() {
-		if (!this.todoList.length) {
+		if (this.todoList.length === 0) {
 			return 1;
 		}
 

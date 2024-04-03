@@ -25,7 +25,7 @@ export const getMenuListActionThunk = () => {
 		const res = await getMenuList();
 		dispatch({
 			type: types.SET_MENU_LIST,
-			menuList: (res.data as Menu.MenuOptions[]) ?? []
+			menuList: res.data! ?? []
 		});
 	};
 };

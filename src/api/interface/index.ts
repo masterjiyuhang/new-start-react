@@ -32,9 +32,7 @@ export namespace Login {
 	export interface ResLogin {
 		access_token: string;
 	}
-	export interface ResAuthButtons {
-		[propName: string]: any;
-	}
+	export type ResAuthButtons = Record<string, any>;
 }
 
 // * 用户管理

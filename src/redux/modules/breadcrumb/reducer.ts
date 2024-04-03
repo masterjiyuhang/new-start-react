@@ -1,5 +1,5 @@
-import { AnyAction } from "redux";
-import { BreadcrumbState } from "@/redux/interface";
+import { type AnyAction } from "redux";
+import { type BreadcrumbState } from "@/redux/interface";
 import produce from "immer";
 import * as types from "@/redux/mutation-types";
 

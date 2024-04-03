@@ -12,7 +12,7 @@ import "@/styles/common.scss";
 
 import "@/language/index";
 
-ReactDOM.createRoot(document.getElementById("root") as HTMLElement).render(
+ReactDOM.createRoot(document.getElementById("root")!).render(
 	// * react 严格模式
 	// <React.StrictMode>
 	// * react-redux写法

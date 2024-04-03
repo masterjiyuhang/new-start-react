@@ -1,6 +1,6 @@
 import { HOME_URL } from "@/config/config";
 import { DownOutlined } from "@ant-design/icons";
-import { Button, Dropdown, MenuProps } from "antd";
+import { Button, Dropdown, type MenuProps } from "antd";
 import React from "react";
 import { useTranslation } from "react-i18next";
 import { useLocation, useNavigate } from "react-router-dom";

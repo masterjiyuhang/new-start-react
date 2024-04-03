@@ -19,7 +19,9 @@ const AvatarIcon = (props: any) => {
 	const passRef = useRef<ModalProps>(null!);
 	const infoRef = useRef<ModalProps>(null!);
 
-	const goHome = () => navigate(HOME_URL);
+	const goHome = () => {
+		navigate(HOME_URL);
+	};
 
 	const logout = () => {
 		Modal.confirm({
@@ -96,10 +98,10 @@ const AvatarIcon = (props: any) => {
 				goHome();
 				break;
 			case "2":
-				infoRef.current!.showModal({ name: 11 });
+				infoRef.current.showModal({ name: 11 });
 				break;
 			case "3":
-				passRef.current!.showModal({ name: 11 });
+				passRef.current.showModal({ name: 11 });
 				break;
 			case "4":
 				logout();

@@ -1,4 +1,4 @@
-import { useState, useImperativeHandle, Ref } from "react";
+import { useState, useImperativeHandle, type Ref } from "react";
 import { Modal, message } from "antd";
 
 interface Props {

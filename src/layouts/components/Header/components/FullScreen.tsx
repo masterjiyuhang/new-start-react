@@ -10,7 +10,9 @@ const FullScreen = () => {
 		screenfull.on("change", () => {
 			if (screenfull.isFullscreen) setFullScreen(true);
 			else setFullScreen(false);
-			return () => screenfull.off("change", () => {});
+			return () => {
+				screenfull.off("change", () => {});
+			};
 		});
 	}, []);
 

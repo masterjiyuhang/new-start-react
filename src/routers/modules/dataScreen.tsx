@@ -1,15 +1,15 @@
 import React from "react";
 import { LayoutIndex } from "@/routers/constant";
-import { RouteObject } from "@/routers/interface";
+import { type RouteObject } from "@/routers/interface";
 import lazyLoad from "@/routers/utils/lazyLoad";
 
-const dataScreenRouter: Array<RouteObject> = [
+const dataScreenRouter: RouteObject[] = [
 	{
 		element: <LayoutIndex />,
 		children: [
 			{
 				path: "/dataScreen/index",
-				element: lazyLoad(React.lazy(() => import("@/views/dataScreen/index"))),
+				element: lazyLoad(React.lazy(async () => await import("@/views/dataScreen/index"))),
 				meta: {
 					keepAlive: true,
 					requiresAuth: false,

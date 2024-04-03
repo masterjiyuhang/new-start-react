@@ -12,8 +12,8 @@ import {
 } from "three";
 import { _3Dto2D, radianAOB, threePointCenter } from "@/views/assembly/earth/src/flyEarth/utils/math";
 import { setTween } from "@/views/assembly/earth/src/flyEarth/utils/tween";
-import { configType } from "@/views/assembly/earth/src/flyEarth/interface";
-import Store from "@/views/assembly/earth/src/flyEarth/store/store";
+import { type configType } from "@/views/assembly/earth/src/flyEarth/interface";
+import type Store from "@/views/assembly/earth/src/flyEarth/store/store";
 
 export default class FlyLine3d {
 	_config: configType;
@@ -22,29 +22,30 @@ export default class FlyLine3d {
 		this._store = store;
 		this._config = store.getConfig();
 	}
+
 	createMesh(positionInfo: [Vector3, Vector3]) {
 		const group = new Group();
 		const [sourcePoint, targetPoint] = positionInfo;
 
-		//算出两点之间的中点向量
+		// 算出两点之间的中点向量
 		const middleV3 = new Vector3().addVectors(sourcePoint, targetPoint).clone().multiplyScalar(0.5);
-		//然后计算方向向量
+		// 然后计算方向向量
 		const dir = middleV3.clone().normalize();
 		const s = radianAOB(sourcePoint, targetPoint, new Vector3(0, 0, 0));
 		const middlePos = dir.multiplyScalar(this._config.R + s * this._config.R * 0.2);
-		//寻找三个圆心的坐标
+		// 寻找三个圆心的坐标
 		const centerPosition = threePointCenter(sourcePoint, targetPoint, middlePos);
-		//求得半径
+		// 求得半径
 		const R = middlePos.clone().sub(centerPosition).length();
 		// group.add(createPoint(centerPosition))
 		const c = radianAOB(sourcePoint, new Vector3(0, -1, 0), centerPosition);
-		const startDeg = -Math.PI / 2 + c; //飞线圆弧开始角度
-		const endDeg = Math.PI - startDeg; //飞线圆弧结束角度
+		const startDeg = -Math.PI / 2 + c; // 飞线圆弧开始角度
+		const endDeg = Math.PI - startDeg; // 飞线圆弧结束角度
 		const pathLine = this.createPathLine(centerPosition, R, startDeg, endDeg);
-		const flyAngle = (endDeg - startDeg) / 7; //飞线圆弧的弧度和轨迹线弧度相关 也可以解释为飞线的长度
+		const flyAngle = (endDeg - startDeg) / 7; // 飞线圆弧的弧度和轨迹线弧度相关 也可以解释为飞线的长度
 
 		const tadpolePointsMesh = this.createShader(R, startDeg, startDeg + flyAngle);
-		//和创建好的路径圆 圆心坐标保持一致
+		// 和创建好的路径圆 圆心坐标保持一致
 		tadpolePointsMesh.position.y = centerPosition.y;
 		tadpolePointsMesh.name = "tadpolePointsMesh";
 		// tadpolePointsMesh.userData.flyEndAngle = endDeg - startDeg - flyAngle;
@@ -57,6 +58,7 @@ export default class FlyLine3d {
 		group.name = "flyLine";
 		return group;
 	}
+
 	createPathLine = (middlePos: Vector3, r: number, startDeg: number, endDeg: number) => {
 		const curve = new ArcCurve(
 			middlePos.x,
@@ -75,6 +77,7 @@ export default class FlyLine3d {
 		pathLine.name = "pathLine";
 		return pathLine;
 	};
+
 	createShader = (r: number, startAngle: number, endAngle: number) => {
 		const points = new ArcCurve(
 			0,
@@ -86,14 +89,14 @@ export default class FlyLine3d {
 		).getSpacedPoints(200);
 		// Create the final object to add to the scene
 		const geometry = new BufferGeometry();
-		const newPoints = points; //获取更多的点数
-		const percentArr = []; //attributes.percent的数据
+		const newPoints = points; // 获取更多的点数
+		const percentArr = []; // attributes.percent的数据
 		for (let i = 0; i < newPoints.length; i++) {
 			percentArr.push(i / newPoints.length);
 		}
 		const colorArr = [];
-		const color1 = new Color(this._config.pathStyle.color); //尾拖线颜色
-		const color2 = new Color(this._config.flyWireStyle.color); //飞线蝌蚪头颜色
+		const color1 = new Color(this._config.pathStyle.color); // 尾拖线颜色
+		const color2 = new Color(this._config.flyWireStyle.color); // 飞线蝌蚪头颜色
 		for (let i = 0; i < newPoints.length; i++) {
 			const color = color1.lerp(color2, i / newPoints.length);
 			colorArr.push(color.r, color.g, color.b);
@@ -102,8 +105,8 @@ export default class FlyLine3d {
 		geometry.attributes.percent = new BufferAttribute(new Float32Array(percentArr), 1);
 		geometry.attributes.color = new BufferAttribute(new Float32Array(colorArr), 3);
 		const material = new PointsMaterial({
-			vertexColors: true, //使用顶点颜色渲染
-			size: 3.0 //点大小
+			vertexColors: true, // 使用顶点颜色渲染
+			size: 3.0 // 点大小
 		});
 		const tadpolePointsMesh = new Points(geometry, material);
 		material.onBeforeCompile = function (shader) {
@@ -111,7 +114,7 @@ export default class FlyLine3d {
 			shader.vertexShader = shader.vertexShader.replace(
 				"void main() {",
 				[
-					"attribute float percent;", //顶点大小百分比变量，控制点渲染大小
+					"attribute float percent;", // 顶点大小百分比变量，控制点渲染大小
 					"void main() {"
 				].join("\n") // .join()把数组元素合成字符串
 			);
@@ -124,8 +127,9 @@ export default class FlyLine3d {
 		tadpolePointsMesh.name = "tadpolePointsMesh";
 		return tadpolePointsMesh;
 	};
+
 	create(src: Vector3, dist: Vector3) {
-		//创建线
+		// 创建线
 		const { quaternion, startPoint3D, endPoint3D } = _3Dto2D(src, dist);
 		const flyLineMesh = this.createMesh([startPoint3D, endPoint3D]);
 		flyLineMesh.quaternion.multiply(quaternion);

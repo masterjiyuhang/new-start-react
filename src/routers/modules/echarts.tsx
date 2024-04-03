@@ -1,10 +1,10 @@
 import React from "react";
 import lazyLoad from "@/routers/utils/lazyLoad";
 import { LayoutIndex } from "@/routers/constant";
-import { RouteObject } from "@/routers/interface";
+import { type RouteObject } from "@/routers/interface";
 
 // echarts 模块
-const formRouter: Array<RouteObject> = [
+const formRouter: RouteObject[] = [
 	{
 		element: <LayoutIndex />,
 		meta: {
@@ -13,7 +13,7 @@ const formRouter: Array<RouteObject> = [
 		children: [
 			{
 				path: "/echarts/waterChart",
-				element: lazyLoad(React.lazy(() => import("@/views/echarts/waterChart/index"))),
+				element: lazyLoad(React.lazy(async () => await import("@/views/echarts/waterChart/index"))),
 				meta: {
 					keepAlive: true,
 					requiresAuth: true,
@@ -23,7 +23,7 @@ const formRouter: Array<RouteObject> = [
 			},
 			{
 				path: "/echarts/columnChart",
-				element: lazyLoad(React.lazy(() => import("@/views/echarts/columnChart/index"))),
+				element: lazyLoad(React.lazy(async () => await import("@/views/echarts/columnChart/index"))),
 				meta: {
 					keepAlive: true,
 					requiresAuth: true,
@@ -33,7 +33,7 @@ const formRouter: Array<RouteObject> = [
 			},
 			{
 				path: "/echarts/lineChart",
-				element: lazyLoad(React.lazy(() => import("@/views/echarts/lineChart/index"))),
+				element: lazyLoad(React.lazy(async () => await import("@/views/echarts/lineChart/index"))),
 				meta: {
 					keepAlive: true,
 					requiresAuth: true,
@@ -43,7 +43,7 @@ const formRouter: Array<RouteObject> = [
 			},
 			{
 				path: "/echarts/pieChart",
-				element: lazyLoad(React.lazy(() => import("@/views/echarts/pieChart/index"))),
+				element: lazyLoad(React.lazy(async () => await import("@/views/echarts/pieChart/index"))),
 				meta: {
 					keepAlive: true,
 					requiresAuth: true,
@@ -53,7 +53,7 @@ const formRouter: Array<RouteObject> = [
 			},
 			{
 				path: "/echarts/radarChart",
-				element: lazyLoad(React.lazy(() => import("@/views/echarts/radarChart/index"))),
+				element: lazyLoad(React.lazy(async () => await import("@/views/echarts/radarChart/index"))),
 				meta: {
 					keepAlive: true,
 					requiresAuth: true,
@@ -63,7 +63,7 @@ const formRouter: Array<RouteObject> = [
 			},
 			{
 				path: "/echarts/nestedChart",
-				element: lazyLoad(React.lazy(() => import("@/views/echarts/nestedChart/index"))),
+				element: lazyLoad(React.lazy(async () => await import("@/views/echarts/nestedChart/index"))),
 				meta: {
 					keepAlive: true,
 					requiresAuth: true,

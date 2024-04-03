@@ -1,7 +1,7 @@
-import { AnyAction } from "redux";
+import { type AnyAction } from "redux";
 import produce from "immer";
 import * as types from "@/redux/mutation-types";
-import { MenuState } from "@/redux/interface";
+import { type MenuState } from "@/redux/interface";
 
 const menuState: MenuState = {
 	// menu collapse

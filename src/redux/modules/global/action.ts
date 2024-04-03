@@ -1,4 +1,4 @@
-import { ThemeConfigProp } from "@/redux/interface";
+import { type ThemeConfigProp } from "@/redux/interface";
 import * as types from "@/redux/mutation-types";
 import type { SizeType } from "antd/es/config-provider/SizeContext";
 

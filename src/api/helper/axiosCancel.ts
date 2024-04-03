@@ -1,4 +1,4 @@
-import axios, { AxiosRequestConfig, Canceler } from "axios";
+import axios, { type AxiosRequestConfig, type Canceler } from "axios";
 import { isFunction } from "@/utils";
 import qs from "qs";
 
@@ -19,7 +19,7 @@ export class AxiosCanceler {
 		this.removePending(config);
 		const url = getPendingUrl(config);
 		config.cancelToken =
-			config.cancelToken ||
+			config.cancelToken ??
 			new axios.CancelToken(cancel => {
 				if (!pendingMap.has(url)) {
 					// 如果 pending 中不存在当前请求，则添加进去

@@ -1,10 +1,10 @@
 import React from "react";
 import lazyLoad from "@/routers/utils/lazyLoad";
 import { LayoutIndex } from "@/routers/constant";
-import { RouteObject } from "@/routers/interface";
+import { type RouteObject } from "@/routers/interface";
 
 // menu 模块
-const menuRouter: Array<RouteObject> = [
+const menuRouter: RouteObject[] = [
 	{
 		element: <LayoutIndex />,
 		meta: {
@@ -13,7 +13,7 @@ const menuRouter: Array<RouteObject> = [
 		children: [
 			{
 				path: "/menu/menu1",
-				element: lazyLoad(React.lazy(() => import("@/views/menu/menu1/index"))),
+				element: lazyLoad(React.lazy(async () => await import("@/views/menu/menu1/index"))),
 				meta: {
 					requiresAuth: true,
 					title: "菜单1",
@@ -22,7 +22,7 @@ const menuRouter: Array<RouteObject> = [
 			},
 			{
 				path: "/menu/menu2/menu21",
-				element: lazyLoad(React.lazy(() => import("@/views/menu/menu2/menu21/index"))),
+				element: lazyLoad(React.lazy(async () => await import("@/views/menu/menu2/menu21/index"))),
 				meta: {
 					requiresAuth: true,
 					title: "菜单2-1",
@@ -31,7 +31,7 @@ const menuRouter: Array<RouteObject> = [
 			},
 			{
 				path: "/menu/menu2/menu22/menu221",
-				element: lazyLoad(React.lazy(() => import("@/views/menu/menu2/menu22/menu221/index"))),
+				element: lazyLoad(React.lazy(async () => await import("@/views/menu/menu2/menu22/menu221/index"))),
 				meta: {
 					requiresAuth: true,
 					title: "菜单2-2-1",
@@ -40,7 +40,7 @@ const menuRouter: Array<RouteObject> = [
 			},
 			{
 				path: "/menu/menu2/menu22/menu222",
-				element: lazyLoad(React.lazy(() => import("@/views/menu/menu2/menu22/menu222/index"))),
+				element: lazyLoad(React.lazy(async () => await import("@/views/menu/menu2/menu22/menu222/index"))),
 				meta: {
 					requiresAuth: true,
 					title: "菜单2-2-2",
@@ -49,7 +49,7 @@ const menuRouter: Array<RouteObject> = [
 			},
 			{
 				path: "/menu/menu2/menu23",
-				element: lazyLoad(React.lazy(() => import("@/views/menu/menu2/menu23/index"))),
+				element: lazyLoad(React.lazy(async () => await import("@/views/menu/menu2/menu23/index"))),
 				meta: {
 					requiresAuth: true,
 					title: "菜单2-3",
@@ -58,7 +58,7 @@ const menuRouter: Array<RouteObject> = [
 			},
 			{
 				path: "/menu/menu3",
-				element: lazyLoad(React.lazy(() => import("@/views/menu/menu3/index"))),
+				element: lazyLoad(React.lazy(async () => await import("@/views/menu/menu3/index"))),
 				meta: {
 					requiresAuth: true,
 					title: "菜单3",

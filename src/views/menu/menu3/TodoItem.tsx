@@ -19,7 +19,14 @@ const TodoRemove = observer(({ id }: { id: any }) => {
 	const { removeTodo } = todoListStore;
 	return (
 		<>
-			<Button type="primary" danger size="small" onClick={() => removeTodo(id)}>
+			<Button
+				type="primary"
+				danger
+				size="small"
+				onClick={() => {
+					removeTodo(id);
+				}}
+			>
 				X
 			</Button>
 		</>

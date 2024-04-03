@@ -13,7 +13,7 @@ const BreadcrumbNav = (props: any) => {
 	const { breadcrumbList } = props.breadcrumbReducer;
 	const { breadcrumb: isShowBreadCrumb } = themeConfig;
 
-	const res: Array<any> = breadcrumbList[pathname]
+	const res: any[] = breadcrumbList[pathname]
 		? breadcrumbList[pathname].map((item: any) => {
 				return { title: item };
 			})

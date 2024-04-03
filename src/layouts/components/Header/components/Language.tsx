@@ -2,7 +2,7 @@ import i18n from "@/language";
 import { setLanguage } from "@/redux/modules/global/action";
 import { getBrowserLang } from "@/utils/util";
 import { TranslationOutlined } from "@ant-design/icons";
-import { Dropdown, MenuProps } from "antd";
+import { Dropdown, type MenuProps } from "antd";
 import React, { useEffect, useState } from "react";
 import { connect } from "react-redux";
 

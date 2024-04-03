@@ -31,7 +31,12 @@ const index = () => {
 	return (
 		<>
 			{" "}
-			<Checkbox checked={componentDisabled} onChange={e => setComponentDisabled(e.target.checked)}>
+			<Checkbox
+				checked={componentDisabled}
+				onChange={e => {
+					setComponentDisabled(e.target.checked);
+				}}
+			>
 				Form disabled
 			</Checkbox>
 			<Form

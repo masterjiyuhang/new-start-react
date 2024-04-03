@@ -28,7 +28,7 @@ const LayoutMenu = (props: any) => {
 
 	const getItem = (
 		label: React.ReactNode,
-		key?: React.Key | null,
+		key?: any,
 		icon?: React.ReactNode,
 		children?: MenuItem[],
 		type?: "group"
@@ -39,7 +39,7 @@ const LayoutMenu = (props: any) => {
 			children,
 			label,
 			type
-		} as MenuItem;
+		};
 	};
 
 	const getMenuData = async () => {
@@ -71,7 +71,7 @@ const LayoutMenu = (props: any) => {
 	};
 
 	// 动态渲染 Icon
-	const customIcons: { [key: string]: any } = Icons;
+	const customIcons: Record<string, any> = Icons;
 	const addIcon = (name: string) => {
 		return React.createElement(customIcons[name]);
 	};
@@ -79,7 +79,10 @@ const LayoutMenu = (props: any) => {
 	// 刷新页面保持菜单高亮
 	useEffect(() => {
 		setSelectedKeys([pathname]);
-		props.menu.isCollapse ? null : setOpenKeys(getOpenKeys(pathname));
+		// props.menu.isCollapse ? null : setOpenKeys(getOpenKeys(pathname));
+		if (!props.menu.isCollapse) {
+			setOpenKeys(getOpenKeys(pathname));
+		}
 	}, [pathname, props.menu.isCollapse]);
 
 	// 动态获取menu菜单
@@ -89,10 +92,16 @@ const LayoutMenu = (props: any) => {
 
 	// 设置当前展开的 subMenu
 	const onOpenChange = (openKeys: string[]) => {
-		if (openKeys.length === 0 || openKeys.length === 1) return setOpenKeys(openKeys);
+		if (openKeys.length === 0 || openKeys.length === 1) {
+			setOpenKeys(openKeys);
+			return;
+		}
 		const latestOpenKey = openKeys[openKeys.length - 1];
 		// 最新展开的 SubMenu
-		if (latestOpenKey.includes(openKeys[0])) return setOpenKeys(openKeys);
+		if (latestOpenKey.includes(openKeys[0])) {
+			setOpenKeys(openKeys);
+			return;
+		}
 		setOpenKeys([latestOpenKey]);
 	};
 

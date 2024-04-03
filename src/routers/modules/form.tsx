@@ -1,10 +1,10 @@
 import React from "react";
 import lazyLoad from "@/routers/utils/lazyLoad";
 import { LayoutIndex } from "@/routers/constant";
-import { RouteObject } from "@/routers/interface";
+import { type RouteObject } from "@/routers/interface";
 
 // 表单 Form 模块
-const formRouter: Array<RouteObject> = [
+const formRouter: RouteObject[] = [
 	{
 		element: <LayoutIndex />,
 		meta: {
@@ -13,7 +13,7 @@ const formRouter: Array<RouteObject> = [
 		children: [
 			{
 				path: "/form/basicForm",
-				element: lazyLoad(React.lazy(() => import("@/views/form/basicForm/index"))),
+				element: lazyLoad(React.lazy(async () => await import("@/views/form/basicForm/index"))),
 				meta: {
 					keepAlive: true,
 					requiresAuth: true,
@@ -23,7 +23,7 @@ const formRouter: Array<RouteObject> = [
 			},
 			{
 				path: "/form/validateForm",
-				element: lazyLoad(React.lazy(() => import("@/views/form/validateForm/index"))),
+				element: lazyLoad(React.lazy(async () => await import("@/views/form/validateForm/index"))),
 				meta: {
 					keepAlive: true,
 					requiresAuth: true,
@@ -33,7 +33,7 @@ const formRouter: Array<RouteObject> = [
 			},
 			{
 				path: "/form/dynamicForm",
-				element: lazyLoad(React.lazy(() => import("@/views/form/dynamicForm/index"))),
+				element: lazyLoad(React.lazy(async () => await import("@/views/form/dynamicForm/index"))),
 				meta: {
 					keepAlive: true,
 					requiresAuth: true,

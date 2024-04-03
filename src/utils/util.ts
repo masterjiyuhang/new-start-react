@@ -1,11 +1,11 @@
-import { RouteObject } from "@/routers/interface";
+import { type RouteObject } from "@/routers/interface";
 
 /**
  * @description 获取需要展开的 subMenu
  * @param {String} path 当前访问地址
  * @returns {Array} 需要展开的 subMenu
  */
-export const getOpenKeys = (path: string): Array<any> => {
+export const getOpenKeys = (path: string): any[] => {
 	let newStr: string = "";
 	let newArr: string[] = [];
 	let arr = path.split("/").map(i => "/" + i);
@@ -39,7 +39,7 @@ export const searchRoute = (path: string, routes: RouteObject[]): RouteObject | 
 		if (item.path === path) return item;
 		if (item.children) {
 			const res = searchRoute(path, item.children);
-			if (Object.keys(res as RouteObject).length) result = res;
+			if (Object.keys(res!).length > 0) result = res;
 		}
 	}
 	return result;
@@ -110,7 +110,7 @@ export const getBreadcrumbList = (path: string, menuList: Menu.MenuOptions[]) =>
 export function handleRouter(routerList: Menu.MenuOptions[], newArr: string[] = []) {
 	routerList.forEach((item: Menu.MenuOptions) => {
 		typeof item === "object" && item.path && newArr.push(item.path);
-		item.children && item.children.length && handleRouter(item.children, newArr);
+		item.children?.length && handleRouter(item.children, newArr);
 	});
 	return newArr;
 }
@@ -120,14 +120,19 @@ export function handleRouter(routerList: Menu.MenuOptions[], newArr: string[] = 
  * @param {String} menuList 当前菜单列表
  * @returns object
  */
-export const findAllBreadcrumb = (menuList: Menu.MenuOptions[]): { [key: string]: any } => {
+export const findAllBreadcrumb = (menuList: Menu.MenuOptions[]): Record<string, any> => {
 	let handleBreadcrumbList: any = {};
 	const loop = (menuItem: Menu.MenuOptions) => {
 		// 下面判断代码解释 *** !item?.children?.length   ==>   (item.children && item.children.length > 0)
-		if (menuItem?.children?.length) menuItem.children.forEach(item => loop(item));
+		if (menuItem?.children?.length)
+			menuItem.children.forEach(item => {
+				loop(item);
+			});
 		else handleBreadcrumbList[menuItem.path] = getBreadcrumbList(menuItem.path, menuList);
 	};
-	menuList.forEach(item => loop(item));
+	menuList.forEach(item => {
+		loop(item);
+	});
 	return handleBreadcrumbList;
 };
 
@@ -154,7 +159,7 @@ export const getBrowserLang = () => {
 export const localGet = (key: string) => {
 	const value = window.localStorage.getItem(key);
 	try {
-		return JSON.parse(window.localStorage.getItem(key) as string);
+		return JSON.parse(window.localStorage.getItem(key)!);
 	} catch (error) {
 		return value;
 	}

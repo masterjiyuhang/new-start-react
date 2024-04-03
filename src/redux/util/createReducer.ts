@@ -1,8 +1,8 @@
 import produce from "immer";
-import { ActionFromReducer } from "redux";
+import { type ActionFromReducer } from "redux";
 
 export const createReducer = <State, Payload>(
-	cases: { [key: string]: (s: State, action: ActionFromReducer<Payload>) => State | any } = {},
+	cases: Record<string, (s: State, action: ActionFromReducer<Payload>) => State | any> = {},
 	defaultState: State
 ) => {
 	return (state = defaultState, action: ActionFromReducer<Payload>) =>

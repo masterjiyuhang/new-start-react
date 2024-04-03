@@ -14,7 +14,12 @@ const TodoListFooter = () => {
 			<ul>
 				{["All", "Active", "Completed"].map(item => (
 					<li key={item}>
-						<Button type={filterCondition === item ? "primary" : "default"} onClick={() => changeFilterCondition(item)}>
+						<Button
+							type={filterCondition === item ? "primary" : "default"}
+							onClick={() => {
+								changeFilterCondition(item);
+							}}
+						>
 							{item}
 						</Button>
 					</li>

@@ -1,4 +1,4 @@
-import * as echarts from "echarts";
+import type * as echarts from "echarts";
 
 /**
  * @description 使用Echarts(只是为了添加图表响应式)

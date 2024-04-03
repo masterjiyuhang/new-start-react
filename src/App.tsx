@@ -22,10 +22,21 @@ const App = (props: any) => {
 
 	const setAntdLanguage = () => {
 		// 如果 redux 中有默认语言就设置成 redux 的默认语言，没有默认语言就设置成浏览器默认语言
-		if (props.language && props.language == "zh") return setI18nLocale(zhCN);
-		if (props.language && props.language == "en") return setI18nLocale(enUS);
-		if (getBrowserLang() == "zh") return setI18nLocale(zhCN);
-		if (getBrowserLang() == "en") return setI18nLocale(enUS);
+		if (props.language && props.language === "zh") {
+			setI18nLocale(zhCN);
+			return;
+		}
+		if (props.language && props.language === "en") {
+			setI18nLocale(enUS);
+			return;
+		}
+		if (getBrowserLang() === "zh") {
+			setI18nLocale(zhCN);
+			return;
+		}
+		if (getBrowserLang() === "en") {
+			setI18nLocale(enUS);
+		}
 	};
 	useEffect(() => {
 		console.log(props.language, "语言发生变化了");
