@@ -28,6 +28,29 @@ module.exports = {
 			{
 				ignorePseudoClasses: ["global", "v-deep", "deep"]
 			}
+		],
+		"at-rule-no-unknown": [
+			true,
+			{
+				ignoreAtRules: [
+					"tailwind",
+					"apply",
+					"variants",
+					"responsive",
+					"screen",
+					"function",
+					"if",
+					"each",
+					"include",
+					"mixin",
+					"extend",
+					"return",
+					"for",
+					"forward",
+					"else",
+					"use"
+				]
+			}
 		]
 	}
 };

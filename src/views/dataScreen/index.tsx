@@ -16,7 +16,7 @@ const dataScreen = (props: any) => {
 			<Button type="primary" onClick={requestMenuList}>
 				发起网络请求
 			</Button>
-			<Button danger type="dashed" onClick={increment}>
+			<Button danger type="dashed" className="mt-2" onClick={increment}>
 				increment: {count}
 			</Button>
 		</div>

@@ -9,6 +9,7 @@ import App from "@/App";
 import "antd/dist/reset.css";
 import "@/styles/reset.scss";
 import "@/styles/common.scss";
+import "@/styles/tailwind.css";
 
 import "@/language/index";
 
