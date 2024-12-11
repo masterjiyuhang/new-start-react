@@ -60,7 +60,7 @@ export default defineConfig((mode: ConfigEnv): UserConfig => {
 			proxy: {
 				// 选项写法
 				"/api": {
-					target: "http://mock.cchang.fun/mock/649982d61d5a0a36692f05dc",
+					target: "http://mock.erhang.fun/mock/649982d61d5a0a36692f05dc",
 					changeOrigin: true,
 					rewrite: (path: string) => path.replace(/^\/api/, "")
 				}
