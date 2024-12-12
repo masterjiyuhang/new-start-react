@@ -47,6 +47,18 @@ const LayoutMenu = (props: any) => {
 		try {
 			const { data } = await getMenuList();
 			if (!data) return;
+			data.push({
+				icon: "ProfileOutlined",
+				title: "CSS 案例",
+				path: "/demo",
+				children: [
+					{
+						icon: "AppstoreOutlined",
+						path: "/demo/loading",
+						title: "加载中"
+					}
+				]
+			});
 			setMenuList(deepLoopFloat(data));
 			// 存储处理过后的所有面包屑导航栏到 redux 中
 			props.setBreadcrumbList(findAllBreadcrumb(data));
@@ -89,6 +101,10 @@ const LayoutMenu = (props: any) => {
 	useEffect(() => {
 		getMenuData();
 	}, []);
+
+	useEffect(() => {
+		console.log("🚀👋 ~ file: index.tsx:97 ~ useEffect ~ menuList:", menuList);
+	}, [menuList]);
 
 	// 设置当前展开的 subMenu
 	const onOpenChange = (openKeys: string[]) => {
