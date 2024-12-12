@@ -10,6 +10,7 @@ const formRouter: RouteObject[] = [
 		meta: {
 			title: "Echarts"
 		},
+		path: "/echarts",
 		children: [
 			{
 				path: "/echarts/waterChart",

@@ -10,7 +10,8 @@ const errorRouter: RouteObject[] = [
 			keepAlive: true,
 			requiresAuth: true,
 			title: "403页面",
-			key: "403"
+			key: "403",
+			needShow: false
 		}
 	},
 	{
@@ -20,7 +21,8 @@ const errorRouter: RouteObject[] = [
 			keepAlive: true,
 			requiresAuth: false,
 			title: "404页面",
-			key: "404"
+			key: "404",
+			needShow: false
 		}
 	},
 	{
@@ -29,7 +31,8 @@ const errorRouter: RouteObject[] = [
 		meta: {
 			requiresAuth: false,
 			title: "500页面",
-			key: "500"
+			key: "500",
+			needShow: false
 		}
 	}
 ];

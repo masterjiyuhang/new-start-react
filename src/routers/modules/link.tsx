@@ -10,6 +10,7 @@ const linkRouter: RouteObject[] = [
 		meta: {
 			title: "外部链接"
 		},
+		path: "/link",
 		children: [
 			{
 				path: "/link/github",

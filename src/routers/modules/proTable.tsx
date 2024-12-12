@@ -10,6 +10,7 @@ const proTableRouter: RouteObject[] = [
 		meta: {
 			title: "超级表格"
 		},
+		path: "/proTable",
 		children: [
 			{
 				path: "/proTable/useHooks",

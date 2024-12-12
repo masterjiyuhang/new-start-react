@@ -10,6 +10,7 @@ const formRouter: RouteObject[] = [
 		meta: {
 			title: "表单 Form"
 		},
+		path: "/form",
 		children: [
 			{
 				path: "/form/basicForm",

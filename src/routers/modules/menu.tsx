@@ -10,6 +10,7 @@ const menuRouter: RouteObject[] = [
 		meta: {
 			title: "嵌套菜单"
 		},
+		path: "/menu",
 		children: [
 			{
 				path: "/menu/menu1",

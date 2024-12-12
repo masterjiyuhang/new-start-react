@@ -9,6 +9,7 @@ const assemblyRouter: RouteObject[] = [
 		meta: {
 			title: "常用组件"
 		},
+		path: "/assembly",
 		children: [
 			{
 				path: "/assembly/guide",
