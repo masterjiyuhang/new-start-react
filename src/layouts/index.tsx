@@ -41,7 +41,7 @@ const LayoutIndex = (props: any) => {
 	}, []);
 	return (
 		// 这里不用 Layout 组件原因是切换页面时样式会先错乱在正常，造成闪屏效果
-		<section className="container">
+		<section className="layout-container">
 			<Sider trigger={null} collapsed={isCollapse} width={220} theme="dark">
 				<LayoutMenu></LayoutMenu>
 			</Sider>
@@ -49,7 +49,7 @@ const LayoutIndex = (props: any) => {
 				<LayoutHeader></LayoutHeader>
 				<LayoutTabs></LayoutTabs>
 				<Content>
-					<TransitionGroup className="content">
+					<TransitionGroup className="min-h-screen overflow-y-scroll content">
 						{/* exit：表示退出当前页面的时候是否有动画 */}
 						<CSSTransition key={pathname} timeout={200} classNames="fade" exit={false}>
 							<Outlet></Outlet>

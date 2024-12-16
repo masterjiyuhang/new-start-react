@@ -16,7 +16,13 @@ const Loading = () => {
 	// const Sp1 = () => <h1>sp1</h1>;
 
 	const LoadingFour = () => {
-		return <div role="alert" aria-live="assertive" className="loader_four"></div>;
+		return (
+			<div role="alert" aria-live="assertive" className={"loaderFour my-3"}>
+				<div data-glitch="Loading..." className="glitch">
+					Loading...
+				</div>
+			</div>
+		);
 	};
 
 	return (
@@ -33,13 +39,15 @@ const Loading = () => {
 				</section>
 			</div>
 
-			<div className="loader2">
-				<div className="blue"></div>
+			<div>
+				<div className="loader2">
+					<div className="blue"></div>
+				</div>
 			</div>
 
 			{/* <Sp1 /> */}
 
-			<div className="relative w-40 h-40">
+			<div className="relative w-40 h-40 my-4 shrink-0">
 				<LoaderThree />
 			</div>
 
